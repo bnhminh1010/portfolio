@@ -75,6 +75,13 @@ export const dictionaries = {
       region: "Region",
       visitorIP: "Visitor IP",
     },
+    terminal: {
+      button: "Terminal",
+      welcome: "BinhMinhOS v1.0.0 (Linux x86_64)\nSystem ready. Type 'help' to see available commands.",
+      prompt: "guest@binhminh-portfolio:~$",
+      commandNotFound: "-bash: {0}: command not found. This incident will be reported.",
+      help: "Available commands:\n  help      - Show this help message\n  whoami    - Show information about me\n  skills    - List core skills\n  projects  - List featured projects\n  download  - Download my resume\n  clear     - Clear the terminal screen\n  lang      - Switch language (e.g., lang vi, lang en)",
+    },
   },
   vi: {
     nav: {
@@ -149,6 +156,13 @@ export const dictionaries = {
       checking: "Đang Kiểm Tra...",
       region: "Khu vực",
       visitorIP: "IP Truy Cập",
+    },
+    terminal: {
+      button: "Terminal",
+      welcome: "BinhMinhOS v1.0.0 (Linux x86_64)\nHệ thống đã sẵn sàng. Gõ 'help' để xem các lệnh khả dụng.",
+      prompt: "guest@binhminh-portfolio:~$",
+      commandNotFound: "-bash: {0}: không tìm thấy lệnh. Sự cố này sẽ được báo cáo.",
+      help: "Các lệnh khả dụng:\n  help      - Hiển thị thông báo hướng dẫn này\n  whoami    - Xem thông tin về tôi\n  skills    - Xem danh sách kỹ năng\n  projects  - Xem danh sách dự án\n  download  - Tải xuống CV của tôi\n  clear     - Xóa màn hình\n  lang      - Đổi ngôn ngữ (VD: lang vi, lang en)",
     },
   },
 };

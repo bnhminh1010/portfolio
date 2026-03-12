@@ -1,12 +1,14 @@
 "use client";
 
-import { Download, Menu, X, Globe } from "lucide-react";
+import { Download, Menu, X, Globe, Terminal as TerminalIcon } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import { Terminal } from "@/components/Terminal";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [terminalOpen, setTerminalOpen] = useState(false);
   const { language, t, toggleLanguage } = useLanguage();
 
   const nav = [
@@ -65,10 +67,21 @@ export function Header() {
             <span className="text-xs font-bold leading-none uppercase">{language}</span>
           </button>
 
+          <button
+            onClick={() => setTerminalOpen(true)}
+            className="inline-flex h-10 items-center justify-center gap-2 border border-black bg-black text-[#0f0] px-3 font-mono font-bold transition-colors duration-200 hover:bg-transparent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-black"
+            aria-label="Open Terminal"
+            title="Open Terminal"
+          >
+            <TerminalIcon className="h-4 w-4" />
+            <span className="text-xs uppercase hidden sm:inline-block">{t("terminal", "button")}</span>
+            <span className="text-xs uppercase sm:hidden">{">_"}</span>
+          </button>
+
           <a href="/NguyenBinhMinh_CV_2025_Updated.pdf" download className="inline-flex">
             <Button variant="solid" className="h-10 px-4">
               <Download className="h-4 w-4" aria-hidden="true" />
-              {t("nav", "resume")}
+              <span className="hidden sm:inline-block">{t("nav", "resume")}</span>
             </Button>
           </a>
         </div>
@@ -92,6 +105,8 @@ export function Header() {
           </div>
         </div>
       ) : null}
+
+      <Terminal isOpen={terminalOpen} onClose={() => setTerminalOpen(false)} />
     </header>
   );
 }
