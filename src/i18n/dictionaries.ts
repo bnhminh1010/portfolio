@@ -82,6 +82,12 @@ export const dictionaries = {
       commandNotFound: "-bash: {0}: command not found. This incident will be reported.",
       help: "Available commands:\n  help      - Show this help message\n  whoami    - Show information about me\n  skills    - List core skills\n  projects  - List featured projects\n  download  - Download my resume\n  clear     - Clear the terminal screen\n  lang      - Switch language (e.g., lang vi, lang en)",
     },
+    gitops: {
+      latestCommit: "Latest Commit",
+      fetching: "Fetching CI/CD status...",
+      status: "Status",
+      success: "SUCCESS",
+    },
   },
   vi: {
     nav: {
@@ -163,6 +169,12 @@ export const dictionaries = {
       prompt: "guest@binhminh-portfolio:~$",
       commandNotFound: "-bash: {0}: không tìm thấy lệnh. Sự cố này sẽ được báo cáo.",
       help: "Các lệnh khả dụng:\n  help      - Hiển thị thông báo hướng dẫn này\n  whoami    - Xem thông tin về tôi\n  skills    - Xem danh sách kỹ năng\n  projects  - Xem danh sách dự án\n  download  - Tải xuống CV của tôi\n  clear     - Xóa màn hình\n  lang      - Đổi ngôn ngữ (VD: lang vi, lang en)",
+    },
+    gitops: {
+      latestCommit: "Bản triển khai mới nhất",
+      fetching: "Đang lấy trạng thái CI/CD...",
+      status: "Trạng thái",
+      success: "THÀNH CÔNG",
     },
   },
 };
