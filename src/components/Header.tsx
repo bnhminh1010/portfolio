@@ -59,7 +59,7 @@ export function Header() {
               <Menu className="h-5 w-5" aria-hidden="true" />
             )}
           </button>
-          <a href="/resume.pdf" download className="inline-flex">
+          <a href="/NguyenBinhMinh_CV_2025_Updated.pdf" download className="inline-flex">
             <Button variant="solid" className="h-10 px-4">
               <Download className="h-4 w-4" aria-hidden="true" />
               Resume
