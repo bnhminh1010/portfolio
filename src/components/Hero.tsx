@@ -2,6 +2,7 @@
 
 import { Github, Linkedin, Mail, Phone } from "lucide-react";
 import { IconButton } from "@/components/ui/IconButton";
+import { useLanguage } from "@/context/LanguageContext";
 
 function LineArtIllustration() {
   return (
@@ -92,16 +93,17 @@ function LineArtIllustration() {
 }
 
 export function Hero() {
+  const { t } = useLanguage();
   return (
     <section id="about" className="bg-white scroll-mt-20">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-20">
         <div>
-          <p className="text-sm font-medium tracking-tight">Hello, I&apos;m Minh.</p>
+          <p className="text-sm font-medium tracking-tight">{t("hero", "greeting")}</p>
           <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-            Backend Developer &amp; DevOps Engineer.
+            {t("hero", "title")}
           </h1>
           <p className="mt-5 max-w-xl text-base leading-7 text-black/80">
-            As a senior IT student specializing in backend development and DevOps, I aim to apply my skills in NestJS, Spring Boot, Neo4j, and Docker to build scalable and reliable systems. My long-term goal is to grow into a Senior Backend Engineer.
+            {t("hero", "description")}
           </p>
 
           <div className="mt-7 flex items-center gap-3">
