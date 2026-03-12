@@ -67,6 +67,14 @@ export const dictionaries = {
         }
       ]
     },
+    serverStatus: {
+      label: "System Core",
+      online: "Operational",
+      offline: "System Down",
+      checking: "Checking...",
+      region: "Region",
+      visitorIP: "Visitor IP",
+    },
   },
   vi: {
     nav: {
@@ -133,6 +141,14 @@ export const dictionaries = {
           meta: "Java (Spring Boot) • MySQL • JPA/Hibernate • Docker • Maven",
         }
       ]
+    },
+    serverStatus: {
+      label: "Lõi Hệ Thống",
+      online: "Đang Hoạt Động",
+      offline: "Mất Kết Nối",
+      checking: "Đang Kiểm Tra...",
+      region: "Khu vực",
+      visitorIP: "IP Truy Cập",
     },
   },
 };
