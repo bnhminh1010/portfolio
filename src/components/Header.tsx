@@ -1,19 +1,20 @@
 "use client";
 
-import { Download, Menu, X } from "lucide-react";
+import { Download, Menu, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { useEffect, useMemo, useState } from "react";
-
-const nav = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-];
+import { useEffect, useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const links = useMemo(() => nav, []);
+  const { language, t, toggleLanguage } = useLanguage();
+
+  const nav = [
+    { href: "#about", label: t("nav", "about") },
+    { href: "#skills", label: t("nav", "skills") },
+    { href: "#experience", label: t("nav", "experience") },
+    { href: "#projects", label: t("nav", "projects") },
+  ];
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -34,7 +35,7 @@ export function Header() {
         </a>
 
         <div className="hidden items-center gap-6 md:flex">
-          {links.map((item) => (
+          {nav.map((item) => (
             <a
               key={item.href}
               href={item.href}
@@ -48,21 +49,26 @@ export function Header() {
         <div className="flex items-center gap-3">
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center border border-black bg-white text-black transition-colors duration-200 hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black md:hidden"
-            aria-label={open ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={open}
+            className="inline-flex h-10 w-10 items-center justify-center border border-black bg-white text-black transition-colors duration-200 hover:bg-black hover:text-white md:hidden"
+            aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? (
-              <X className="h-5 w-5" aria-hidden="true" />
-            ) : (
-              <Menu className="h-5 w-5" aria-hidden="true" />
-            )}
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
+          
+          <button
+            onClick={toggleLanguage}
+            className="inline-flex h-10 w-10 items-center justify-center border border-black bg-white text-black transition-colors duration-200 hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-black"
+            aria-label="Toggle language"
+            title={language === "en" ? "Chuyển sang Tiếng Việt" : "Switch to English"}
+          >
+            <span className="text-xs font-bold leading-none uppercase">{language}</span>
+          </button>
+
           <a href="/NguyenBinhMinh_CV_2025_Updated.pdf" download className="inline-flex">
             <Button variant="solid" className="h-10 px-4">
               <Download className="h-4 w-4" aria-hidden="true" />
-              Resume
+              {t("nav", "resume")}
             </Button>
           </a>
         </div>
@@ -72,12 +78,12 @@ export function Header() {
         <div className="border-t border-black md:hidden">
           <div className="mx-auto max-w-6xl px-4 py-3 sm:px-6">
             <div className="grid grid-cols-2 gap-2">
-              {links.map((item) => (
+              {nav.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="border border-black px-3 py-2 text-sm font-medium tracking-tight transition-colors duration-200 hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  className="border border-black px-3 py-2 text-sm font-medium tracking-tight transition-colors duration-200 hover:bg-black hover:text-white"
                 >
                   {item.label}
                 </a>

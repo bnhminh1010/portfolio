@@ -10,6 +10,7 @@ import {
   LaptopMinimal,
   ServerCog,
 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const skills = [
   // Backend
@@ -27,11 +28,12 @@ const skills = [
 const inverted = new Set([1, 3, 6]);
 
 export function Skills() {
+  const { t } = useLanguage();
   return (
     <section id="skills" className="bg-white scroll-mt-20">
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:py-20">
         <h2 className="text-center text-3xl font-bold tracking-tight sm:text-4xl">
-          My Tech Stack
+          {t("skills", "title")}
         </h2>
 
         <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-4">
