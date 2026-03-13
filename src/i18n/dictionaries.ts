@@ -18,6 +18,16 @@ export const dictionaries = {
     skills: {
       title: "Skills & Technologies",
     },
+    skillsDesc: {
+      NodeJS: "Built backend APIs for EKG System using NestJS and Next.js.",
+      "Spring Boot": "Developed RESTful APIs and managed lifecycle for ThinkAI e-learning platform.",
+      Neo4j: "Architected enterprise knowledge graph modeling 80+ employees and 300+ relationships.",
+      PostgreSQL: "Designed schemas and optimized complex queries for focus apps and e-learning platforms.",
+      Docker: "Containerized applications and optimized multi-stage builds to reduce image size by 90%.",
+      Linux: "Administrated Linux environments, hardening security and managing server resources.",
+      Git: "Maintained version control with strict branch protection rules and GitOps workflows.",
+      "CI/CD": "Designed automated pipelines including SAST scanning, testing, and deployment.",
+    },
     experience: {
       title: "Experience",
       jobs: [
@@ -129,6 +139,16 @@ export const dictionaries = {
     },
     skills: {
       title: "Kỹ năng & Công nghệ",
+    },
+    skillsDesc: {
+      NodeJS: "Xây dựng API backend cho hệ thống EKG bằng NestJS và Next.js.",
+      "Spring Boot": "Phát triển RESTful API và quản lý vòng đời trọn gói cho nền tảng e-learning ThinkAI.",
+      Neo4j: "Thiết kế kiến trúc knowledge graph mô hình hóa hơn 80 nhân viên và 300 mối quan hệ.",
+      PostgreSQL: "Thiết kế CSDL và tối ưu hóa truy vấn phức tạp cho các ứng dụng quản lý thời gian.",
+      Docker: "Đóng gói ứng dụng (Containerization) và tối ưu hóa multi-stage build giảm 90% dung lượng.",
+      Linux: "Quản trị môi trường Linux, tăng cường bảo mật và cấp phát tài nguyên máy chủ.",
+      Git: "Quản lý mã nguồn với các quy tắc bảo vệ nhánh nghiêm ngặt và luồng GitOps.",
+      "CI/CD": "Thiết kế đường ống tự động với luồng DevSecOps (quét SAST, kiểm thử, triển khai).",
     },
     experience: {
       title: "Kinh nghiệm làm việc",
