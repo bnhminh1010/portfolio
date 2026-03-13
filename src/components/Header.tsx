@@ -78,9 +78,8 @@ export function Header() {
             <span className="text-xs uppercase sm:hidden">{">_"}</span>
           </button>
 
-          <a href="/NguyenBinhMinh_CV_2025_Updated.pdf" download className="inline-flex">
+          <a href={language === "vi" ? "/cv-vi" : "/cv"} target="_blank" rel="noopener noreferrer" className="inline-flex">
             <Button variant="solid" className="h-10 px-4">
-              <Download className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline-block">{t("nav", "resume")}</span>
             </Button>
           </a>
