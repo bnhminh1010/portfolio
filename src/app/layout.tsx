@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Binh Minh - Senior Backend & DevOps Engineer Portfolio",
+        alt: "Binh Minh - Backend & DevOps Engineer Portfolio",
       },
     ],
     locale: "en_US",
