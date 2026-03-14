@@ -56,7 +56,7 @@ export default function CVPage() {
             {/* EDUCATION */}
             <section>
               <h3 className="text-xl print:text-lg font-black uppercase border-b-2 border-black pb-1 mb-3 print:mb-2">Education</h3>
-              <div className="mb-2">
+              <div>
                 <h4 className="font-black text-base print:text-sm uppercase">Engineer in Software Eng.</h4>
                 <p className="text-sm print:text-xs font-bold leading-tight mt-1 opacity-80">Ho Chi Minh City University of Technology (HUTECH)</p>
                 <div className="flex justify-between items-center mt-3 print:mt-2">
@@ -64,6 +64,10 @@ export default function CVPage() {
                   <p className="text-sm print:text-[11px] font-black bg-black text-white px-3 py-1 print:px-2 print:py-0.5">GPA: 3.19</p>
                 </div>
               </div>
+              <ul className="text-sm print:text-xs font-medium list-disc list-outside ml-4 mt-4 print:mt-3 space-y-1">
+                <li><span className="font-bold opacity-80">Awards:</span> Semi-Finalist IT Got Talent 2025</li>
+                <li><span className="font-bold opacity-80">English:</span> Studying TOEIC (Target 650)</li>
+              </ul>
             </section>
 
             {/* SKILLS */}
@@ -73,7 +77,7 @@ export default function CVPage() {
               <div className="mb-4 print:mb-3">
                 <h4 className="font-bold text-sm print:text-xs uppercase mb-1.5 opacity-80">Backend</h4>
                 <div className="flex flex-wrap gap-2 print:gap-1.5">
-                  {["NodeJS", "Spring Boot", "Neo4j", "PostgreSQL", "Redis"].map(skill => (
+                  {["NodeJS", "Spring Boot", ".NET", "Neo4j", "PostgreSQL", "Redis"].map(skill => (
                     <span key={skill} className="text-sm print:text-[11px] font-bold border-2 border-black px-2 py-0.5">{skill}</span>
                   ))}
                 </div>
