@@ -77,17 +77,26 @@ export default function CVPageVI() {
               <div className="mb-4 print:mb-3">
                 <h4 className="font-bold text-sm print:text-xs uppercase mb-1.5 opacity-80">Backend</h4>
                 <div className="flex flex-wrap gap-2 print:gap-1.5">
-                  {["NodeJS", "Spring Boot", ".NET", "Neo4j", "PostgreSQL", "Redis"].map(skill => (
+                  {["NodeJS", "Spring Boot", ".NET", "Neo4j", "PostgreSQL"].map(skill => (
                     <span key={skill} className="text-sm print:text-[11px] font-bold border-2 border-black px-2 py-0.5">{skill}</span>
                   ))}
                 </div>
               </div>
 
-              <div>
+              <div className="mb-4 print:mb-3">
                 <h4 className="font-bold text-sm print:text-xs uppercase mb-1.5 opacity-80">DevOps</h4>
                 <div className="flex flex-wrap gap-2 print:gap-1.5">
-                  {["Docker", "Kubernetes", "GitOps", "Linux", "CI/CD"].map(skill => (
+                  {["Docker", "GitOps", "Linux", "CI/CD"].map(skill => (
                     <span key={skill} className="text-sm print:text-[11px] font-bold bg-black text-white px-2 py-0.5">{skill}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-sm print:text-xs uppercase mb-1.5 opacity-80">AI Tools</h4>
+                <div className="flex flex-wrap gap-2 print:gap-1.5">
+                  {["ClaudeCode", "OpenCode", "Cursor", "Antigravity"].map(skill => (
+                    <span key={skill} className="text-sm print:text-[11px] font-bold border-2 border-black px-2 py-0.5">{skill}</span>
                   ))}
                 </div>
               </div>

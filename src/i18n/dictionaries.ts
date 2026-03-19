@@ -27,6 +27,10 @@ export const dictionaries = {
       Linux: "Administrated Linux environments, hardening security and managing server resources.",
       Git: "Maintained version control with strict branch protection rules and GitOps workflows.",
       "CI/CD": "Designed automated pipelines including SAST scanning, testing, and deployment.",
+      ClaudeCode: "Terminal-native agent by Anthropic. Opus 4.6 model for deep multi-file refactoring.",
+      Cursor: "AI-native IDE forked from VS Code. Multi-model support with interactive pair programming.",
+      OpenCode: "Open-source terminal CLI agent. 45K+ GitHub stars, free and highly extensible.",
+      Antigravity: "Free agent-first IDE by Google. Claude Opus + Gemini 3 Pro, 5 parallel agents.",
     },
     experience: {
       title: "Experience",
@@ -149,6 +153,10 @@ export const dictionaries = {
       Linux: "Quản trị môi trường Linux, tăng cường bảo mật và cấp phát tài nguyên máy chủ.",
       Git: "Quản lý mã nguồn với các quy tắc bảo vệ nhánh nghiêm ngặt và luồng GitOps.",
       "CI/CD": "Thiết kế đường ống tự động với luồng DevSecOps (quét SAST, kiểm thử, triển khai).",
+      ClaudeCode: "AI agent terminal-native của Anthropic. Model Opus 4.6 cho refactoring đa file chuyên sâu.",
+      Cursor: "IDE AI-native fork từ VS Code. Hỗ trợ multi-model với pair programming tương tác.",
+      OpenCode: "CLI agent mã nguồn mở. 45K+ sao GitHub, miễn phí và dễ mở rộng.",
+      Antigravity: "IDE agent-first miễn phí của Google. Tích hợp Claude Opus + Gemini 3 Pro, 5 agent song song.",
     },
     experience: {
       title: "Kinh nghiệm làm việc",
