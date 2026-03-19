@@ -2,7 +2,7 @@
 
 import {
   Boxes,
-  Bug,
+  BrainCircuit,
   Container,
   GitBranch,
   Hammer,
@@ -23,9 +23,14 @@ const skills = [
   { label: "Linux", id: "Linux", Icon: LaptopMinimal },
   { label: "Git", id: "Git", Icon: GitBranch },
   { label: "CI/CD", id: "CI/CD", Icon: Hammer },
+  // AI Tools
+  { label: "ClaudeCode", id: "ClaudeCode", Icon: BrainCircuit },
+  { label: "Cursor", id: "Cursor", Icon: BrainCircuit },
+  { label: "OpenCode", id: "OpenCode", Icon: BrainCircuit },
+  { label: "Antigravity", id: "Antigravity", Icon: BrainCircuit },
 ] as const;
 
-const inverted = new Set([1, 3, 6]);
+const inverted = new Set([1, 3, 6, 9]);
 
 export function Skills() {
   const { t } = useLanguage();
