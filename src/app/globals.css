@@ -27,3 +27,9 @@ html {
   background: #000000;
   color: #ffffff;
 }
+
+@media print {
+  body > *:not(main) {
+    display: none !important;
+  }
+}
