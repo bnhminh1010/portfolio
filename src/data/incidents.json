@@ -1,0 +1,42 @@
+{
+  "incidents": [
+    {
+      "id": "INC-001",
+      "title": "High latency on /api/exam",
+      "severity": "warning",
+      "status": "resolved",
+      "time": "2 hours ago",
+      "mttr": "15 min"
+    },
+    {
+      "id": "INC-002",
+      "title": "Cache miss spike",
+      "severity": "info",
+      "status": "resolved",
+      "time": "1 day ago",
+      "mttr": "5 min"
+    }
+  ],
+  "runbooks": [
+    {
+      "id": "RB-001",
+      "title": "High CPU Response",
+      "steps": ["Check prometheus", "Scale pods", "Review logs", "Notify on-call"]
+    },
+    {
+      "id": "RB-002",
+      "title": "Database Connection Pool Exhausted",
+      "steps": ["Check connections", "Identify leak", "Restart service", "Monitor recovery"]
+    },
+    {
+      "id": "RB-003",
+      "title": "Deployment Rollback",
+      "steps": ["ArgoCD rollback", "Verify health", "Notify team", "Create post-mortem"]
+    }
+  ],
+  "stats": {
+    "incidents30d": 2,
+    "avgMttr": "15 min",
+    "uptime": "99.95%"
+  }
+}

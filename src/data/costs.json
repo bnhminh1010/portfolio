@@ -1,0 +1,17 @@
+{
+  "costs": [
+    { "category": "Compute (EC2/ECS)", "amount": 24.5, "icon": "Server", "color": "bg-gray-800" },
+    { "category": "Database (RDS)", "amount": 18.0, "icon": "Database", "color": "bg-gray-600" },
+    { "category": "Storage (S3)", "amount": 3.2, "icon": "HardDrive", "color": "bg-gray-400" },
+    { "category": "CDN (CloudFront)", "amount": 2.1, "icon": "Globe", "color": "bg-gray-200" }
+  ],
+  "optimizations": [
+    { "saved": "$4.50/mo", "action": "Reserved Instances", "status": "savings" },
+    { "saved": "$1.20/mo", "action": "S3 Lifecycle Policies", "status": "savings" },
+    { "saved": "$0.80/mo", "action": "CloudFront Compression", "status": "savings" }
+  ],
+  "stats": {
+    "totalMonthly": 47.8,
+    "changePercent": -8
+  }
+}

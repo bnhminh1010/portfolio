@@ -139,8 +139,33 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="border border-black p-4 sm:p-6">
-          <LineArtIllustration />
+        {/* Sidebar info */}
+        <div className="space-y-4">
+          <div className="border border-black p-4 sm:p-6">
+            <LineArtIllustration />
+          </div>
+
+          {/* Quick stats */}
+          <div className="grid grid-cols-3 gap-2 text-center text-sm">
+            <div className="border border-gray-200 p-3">
+              <div className="text-xl font-bold">4+</div>
+              <div className="text-xs text-gray-500">Years</div>
+            </div>
+            <div className="border border-gray-200 p-3">
+              <div className="text-xl font-bold">3</div>
+              <div className="text-xs text-gray-500">Projects</div>
+            </div>
+            <div className="border border-gray-200 p-3">
+              <div className="text-xl font-bold">15+</div>
+              <div className="text-xs text-gray-500">Techs</div>
+            </div>
+          </div>
+
+          {/* Status & Location */}
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-green-600 font-medium">● Open to work</span>
+            <span className="text-gray-500">Thu Duc, HCM</span>
+          </div>
         </div>
       </div>
     </section>

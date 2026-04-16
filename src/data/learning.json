@@ -1,0 +1,52 @@
+[
+  {
+    "year": "2022",
+    "title": "Foundation",
+    "titleVi": "Nền tảng",
+    "items": [
+      { "label": "Java / OOP", "icon": "Code", "desc": "Core Java, OOP concepts" },
+      { "label": "Data Structures", "icon": "Server", "desc": "Algorithms, Big O" },
+      { "label": "Git", "icon": "GitBranch", "desc": "Version control basics" }
+    ]
+  },
+  {
+    "year": "2023",
+    "title": "Backend Basics",
+    "titleVi": "Backend Cơ bản",
+    "items": [
+      { "label": "Spring Boot", "icon": "Code", "desc": "REST APIs, JWT Auth" },
+      { "label": "MySQL", "icon": "Database", "desc": "Relational databases" },
+      { "label": "HTTP/REST", "icon": "Server", "desc": "API design patterns" }
+    ]
+  },
+  {
+    "year": "2024",
+    "title": "DevOps Intro",
+    "titleVi": "DevOps Cơ bản",
+    "items": [
+      { "label": "Docker", "icon": "Container", "desc": "Containerization" },
+      { "label": "Redis", "icon": "Server", "desc": "Caching strategies" },
+      { "label": "Linux", "icon": "Server", "desc": "System administration" }
+    ]
+  },
+  {
+    "year": "2025",
+    "title": "Advanced",
+    "titleVi": "Nâng cao",
+    "items": [
+      { "label": "Neo4j", "icon": "Database", "desc": "Graph databases" },
+      { "label": "CI/CD", "icon": "GitBranch", "desc": "GitHub Actions" },
+      { "label": "Grafana", "icon": "Server", "desc": "Monitoring & Observability" }
+    ]
+  },
+  {
+    "year": "2026",
+    "title": "Cloud & Security",
+    "titleVi": "Cloud & Bảo mật",
+    "items": [
+      { "label": "AWS Basics", "icon": "Cloud", "desc": "EC2, RDS, S3, CloudFront" },
+      { "label": "DevSecOps", "icon": "Shield", "desc": "Security scanning (Trivy)" },
+      { "label": "Terraform", "icon": "Cloud", "desc": "Infrastructure as Code" }
+    ]
+  }
+]

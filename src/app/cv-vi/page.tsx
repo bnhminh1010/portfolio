@@ -112,7 +112,7 @@ export default function CVPageVI() {
                     <h5 className="font-black text-sm print:text-sm uppercase tracking-tight">Enterprise Knowledge Graph (EKG)</h5>
                     <Globe className="w-4 h-4 text-black/50 print:text-black" />
                   </a>
-                  <p className="text-xs print:text-[11px] font-bold mb-3 opacity-70 border-b border-black/20 pb-2">Công nghệ: React, NestJS, Neo4j, Docker</p>
+                  <p className="text-xs print:text-[11px] font-bold mb-3 opacity-70 border-b border-black/20 pb-2">Công nghệ: React, ExpressJS, Neo4j, Docker</p>
                   <ul className="text-sm print:text-xs font-medium list-disc list-outside ml-4 space-y-2 print:space-y-1.5 leading-relaxed">
                     <li>Thiết kế cấu trúc tìm kiếm nội bộ để trực quan hóa mối quan hệ giữa hơn 80 nhân sự và bộ kỹ năng công nghệ bằng cơ sở dữ liệu đồ thị Neo4j.</li>
                     <li>Triển khai các lớp bộ đệm (caching layers) giúp load ra hơn 300 đối tượng biểu diễn nhánh đồ thị cùng lúc cực kỳ nhanh chóng.</li>

@@ -1,0 +1,47 @@
+{
+  "vulnerabilities": [
+    {
+      "severity": "high",
+      "id": "CVE-2024-1234",
+      "package": "nginx",
+      "current": "1.25.0",
+      "fixed": "1.25.3",
+      "description": "Out-of-bounds write in HTTP/2",
+      "days": 45
+    },
+    {
+      "severity": "high",
+      "id": "CVE-2024-5678",
+      "package": "openssl",
+      "current": "3.0.11",
+      "fixed": "3.0.15",
+      "description": "Memory corruption in X.509 verification",
+      "days": 30
+    },
+    {
+      "severity": "medium",
+      "id": "CVE-2024-9012",
+      "package": "curl",
+      "current": "8.5.0",
+      "fixed": "8.6.0",
+      "description": "URL parsing vulnerability",
+      "days": 15
+    },
+    {
+      "severity": "low",
+      "id": "CVE-2024-3456",
+      "package": "tzdata",
+      "current": "2024a",
+      "fixed": "2024c",
+      "description": "Time zone data update",
+      "days": 7
+    }
+  ],
+  "stats": {
+    "high": 2,
+    "medium": 1,
+    "low": 1,
+    "critical": 0
+  },
+  "lastScan": "2026-04-16T08:00:00Z"
+}

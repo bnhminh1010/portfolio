@@ -1,0 +1,32 @@
+[
+  {
+    "id": "thinkai",
+    "role": "Backend/DevOps Developer",
+    "roleVi": "Backend/DevOps",
+    "company": "ThinkAI",
+    "period": "2026 - Present",
+    "location": "Ho Chi Minh City",
+    "type": "team",
+    "highlights": [
+      "JWT authentication with role-based access control",
+      "CI/CD pipelines with DevSecOps practices",
+      "Database optimization for 100+ concurrent users",
+      "Restful APIs for course & exam system"
+    ]
+  },
+  {
+    "id": "ekg",
+    "role": "Full Stack Developer",
+    "roleVi": "Full Stack",
+    "company": "Enterprise Knowledge Graph",
+    "period": "2025 - 2026",
+    "location": "Personal Project",
+    "type": "personal",
+    "highlights": [
+      "Neo4j graph database design",
+      "Redis caching layer implementation",
+      "LLM integration with Chain-of-Thought",
+      "Auto model routing service"
+    ]
+  }
+]

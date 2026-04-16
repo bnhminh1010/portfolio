@@ -1,65 +1,129 @@
 "use client";
 
-import { ExternalLink, Github } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { useState, useEffect } from "react";
+import { ExternalLink, Github, Code, Server, Database, Cloud } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { dictionaries } from "@/i18n/dictionaries";
+
+type Project = {
+  id: string;
+  name: string;
+  nameVi: string;
+  year: string;
+  tech: string[];
+  github: string;
+  highlights: string[];
+};
+
+const getTechIcon = (tech: string) => {
+  if (tech.includes("JS") || tech.includes("Boot") || tech.includes("Next")) return Code;
+  if (tech.includes("MySQL") || tech.includes("Neo4j") || tech.includes("Redis") || tech.includes("Mongo")) return Database;
+  if (tech.includes("Docker") || tech.includes("Cloud") || tech.includes("Railway")) return Cloud;
+  return Server;
+};
 
 export function Projects() {
-  const { language, t } = useLanguage();
-  const projects = dictionaries[language].projects.items;
+  const { language } = useLanguage();
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
 
-  // Icons are mapped by index since the order is the same across translations
-  const ctas = [
-    {
-      href: "https://github.com/bnhminh1010/ChatBot_Enterprise_knowledge_Graph",
-      variant: "outline" as const,
-      Icon: Github,
-    },
-    {
-      href: "https://github.com/ThinkAI-team/thinkai-backend",
-      variant: "solid" as const,
-      Icon: ExternalLink,
-    },
-  ];
+  useEffect(() => {
+    fetch("/api/projects")
+      .then((res) => res.json())
+      .then((data) => {
+        setProjects(data);
+        if (data.length > 0) setActiveProject(data[0]);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  if (loading || !activeProject) {
+    return (
+      <section id="projects" className="border-b border-gray-200 bg-gray-50 scroll-mt-20">
+        <div className="mx-auto max-w-6xl p-4 sm:p-6 lg:p-8">
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold">Projects</h2>
+          </div>
+          <div className="h-64 bg-gray-200 animate-pulse" />
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section id="projects" className="bg-white scroll-mt-20">
-      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:py-20">
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          {t("projects", "title")}
-        </h2>
+    <section id="projects" className="border-b border-gray-200 bg-gray-50 scroll-mt-20">
+      <div className="mx-auto max-w-6xl p-4 sm:p-6 lg:p-8">
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold">Projects</h2>
+          <p className="text-sm text-gray-500 mt-1">
+            {language === "vi" ? "Featured projects & achievements" : "Featured projects & achievements"}
+          </p>
+        </div>
 
-        <div className="mt-10 space-y-6">
-          {projects.map((p, idx) => {
-            const cta = ctas[idx];
-            return (
-              <article
-                key={p.title}
-                className="border border-black p-6 sm:p-7"
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          {/* Project List */}
+          <div className="lg:col-span-1 space-y-1">
+            {projects.map((project) => (
+              <button
+                key={project.id}
+                onClick={() => setActiveProject(project)}
+                className={`w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                  activeProject.id === project.id
+                    ? "bg-black text-white"
+                    : "bg-white text-gray-600 hover:bg-gray-100"
+                }`}
               >
-                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                  <h3 className="text-lg font-bold tracking-tight">{p.title}</h3>
-                  <p className="text-sm text-black/70">2026</p>
-                </div>
-                <p className="mt-4 text-sm leading-6 text-black/80">
-                  {p.description}
-                </p>
-                <p className="mt-3 text-xs font-medium tracking-tight text-black/70">
-                  {p.meta}
-                </p>
+                {language === "vi" ? project.nameVi : project.name}
+              </button>
+            ))}
+          </div>
 
-                <div className="mt-6">
-                  <a href={cta.href} target="_blank" rel="noreferrer">
-                    <Button variant={cta.variant} className="h-10 px-4">
-                      <cta.Icon className="h-4 w-4" aria-hidden="true" />
-                      {t("projects", "viewSource")}
-                    </Button>
-                  </a>
+          {/* Project Details */}
+          <div className="lg:col-span-2 bg-white border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold">
+                {language === "vi" ? activeProject.nameVi : activeProject.name}
+              </h3>
+              <span className="text-xs text-gray-500">{activeProject.year}</span>
+            </div>
+
+            {/* Tech Stack */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {activeProject.tech.map((tech) => {
+                const Icon = getTechIcon(tech);
+                return (
+                  <span key={tech} className="flex items-center gap-1 px-2 py-1 bg-gray-100 text-xs">
+                    <Icon className="w-3 h-3" />
+                    {tech}
+                  </span>
+                );
+              })}
+            </div>
+
+            {/* Highlights */}
+            <div className="space-y-2 mb-4">
+              {activeProject.highlights.map((hl, i) => (
+                <div key={i} className="flex items-center gap-2 text-sm text-gray-600">
+                  <span className="w-1.5 h-1.5 bg-black rounded-full" />
+                  {hl}
                 </div>
-              </article>
-            );
-          })}
+              ))}
+            </div>
+
+            {/* Links */}
+            <div className="flex gap-3">
+              <a
+                href={activeProject.github}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 text-sm font-medium hover:underline"
+              >
+                <Github className="w-4 h-4" />
+                View Source
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

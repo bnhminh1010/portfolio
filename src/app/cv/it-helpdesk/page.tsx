@@ -27,8 +27,9 @@ export default function CVITHelpdeskPage() {
           <div className="flex flex-wrap justify-center gap-4 text-sm print:text-xs font-semibold mt-2 mb-6 print:mb-2 text-black">
             <a href="mailto:pata10102004@gmail.com" className="flex items-center gap-1.5 hover:underline"><Mail className="w-4 h-4 print:w-3 print:h-3" /> pata10102004@gmail.com</a>
             <a href="tel:0372064929" className="flex items-center gap-1.5 hover:underline"><Phone className="w-4 h-4 print:w-3 print:h-3" /> 037 206 4929</a>
+            <span className="flex items-center gap-1.5">10/10/2004</span>
             <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 print:w-3 print:h-3" /> Ho Chi Minh City, Vietnam</span>
-            <a href="https://portfolio-binhminh.vercel.app" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:underline"><Globe className="w-4 h-4 print:w-3 print:h-3" /> portfolio-binhminh.vercel.app</a>
+            <a href="https://portfolio-binhminh.vercel.app" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:underline"><Globe className="w-4 h-4 print:w-3 print:h-3" /> Portfolio</a>
           </div>
 
           <section className="max-w-2xl mx-auto">
@@ -39,6 +40,18 @@ export default function CVITHelpdeskPage() {
         </header>
 
         <div className="flex flex-col gap-10 print:gap-8">
+
+          <section>
+            <h3 className="text-xl print:text-lg font-black uppercase border-b-2 border-black pb-1 mb-3 print:mb-2">Career Objectives</h3>
+            <div className="space-y-2 text-sm print:text-xs">
+              <div>
+                <span className="font-bold">Short-term:</span> Secure an IT Support position to provide efficient technical assistance, contribute to team success, and grow in a professional environment.
+              </div>
+              <div>
+                <span className="font-bold">Long-term:</span> Become a System Administrator or IT Manager capable of managing enterprise infrastructure, networks, and leading IT teams.
+              </div>
+            </div>
+          </section>
 
           <div className="grid grid-cols-1 md:grid-cols-2 print:grid print:grid-cols-2 gap-8 print:gap-6">
             
@@ -61,31 +74,10 @@ export default function CVITHelpdeskPage() {
             <section>
               <h3 className="text-xl print:text-lg font-black uppercase border-b-2 border-black pb-1 mb-3 print:mb-2">Skills</h3>
               
-              <div className="mb-4 print:mb-3">
-                <h4 className="font-bold text-sm print:text-xs uppercase mb-1.5 opacity-80">Operating Systems</h4>
-                <div className="flex flex-wrap gap-2 print:gap-1.5">
-                  {["Windows 10/11", "Windows Server", "Linux (Ubuntu)", "macOS"].map(skill => (
-                    <span key={skill} className="text-sm print:text-[11px] font-bold border-2 border-black px-2 py-0.5">{skill}</span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mb-4 print:mb-3">
-                <h4 className="font-bold text-sm print:text-xs uppercase mb-1.5 opacity-80">Networking</h4>
-                <div className="flex flex-wrap gap-2 print:gap-1.5">
-                  {["TCP/IP", "DNS", "DHCP", "VPN", "Firewall"].map(skill => (
-                    <span key={skill} className="text-sm print:text-[11px] font-bold bg-black text-white px-2 py-0.5">{skill}</span>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-bold text-sm print:text-xs uppercase mb-1.5 opacity-80">Tools</h4>
-                <div className="flex flex-wrap gap-2 print:gap-1.5">
-                  {["Active Directory", "Office 365", "Remote Desktop", "ITIL"].map(skill => (
-                    <span key={skill} className="text-sm print:text-[11px] font-bold border-2 border-black px-2 py-0.5">{skill}</span>
-                  ))}
-                </div>
+              <div className="space-y-2 text-sm print:text-xs">
+                <div><span className="font-bold">Operating Systems:</span> <span className="inline-flex flex-wrap gap-1"><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Windows 10/11</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Windows Server</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Linux (Ubuntu)</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">macOS</span></span></div>
+                <div><span className="font-bold">Networking:</span> <span className="inline-flex flex-wrap gap-1"><span className="bg-black text-white px-1.5 py-0.5 text-xs font-bold">TCP/IP</span><span className="bg-black text-white px-1.5 py-0.5 text-xs font-bold">DNS</span><span className="bg-black text-white px-1.5 py-0.5 text-xs font-bold">DHCP</span><span className="bg-black text-white px-1.5 py-0.5 text-xs font-bold">VPN</span><span className="bg-black text-white px-1.5 py-0.5 text-xs font-bold">Firewall</span></span></div>
+                <div><span className="font-bold">Tools:</span> <span className="inline-flex flex-wrap gap-1"><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Active Directory</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Office 365</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Remote Desktop</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">ITIL</span></span></div>
               </div>
             </section>
           </div>
@@ -106,11 +98,12 @@ export default function CVITHelpdeskPage() {
                     <h5 className="font-black text-sm print:text-sm uppercase tracking-tight">Enterprise Knowledge Graph</h5>
                     <Globe className="w-4 h-4 text-black/50 print:text-black" />
                   </a>
-                  <p className="text-xs print:text-[11px] font-bold mb-3 opacity-70 border-b border-black/20 pb-2">Tech: Docker, Linux, Neo4j</p>
+                  <p className="text-xs print:text-[11px] font-bold mb-3 opacity-70 border-b border-black/20 pb-2">Tech: ExpressJS, Neo4j, Redis, Docker, JWT</p>
                   <ul className="text-sm print:text-xs font-medium list-disc list-outside ml-4 space-y-2 print:space-y-1.5 leading-relaxed">
-                    <li>Deployed and maintained development environments using Docker containers on Linux servers.</li>
-                    <li>Managed user permissions and access controls for 80+ employee accounts.</li>
-                    <li>Configured and monitored system performance ensuring 99.9% uptime.</li>
+                    <li>Designed Neo4j database schema mapping 80+ employees, skills, and project relationships.</li>
+                    <li>Implemented Redis caching layer for chat history via Docker, reducing database load by 60%.</li>
+                    <li>Built Chain-of-Thought agent system to optimize user queries before LLM processing.</li>
+                    <li>Developed auto model routing service that selects optimal LLM (Ollama/Gemini) based on query complexity.</li>
                   </ul>
                 </div>
 
@@ -119,11 +112,12 @@ export default function CVITHelpdeskPage() {
                     <h5 className="font-black text-sm print:text-sm uppercase tracking-tight">ThinkAI E-Learning Platform</h5>
                     <Globe className="w-4 h-4 text-black/50 print:text-black" />
                   </a>
-                  <p className="text-xs print:text-[11px] font-bold mb-3 opacity-70 border-b border-black/20 pb-2">Tech: CI/CD, Linux, PostgreSQL</p>
+                  <p className="text-xs print:text-[11px] font-bold mb-3 opacity-70 border-b border-black/20 pb-2">Tech: Spring Boot, Aiven MySQL, CI/CD, Railway</p>
                   <ul className="text-sm print:text-xs font-medium list-disc list-outside ml-4 space-y-2 print:space-y-1.5 leading-relaxed">
-                    <li>Set up automated CI/CD pipelines using GitHub Actions for continuous deployment.</li>
-                    <li>Managed production server infrastructure supporting 1000+ concurrent users.</li>
-                    <li>Implemented backup and disaster recovery procedures for data protection.</li>
+                    <li>Implemented JWT authentication with role-based access control (Admin/Teacher/Student).</li>
+                    <li>Deployed backend on Railway and database on Aiven MySQL with connection pooling optimization.</li>
+                    <li>Built CI/CD pipelines with GitHub Actions integrating DevSecOps practices (SAST scanning).</li>
+                    <li>Managed production infrastructure supporting 1,000+ concurrent mock-test sessions.</li>
                   </ul>
                 </div>
               </div>

@@ -1,0 +1,16 @@
+{
+  "name": "Nguyễn Bình Minh",
+  "title": "Backend/DevOps Developer",
+  "titleVi": "Backend/DevOps",
+  "location": "Ho Chi Minh City",
+  "locationShort": "HCMC",
+  "email": "bnhminh1010@gmail.com",
+  "github": "https://github.com/bnhminh1010",
+  "linkedin": "",
+  "bio": "Backend Developer with DevOps skills. Focus on scalable systems, CI/CD, and cloud architecture.",
+  "bioVi": "Backend Developer với kỹ năng DevOps. Tập trung vào hệ thống scalable, CI/CD, và cloud architecture.",
+  "openToWork": true,
+  "yearsOfExperience": "4+",
+  "projectsCount": "3",
+  "techsCount": "15+"
+}

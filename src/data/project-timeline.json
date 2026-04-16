@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Portfolio Website",
+    "nameVi": "Website Portfolio",
+    "start": 2024,
+    "end": 2026,
+    "status": "active",
+    "color": "bg-black"
+  },
+  {
+    "name": "EKG Chatbot",
+    "nameVi": "Chatbot EKG",
+    "start": 2025,
+    "end": 2026,
+    "status": "completed",
+    "color": "bg-gray-600"
+  },
+  {
+    "name": "ThinkAI Backend",
+    "nameVi": "ThinkAI Backend",
+    "start": 2025,
+    "end": 2026,
+    "status": "active",
+    "color": "bg-gray-400"
+  },
+  {
+    "name": "Docker Setup",
+    "nameVi": "Cấu hình Docker",
+    "start": 2024,
+    "end": 2025,
+    "status": "completed",
+    "color": "bg-gray-300"
+  }
+]

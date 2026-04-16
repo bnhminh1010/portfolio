@@ -1,0 +1,24 @@
+{
+  "github": {
+    "username": "bnhminh1010",
+    "token": ""
+  },
+  "prometheus": {
+    "enabled": true,
+    "url": "https://prometheus.thinkai.id.vn"
+  },
+  "loki": {
+    "enabled": true,
+    "url": "https://loki.thinkai.id.vn"
+  },
+  "grafana": {
+    "enabled": true,
+    "url": "https://grafana.thinkai.id.vn",
+    "apiKey": "",
+    "dashboardId": ""
+  },
+  "kubernetes": {
+    "enabled": false,
+    "config": ""
+  }
+}

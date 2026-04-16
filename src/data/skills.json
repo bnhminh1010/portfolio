@@ -1,0 +1,50 @@
+[
+  {
+    "id": "NodeJS",
+    "label": "NodeJS",
+    "category": "backend",
+    "inverted": false
+  },
+  {
+    "id": "Spring Boot",
+    "label": "Spring Boot",
+    "category": "backend",
+    "inverted": true
+  },
+  {
+    "id": "Neo4j",
+    "label": "Neo4j",
+    "category": "backend",
+    "inverted": false
+  },
+  {
+    "id": "PostgreSQL",
+    "label": "PostgreSQL",
+    "category": "backend",
+    "inverted": true
+  },
+  {
+    "id": "Docker",
+    "label": "Docker",
+    "category": "devops",
+    "inverted": false
+  },
+  {
+    "id": "Linux",
+    "label": "Linux",
+    "category": "devops",
+    "inverted": true
+  },
+  {
+    "id": "Git",
+    "label": "Git",
+    "category": "devops",
+    "inverted": false
+  },
+  {
+    "id": "CI/CD",
+    "label": "CI/CD",
+    "category": "devops",
+    "inverted": false
+  }
+]

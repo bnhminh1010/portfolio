@@ -27,6 +27,7 @@ export default function CVFrontendPage() {
           <div className="flex flex-wrap justify-center gap-4 text-sm print:text-xs font-semibold mt-2 mb-6 print:mb-2 text-black">
             <a href="mailto:pata10102004@gmail.com" className="flex items-center gap-1.5 hover:underline"><Mail className="w-4 h-4 print:w-3 print:h-3" /> pata10102004@gmail.com</a>
             <a href="tel:0372064929" className="flex items-center gap-1.5 hover:underline"><Phone className="w-4 h-4 print:w-3 print:h-3" /> 037 206 4929</a>
+            <span className="flex items-center gap-1.5">10/10/2004</span>
             <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 print:w-3 print:h-3" /> Ho Chi Minh City, Vietnam</span>
             <a href="https://portfolio-binhminh.vercel.app" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:underline"><Globe className="w-4 h-4 print:w-3 print:h-3" /> portfolio-binhminh.vercel.app</a>
           </div>
@@ -39,6 +40,18 @@ export default function CVFrontendPage() {
         </header>
 
         <div className="flex flex-col gap-10 print:gap-8">
+
+          <section>
+            <h3 className="text-xl print:text-lg font-black uppercase border-b-2 border-black pb-1 mb-3 print:mb-2">Career Objectives</h3>
+            <div className="space-y-2 text-sm print:text-xs">
+              <div>
+                <span className="font-bold">Short-term:</span> Secure a Frontend position to build user-friendly web interfaces, contribute to team success, and grow in a professional environment.
+              </div>
+              <div>
+                <span className="font-bold">Long-term:</span> Become a UI/UX expert or Frontend Architect capable of designing and implementing scalable, accessible, and performant web applications.
+              </div>
+            </div>
+          </section>
 
           <div className="grid grid-cols-1 md:grid-cols-2 print:grid print:grid-cols-2 gap-8 print:gap-6">
             
@@ -61,31 +74,12 @@ export default function CVFrontendPage() {
             <section>
               <h3 className="text-xl print:text-lg font-black uppercase border-b-2 border-black pb-1 mb-3 print:mb-2">Skills</h3>
               
-              <div className="mb-4 print:mb-3">
-                <h4 className="font-bold text-sm print:text-xs uppercase mb-1.5 opacity-80">Frontend</h4>
-                <div className="flex flex-wrap gap-2 print:gap-1.5">
-                  {["React", "Next.js", "TypeScript", "Tailwind CSS", "SASS/SCSS"].map(skill => (
-                    <span key={skill} className="text-sm print:text-[11px] font-bold border-2 border-black px-2 py-0.5">{skill}</span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mb-4 print:mb-3">
-                <h4 className="font-bold text-sm print:text-xs uppercase mb-1.5 opacity-80">Tools</h4>
-                <div className="flex flex-wrap gap-2 print:gap-1.5">
-                  {["Figma", "Git", "Vite", "Webpack"].map(skill => (
-                    <span key={skill} className="text-sm print:text-[11px] font-bold bg-black text-white px-2 py-0.5">{skill}</span>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-bold text-sm print:text-xs uppercase mb-1.5 opacity-80">AI Tools</h4>
-                <div className="flex flex-wrap gap-2 print:gap-1.5">
-                  {["ClaudeCode", "OpenCode", "Cursor", "Antigravity"].map(skill => (
-                    <span key={skill} className="text-sm print:text-[11px] font-bold border-2 border-black px-2 py-0.5">{skill}</span>
-                  ))}
-                </div>
+              <div className="space-y-2 text-sm print:text-xs">
+                <div><span className="font-bold">Language:</span> <span className="inline-flex flex-wrap gap-1"><span className="border border-black px-1.5 py-0.5 text-xs font-bold">JavaScript</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">TypeScript</span></span></div>
+                <div><span className="font-bold">Framework:</span> <span className="inline-flex flex-wrap gap-1"><span className="border border-black px-1.5 py-0.5 text-xs font-bold">React</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Next.js</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Vue.js</span></span></div>
+                <div><span className="font-bold">Styling:</span> <span className="inline-flex flex-wrap gap-1"><span className="bg-black text-white px-1.5 py-0.5 text-xs font-bold">Tailwind CSS</span><span className="bg-black text-white px-1.5 py-0.5 text-xs font-bold">SASS/SCSS</span><span className="bg-black text-white px-1.5 py-0.5 text-xs font-bold">CSS Modules</span></span></div>
+                <div><span className="font-bold">Tools:</span> <span className="inline-flex flex-wrap gap-1"><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Figma</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Git</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Vite</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Webpack</span></span></div>
+                <div><span className="font-bold">AI Tools:</span> <span className="inline-flex flex-wrap gap-1"><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Claude Code</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Cursor</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Antigravity</span></span></div>
               </div>
             </section>
           </div>
@@ -108,9 +102,10 @@ export default function CVFrontendPage() {
                   </a>
                   <p className="text-xs print:text-[11px] font-bold mb-3 opacity-70 border-b border-black/20 pb-2">Tech: Next.js 15, React 19, TypeScript, CSS Modules</p>
                   <ul className="text-sm print:text-xs font-medium list-disc list-outside ml-4 space-y-2 print:space-y-1.5 leading-relaxed">
-                    <li>Developed Student workspace with dashboard, course pages, exam system, and AI Tutor.</li>
-                    <li>Built Teacher workspace for managing courses, question banks, and exams.</li>
-                    <li>Implemented JWT authentication supporting 3 user roles with API integration.</li>
+                    <li>Developed Student workspace with dashboard, course pages, exam system, and AI Tutor interface.</li>
+                    <li>Built Teacher workspace for managing courses, question banks, and exam creation.</li>
+                    <li>Implemented JWT authentication with role-based access (Admin/Teacher/Student) with API integration.</li>
+                    <li>Optimized UI components reducing page load time by 30% using React.memo and code splitting.</li>
                   </ul>
                 </div>
 
@@ -121,9 +116,10 @@ export default function CVFrontendPage() {
                   </a>
                   <p className="text-xs print:text-[11px] font-bold mb-3 opacity-70 border-b border-black/20 pb-2">Tech: Next.js 14, TypeScript, Tailwind CSS, Recharts</p>
                   <ul className="text-sm print:text-xs font-medium list-disc list-outside ml-4 space-y-2 print:space-y-1.5 leading-relaxed">
-                    <li>Built dashboard with financial statistics and charts using Recharts.</li>
-                    <li>Developed natural language transaction input feature.</li>
-                    <li>Implemented 6-digit PIN authentication for local data protection.</li>
+                    <li>Designed and developed fullstack personal finance management application with expense tracking.</li>
+                    <li>Built interactive dashboard with financial statistics and charts using Recharts.</li>
+                    <li>Implemented natural language transaction input parsing, converting plain text to structured data.</li>
+                    <li>Developed 6-digit PIN authentication using AES encryption for local data protection.</li>
                   </ul>
                 </div>
               </div>

@@ -18,17 +18,17 @@ export default function CVBackendPage() {
 
         <header className="border-b-4 border-black pb-8 print:pb-4 mb-8 print:mb-4 flex flex-col items-center text-center">
           <h1 className="text-5xl md:text-6xl print:text-5xl font-black uppercase tracking-tighter leading-none mb-2 print:mb-1">
-            Binh Minh
+            Nguyen Binh Minh
           </h1>
           <h2 className="text-xl md:text-2xl print:text-lg font-bold uppercase tracking-widest bg-black text-white print:bg-transparent print:text-black inline-block px-3 py-1 print:px-0 print:py-0 mb-4 print:mb-2">
-            Backend & DevOps Engineer
+            Backend & DevOps Developer
           </h2>
 
           <div className="flex flex-wrap justify-center gap-4 text-sm print:text-xs font-semibold mt-2 mb-6 print:mb-2 text-black">
             <a href="mailto:pata10102004@gmail.com" className="flex items-center gap-1.5 hover:underline"><Mail className="w-4 h-4 print:w-3 print:h-3" /> pata10102004@gmail.com</a>
             <a href="tel:0372064929" className="flex items-center gap-1.5 hover:underline"><Phone className="w-4 h-4 print:w-3 print:h-3" /> 037 206 4929</a>
-            <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 print:w-3 print:h-3" /> Ho Chi Minh City, Vietnam</span>
-            <a href="https://portfolio-binhminh.vercel.app" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:underline"><Globe className="w-4 h-4 print:w-3 print:h-3" /> Portfolio</a>
+            <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 print:w-3 print:h-3" /> Thu Duc, TP. HCM</span>
+            <a href="https://binhminh.thinkai.id.vn" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:underline"><Globe className="w-4 h-4 print:w-3 print:h-3" /> binhminh.thinkai.id.vn</a>
           </div>
 
           <section className="max-w-2xl mx-auto">
@@ -39,6 +39,18 @@ export default function CVBackendPage() {
         </header>
 
         <div className="flex flex-col gap-10 print:gap-8">
+
+          <section>
+            <h3 className="text-xl print:text-lg font-black uppercase border-b-2 border-black pb-1 mb-3 print:mb-2">Career Objectives</h3>
+            <div className="space-y-2 text-sm print:text-xs">
+              <div>
+                <span className="font-bold">Short-term:</span> Secure a Backend/DevOps position to apply knowledge in real-world systems, contribute to team success, and grow in a professional environment.
+              </div>
+              <div>
+                <span className="font-bold">Long-term:</span> Become a system architect capable of designing scalable, resilient distributed systems. Master DevOps practices to build robust CI/CD pipelines and infrastructure.
+              </div>
+            </div>
+          </section>
 
           <div className="grid grid-cols-1 md:grid-cols-2 print:grid print:grid-cols-2 gap-8 print:gap-6">
             
@@ -61,34 +73,13 @@ export default function CVBackendPage() {
             <section>
               <h3 className="text-xl print:text-lg font-black uppercase border-b-2 border-black pb-1 mb-3 print:mb-2">Skills</h3>
               
-              <div className="mb-4 print:mb-3">
-                <h4 className="font-bold text-sm print:text-xs uppercase mb-1.5 opacity-80">Backend</h4>
-                <div className="flex flex-wrap gap-2 print:gap-1.5">
-<<<<<<< Updated upstream:src/app/cv/backend/page.tsx
-                  {["NodeJS", ".NET", "MySQL"].map(skill => (
-=======
-<<<<<<< Updated upstream:src/app/cv/page.tsx
-                  {["NodeJS", "Spring Boot", ".NET", "Neo4j", "PostgreSQL"].map(skill => (
-=======
-<<<<<<< HEAD:src/app/cv/backend/page.tsx
-                  {["NodeJS", ".NET", "MySQL"].map(skill => (
-=======
-                  {["NodeJS", "Spring Boot", ".NET", "Neo4j", "PostgreSQL", "Redis"].map(skill => (
->>>>>>> parent of 70f1b29 (Merge pull request #10 from bnhminh1010/feature/aitools):src/app/cv/page.tsx
->>>>>>> Stashed changes:src/app/cv/backend/page.tsx
->>>>>>> Stashed changes:src/app/cv/page.tsx
-                    <span key={skill} className="text-sm print:text-[11px] font-bold border-2 border-black px-2 py-0.5">{skill}</span>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-bold text-sm print:text-xs uppercase mb-1.5 opacity-80">DevOps</h4>
-                <div className="flex flex-wrap gap-2 print:gap-1.5">
-                  {["Docker", "Kubernetes", "GitOps", "Linux", "CI/CD"].map(skill => (
-                    <span key={skill} className="text-sm print:text-[11px] font-bold bg-black text-white px-2 py-0.5">{skill}</span>
-                  ))}
-                </div>
+              <div className="space-y-2 text-sm print:text-xs">
+                <div><span className="font-bold">Language:</span> <span className="inline-flex flex-wrap gap-1"><span className="border border-black px-1.5 py-0.5 text-xs font-bold">C#</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">JAVA</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">NodeJS</span></span></div>
+                <div><span className="font-bold">Framework:</span> <span className="inline-flex flex-wrap gap-1"><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Spring Boot</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">.NET</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Express</span></span></div>
+                <div><span className="font-bold">Database:</span> <span className="inline-flex flex-wrap gap-1"><span className="border border-black px-1.5 py-0.5 text-xs font-bold">MongoDB</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">MySQL</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Neo4j</span></span></div>
+                <div><span className="font-bold">DevOps:</span> <span className="inline-flex flex-wrap gap-1"><span className="bg-black text-white px-1.5 py-0.5 text-xs font-bold">Docker</span><span className="bg-black text-white px-1.5 py-0.5 text-xs font-bold">GitOps</span><span className="bg-black text-white px-1.5 py-0.5 text-xs font-bold">Linux</span><span className="bg-black text-white px-1.5 py-0.5 text-xs font-bold">CI/CD</span></span></div>
+                <div><span className="font-bold">Tools:</span> <span className="inline-flex flex-wrap gap-1"><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Bruno</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Git</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Docker compose</span></span></div>
+                <div><span className="font-bold">AI Tools:</span> <span className="inline-flex flex-wrap gap-1"><span className="border border-black px-1.5 py-0.5 text-xs font-bold">ClaudeCode</span><span className="border border-black px-1.5 py-0.5 text-xs font-bold">Cursor</span></span></div>
               </div>
             </section>
           </div>
@@ -101,7 +92,7 @@ export default function CVBackendPage() {
                 <h4 className="font-black text-lg print:text-base uppercase">Backend/DevOps</h4>
               </div>
               
-              <p className="text-sm print:text-xs font-bold opacity-70 mb-5 print:mb-4 mt-2">Course Projects & Research | 2024 - Present</p>
+              <p className="text-sm print:text-xs font-bold opacity-70 mb-5 print:mb-4 mt-2">Course Projects & Research | 2025 - Present</p>
               
               <div className="flex flex-col gap-8 print:gap-8">
                 <div>
@@ -109,11 +100,12 @@ export default function CVBackendPage() {
                     <h5 className="font-black text-sm print:text-sm uppercase tracking-tight">Enterprise Knowledge Graph</h5>
                     <Globe className="w-4 h-4 text-black/50 print:text-black" />
                   </a>
-                  <p className="text-xs print:text-[11px] font-bold mb-3 opacity-70 border-b border-black/20 pb-2">Tech: NestJS, Neo4j, Redis, Docker, JWT</p>
+                  <p className="text-xs print:text-[11px] font-bold mb-3 opacity-70 border-b border-black/20 pb-2">Tech: ExpressJS, Neo4j, Redis, Docker, JWT</p>
                   <ul className="text-sm print:text-xs font-medium list-disc list-outside ml-4 space-y-2 print:space-y-1.5 leading-relaxed">
-                    <li>Developed RESTful API with JWT authentication supporting Admin and Viewer roles.</li>
-                    <li>Built knowledge graph in Neo4j mapping 80+ employees, skills, and project relationships.</li>
-                    <li>Implemented 3-tier AI chatbot with intelligent routing (Neo4j/Ollama/Gemini).</li>
+                    <li>Designed Neo4j database schema mapping 80+ employees, skills, and project relationships.</li>
+                    <li>Implemented Redis caching layer for chat history via Docker, reducing database load by 60%.</li>
+                    <li>Built Chain-of-Thought agent system to optimize user queries before LLM processing.</li>
+                    <li>Developed auto model routing service that selects optimal LLM (Ollama/Gemini) based on query complexity.</li>
                   </ul>
                 </div>
 
@@ -122,11 +114,13 @@ export default function CVBackendPage() {
                     <h5 className="font-black text-sm print:text-sm uppercase tracking-tight">ThinkAI E-Learning Platform</h5>
                     <Globe className="w-4 h-4 text-black/50 print:text-black" />
                   </a>
-                  <p className="text-xs print:text-[11px] font-bold mb-3 opacity-70 border-b border-black/20 pb-2">Tech: Spring Boot 3, Oracle Cloud, Docker, CI/CD</p>
+                  <p className="text-xs print:text-[11px] font-bold mb-3 opacity-70 border-b border-black/20 pb-2">Tech: Spring Boot 3, Aiven MySQL, Docker, CI/CD, Railway</p>
                   <ul className="text-sm print:text-xs font-medium list-disc list-outside ml-4 space-y-2 print:space-y-1.5 leading-relaxed">
-                    <li>Developed a monolithic core system handling course lifecycle and user subscriptions.</li>
-                    <li>Deployed full backend and database infrastructure on Oracle Cloud Infrastructure (OCI).</li>
-                    <li>Automated deployments and testing via GitHub Actions, integrating DevSecOps (SAST).</li>
+                    <li>Implemented JWT authentication with role-based access control (Admin/Teacher/Student).</li>
+                    <li>Deployed backend on Railway and database on Aiven MySQL with connection pooling optimization.</li>
+                    <li>Built CI/CD pipelines with GitHub Actions integrating DevSecOps practices (SAST scanning).</li>
+                    <li>Optimized database queries supporting 100+ concurrent mock-test sessions with 40% improved throughput.</li>
+                    <li>Developed RESTful APIs handling course lifecycle, subscriptions, and exam system.</li>
                   </ul>
                 </div>
               </div>

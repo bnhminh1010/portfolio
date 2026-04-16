@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import {
   Boxes,
   Bug,
@@ -12,23 +13,54 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
-const skills = [
-  // Backend
-  { label: "NodeJS", id: "NodeJS", Icon: ServerCog },
-  { label: "Spring Boot", id: "Spring Boot", Icon: ServerCog },
-  { label: "Neo4j", id: "Neo4j", Icon: Boxes },
-  { label: "PostgreSQL", id: "PostgreSQL", Icon: Boxes },
-  // DevOps
-  { label: "Docker", id: "Docker", Icon: Container },
-  { label: "Linux", id: "Linux", Icon: LaptopMinimal },
-  { label: "Git", id: "Git", Icon: GitBranch },
-  { label: "CI/CD", id: "CI/CD", Icon: Hammer },
-] as const;
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  ServerCog,
+  Boxes,
+  Container,
+  GitBranch,
+  Hammer,
+  LaptopMinimal,
+};
 
-const inverted = new Set([1, 3, 6]);
+type Skill = {
+  id: string;
+  label: string;
+  category: string;
+  inverted: boolean;
+};
 
 export function Skills() {
   const { t } = useLanguage();
+  const [skills, setSkills] = useState<Skill[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/skills")
+      .then((res) => res.json())
+      .then((data) => {
+        setSkills(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <section id="skills" className="bg-white scroll-mt-20">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:py-20">
+          <h2 className="text-center text-3xl font-bold tracking-tight sm:text-4xl">
+            {t("skills", "title")}
+          </h2>
+          <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-4">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="aspect-square border border-gray-200 animate-pulse" />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="skills" className="bg-white scroll-mt-20">
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:py-20">
@@ -37,8 +69,10 @@ export function Skills() {
         </h2>
 
         <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-4">
-          {skills.map(({ label, id, Icon }, idx) => {
-            const isInverted = inverted.has(idx);
+          {skills.map(({ label, id, category }, idx) => {
+            // Use category to pick icon, fallback to ServerCog
+            const Icon = category === "backend" ? ServerCog : category === "devops" ? Container : ServerCog;
+            const isInverted = skills[idx]?.inverted || false;
             
             // Brutalist card base
             const cardBase = "group relative aspect-square border border-black flex flex-col items-center justify-center p-4 transition-colors duration-300 overflow-hidden cursor-crosshair";

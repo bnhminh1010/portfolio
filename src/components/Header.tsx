@@ -1,6 +1,6 @@
 "use client";
 
-import { Download, Menu, X, Globe, Terminal as TerminalIcon } from "lucide-react";
+import { Download, Menu, X, Globe, Terminal as TerminalIcon, FileText, Code, Monitor, HelpCircle, File } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -9,7 +9,15 @@ import { Terminal } from "@/components/Terminal";
 export function Header() {
   const [open, setOpen] = useState(false);
   const [terminalOpen, setTerminalOpen] = useState(false);
+  const [cvModalOpen, setCvModalOpen] = useState(false);
   const { language, t, toggleLanguage } = useLanguage();
+
+  const cvOptions = [
+    { href: "/cv/backend", label: "Backend/DevOps", icon: Code },
+    { href: "/cv/frontend", label: "Frontend", icon: Monitor },
+    { href: "/cv/it-helpdesk", label: "IT Helpdesk", icon: HelpCircle },
+    { href: "/2026-NguyenBinhMinh-Backend-Devops.pdf", label: "View PDF", icon: File, external: true },
+  ];
 
   const nav = [
     { href: "#about", label: t("nav", "about") },
@@ -78,11 +86,9 @@ export function Header() {
             <span className="text-xs uppercase sm:hidden">{">_"}</span>
           </button>
 
-          <a href={language === "vi" ? "/cv-vi" : "/cv"} target="_blank" rel="noopener noreferrer" className="inline-flex">
-            <Button variant="solid" className="h-10 px-4">
+          <Button variant="solid" className="h-10 px-4" onClick={() => setCvModalOpen(true)}>
               <span className="hidden sm:inline-block">{t("nav", "resume")}</span>
             </Button>
-          </a>
         </div>
       </nav>
 
@@ -106,6 +112,38 @@ export function Header() {
       ) : null}
 
       <Terminal isOpen={terminalOpen} onClose={() => setTerminalOpen(false)} />
+
+      {/* CV Selection Modal */}
+      {cvModalOpen && (
+        <>
+          <div className="fixed inset-0 bg-black/40 z-50" onClick={() => setCvModalOpen(false)} />
+          <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-[280px] px-4">
+            <div className="bg-white rounded-lg shadow-xl">
+              <div className="flex justify-between items-center p-4 border-b border-gray-100">
+                <span className="text-sm font-medium">Select CV</span>
+                <button onClick={() => setCvModalOpen(false)} className="text-gray-400 hover:text-black">
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="p-2">
+                {cvOptions.map((cv) => (
+                  <a
+                    key={cv.href}
+                    href={cv.href}
+                    target={cv.external ? "_blank" : "_blank"}
+                    rel="noopener noreferrer"
+                    onClick={() => setCvModalOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:text-black hover:bg-gray-50 transition-colors rounded-md"
+                  >
+                    <cv.icon className="w-4 h-4" />
+                    <span className="text-sm font-medium">{cv.label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </header>
   );
 }
