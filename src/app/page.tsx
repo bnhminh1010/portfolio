@@ -12,7 +12,6 @@ import { GrafanaDashboard } from "@/components/GrafanaDashboard";
 import { ScrollFadeIn } from "@/components/ScrollFadeIn";
 import { IaCShowcase } from "@/components/IaCShowcase";
 import { SecurityScan } from "@/components/SecurityScan";
-import { LiveMonitoring } from "@/components/LiveMonitoring";
 import { IncidentDemo } from "@/components/IncidentDemo";
 import { CostBreakdown } from "@/components/CostBreakdown";
 import { NetworkTopology } from "@/components/NetworkTopology";
@@ -78,11 +77,7 @@ export default function Home() {
         </ScrollFadeIn>
 
         <ScrollFadeIn delay={100}>
-          <section id="monitoring"><LiveMonitoring /></section>
-        </ScrollFadeIn>
-
-        <ScrollFadeIn delay={100}>
-          <PrometheusMetrics />
+          <section id="monitoring"><PrometheusMetrics /></section>
         </ScrollFadeIn>
 
         <ScrollFadeIn delay={100}>
