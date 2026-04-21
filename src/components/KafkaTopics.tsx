@@ -2,33 +2,59 @@
 
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
-import { HardDrive, Activity, Users, Clock } from "lucide-react";
+import { Activity, Users } from "lucide-react";
 
-// Mock Kafka data
-const mockTopics = [
-  { name: "user-events", partitions: 3, replication: 1, messagesPerSec: "245" },
-  { name: "course-progress", partitions: 3, replication: 1, messagesPerSec: "128" },
-  { name: "exam-submissions", partitions: 6, replication: 1, messagesPerSec: "52" },
-  { name: "ai-analytics", partitions: 3, replication: 1, messagesPerSec: "18" },
-  { name: "notifications", partitions: 3, replication: 1, messagesPerSec: "89" },
-];
+type Topic = {
+  name: string;
+  partitions: number;
+  replicationFactor?: number;
+  replication?: number;
+  messagesPerSec: string;
+};
 
-const mockConsumerGroups = [
-  { group: "user-service", lag: 12, members: 2 },
-  { group: "analytics-worker", lag: 45, members: 3 },
-  { group: "notification-sender", lag: 0, members: 1 },
-];
+type ConsumerGroup = {
+  group: string;
+  lag: number;
+  members: number;
+};
 
 export function KafkaTopics() {
   const { language } = useLanguage();
-  const [selected, setSelected] = useState("user-events");
+  const [topics, setTopics] = useState<Topic[]>([]);
+  const [consumerGroups, setConsumerGroups] = useState<ConsumerGroup[]>([]);
+  const [selected, setSelected] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  // Fetch from API
   useEffect(() => {
-    // TODO: Connect to Kafka REST Proxy
+    let mounted = true;
+
+    fetch("/api/topics")
+      .then((res) => res.json())
+      .then((payload) => {
+        if (!mounted) return;
+        const apiTopics = Array.isArray(payload?.data?.topics) ? payload.data.topics : [];
+        const apiGroups = Array.isArray(payload?.data?.consumerGroups) ? payload.data.consumerGroups : [];
+
+        setTopics(apiTopics);
+        setConsumerGroups(apiGroups);
+        if (apiTopics[0]?.name) setSelected(apiTopics[0].name);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (mounted) setLoading(false);
+      });
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
-  const totalMessages = mockTopics.reduce((acc, t) => acc + parseInt(t.messagesPerSec), 0);
+  const totalMessages = topics.reduce((acc, t) => {
+    const parsed = Number.parseInt(String(t.messagesPerSec).replace(/[^0-9]/g, ""), 10);
+    return Number.isFinite(parsed) ? acc + parsed : acc;
+  }, 0);
+
+  const totalLag = consumerGroups.reduce((acc, group) => acc + group.lag, 0);
 
   return (
     <section className="border-b border-gray-200 bg-gray-50">
@@ -39,20 +65,17 @@ export function KafkaTopics() {
             Apache Kafka
           </h2>
           <p className="text-sm text-gray-500 mt-1">
-            {language === "vi"
-              ? "Event streaming & message queue"
-              : "Event streaming & message queue"}
+            {language === "vi" ? "Event streaming & message queue" : "Event streaming & message queue"}
           </p>
         </div>
 
-        {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           <div className="bg-white p-4 border border-gray-200">
-            <div className="text-2xl font-bold">{mockTopics.length}</div>
+            <div className="text-2xl font-bold">{loading ? "--" : topics.length}</div>
             <div className="text-xs text-gray-500">Topics</div>
           </div>
           <div className="bg-white p-4 border border-gray-200">
-            <div className="text-2xl font-bold">{totalMessages}/s</div>
+            <div className="text-2xl font-bold">{loading ? "--" : `${totalMessages}/s`}</div>
             <div className="text-xs text-gray-500">Msg Rate</div>
           </div>
           <div className="bg-white p-4 border border-gray-200">
@@ -60,19 +83,20 @@ export function KafkaTopics() {
             <div className="text-xs text-gray-500">Brokers</div>
           </div>
           <div className="bg-white p-4 border border-gray-200">
-            <div className="text-2xl font-bold">57</div>
+            <div className="text-2xl font-bold">{loading ? "--" : totalLag}</div>
             <div className="text-xs text-gray-500">Total Lag</div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Topics */}
           <div className="bg-white border border-gray-200">
             <div className="px-4 py-3 border-b border-gray-100">
               <span className="text-sm font-medium">Topics</span>
             </div>
             <div className="divide-y divide-gray-100">
-              {mockTopics.map((topic) => (
+              {loading && <div className="px-4 py-3 text-sm text-gray-400">Loading topics...</div>}
+              {!loading && topics.length === 0 && <div className="px-4 py-3 text-sm text-gray-400">No topics available</div>}
+              {topics.map((topic) => (
                 <button
                   key={topic.name}
                   onClick={() => setSelected(topic.name)}
@@ -89,13 +113,16 @@ export function KafkaTopics() {
             </div>
           </div>
 
-          {/* Consumer Groups */}
           <div className="bg-white border border-gray-200">
             <div className="px-4 py-3 border-b border-gray-100">
               <span className="text-sm font-medium">Consumer Groups</span>
             </div>
             <div className="divide-y divide-gray-100">
-              {mockConsumerGroups.map((cg) => (
+              {loading && <div className="px-4 py-3 text-sm text-gray-400">Loading consumer groups...</div>}
+              {!loading && consumerGroups.length === 0 && (
+                <div className="px-4 py-3 text-sm text-gray-400">No consumer groups available</div>
+              )}
+              {consumerGroups.map((cg) => (
                 <div key={cg.group} className="px-4 py-3">
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-sm font-mono">{cg.group}</span>

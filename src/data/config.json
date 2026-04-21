@@ -17,6 +17,19 @@
     "apiKey": "",
     "dashboardId": ""
   },
+  "kafka": {
+    "enabled": false,
+    "url": "http://localhost:9092"
+  },
+  "tempo": {
+    "enabled": true,
+    "url": "http://localhost:3200"
+  },
+  "vault": {
+    "enabled": false,
+    "url": "http://localhost:8200",
+    "token": ""
+  },
   "kubernetes": {
     "enabled": false,
     "config": ""

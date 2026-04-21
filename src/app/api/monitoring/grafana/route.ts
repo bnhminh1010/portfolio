@@ -12,18 +12,26 @@ const mockPanels = [
 ];
 
 export async function GET() {
+  const grafanaEnabled =
+    process.env.GRAFANA_ENABLED != null
+      ? process.env.GRAFANA_ENABLED === "true"
+      : config.grafana?.enabled;
+  const grafanaUrl = process.env.GRAFANA_URL || config.grafana?.url;
+  const grafanaApiKey = process.env.GRAFANA_API_KEY || config.grafana?.apiKey;
+  const grafanaDashboardId = process.env.GRAFANA_DASHBOARD_ID || config.grafana?.dashboardId;
+
   // If Grafana is configured and enabled, fetch from real Grafana
-  if (config.grafana?.enabled && config.grafana?.url && config.grafana?.dashboardId) {
+  if (grafanaEnabled && grafanaUrl && grafanaDashboardId) {
     try {
       const headers: Record<string, string> = {
         "Content-Type": "application/json",
       };
-      if (config.grafana?.apiKey) {
-        headers["Authorization"] = `Bearer ${config.grafana.apiKey}`;
+      if (grafanaApiKey) {
+        headers["Authorization"] = `Bearer ${grafanaApiKey}`;
       }
 
       const response = await fetch(
-        `${config.grafana.url}/api/dashboards/uid/${config.grafana.dashboardId}`,
+        `${grafanaUrl}/api/dashboards/uid/${grafanaDashboardId}`,
         { headers }
       );
       const data = await response.json();

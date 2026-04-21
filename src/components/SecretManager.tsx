@@ -1,27 +1,49 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
-import { Key, RefreshCw, Shield, Clock, CheckCircle, AlertTriangle } from "lucide-react";
+import { Key, RefreshCw, Clock, CheckCircle, AlertTriangle } from "lucide-react";
 
-const mockSecrets = [
-  { key: "DATABASE_URL", status: "active", rotation: "90d", lastRotated: "2026-03-15" },
-  { key: "JWT_SECRET", status: "active", rotation: "30d", lastRotated: "2026-04-01" },
-  { key: "AWS_ACCESS_KEY", status: "pending", rotation: "30d", lastRotated: "2026-03-20" },
-  { key: "REDIS_PASSWORD", status: "active", rotation: "60d", lastRotated: "2026-04-10" },
-  { key: "OPENAI_API_KEY", status: "active", rotation: "90d", lastRotated: "2026-03-25" },
-];
+type Secret = {
+  key: string;
+  status: string;
+  rotation: string;
+  lastRotated: string;
+};
 
 export function SecretManager() {
   const { language } = useLanguage();
+  const [secrets, setSecrets] = useState<Secret[]>([]);
   const [syncing, setSyncing] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const handleSync = () => {
-    setSyncing(true);
-    setTimeout(() => setSyncing(false), 1500);
+  const fetchSecrets = async () => {
+    try {
+      const res = await fetch("/api/secrets");
+      const payload = await res.json();
+      setSecrets(Array.isArray(payload?.data) ? payload.data : []);
+    } catch (error) {
+      console.error("Failed to fetch secrets:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const activeCount = mockSecrets.filter(s => s.status === "active").length;
+  useEffect(() => {
+    fetchSecrets();
+  }, []);
+
+  const handleSync = async () => {
+    setSyncing(true);
+    try {
+      await fetch("/api/secrets/sync", { method: "POST" });
+      await fetchSecrets();
+    } finally {
+      setSyncing(false);
+    }
+  };
+
+  const activeCount = secrets.filter((s) => s.status === "active").length;
 
   return (
     <section className="border-b border-gray-200 bg-white">
@@ -33,28 +55,22 @@ export function SecretManager() {
               Secrets Manager
             </h2>
             <p className="text-sm text-gray-500 mt-1">
-              {language === "vi"
-                ? "HashiCorp Vault - Quản lý secrets tập trung"
-                : "HashiCorp Vault - Centralized secrets management"}
+              {language === "vi" ? "HashiCorp Vault - Quản lý secrets tập trung" : "HashiCorp Vault - Centralized secrets management"}
             </p>
           </div>
-          <button
-            onClick={handleSync}
-            className="flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 hover:bg-gray-50"
-          >
+          <button onClick={handleSync} className="flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 hover:bg-gray-50">
             <RefreshCw className={`w-4 h-4 ${syncing ? "animate-spin" : ""}`} />
             Sync
           </button>
         </div>
 
-        {/* Stats */}
         <div className="grid grid-cols-3 gap-4 mb-6">
           <div className="bg-gray-50 p-4 border border-gray-200">
-            <div className="text-2xl font-bold">{mockSecrets.length}</div>
+            <div className="text-2xl font-bold">{loading ? "--" : secrets.length}</div>
             <div className="text-xs text-gray-500">Total Secrets</div>
           </div>
           <div className="bg-gray-50 p-4 border border-gray-200">
-            <div className="text-2xl font-bold text-green-600">{activeCount}</div>
+            <div className="text-2xl font-bold text-green-600">{loading ? "--" : activeCount}</div>
             <div className="text-xs text-gray-500">Active</div>
           </div>
           <div className="bg-gray-50 p-4 border border-gray-200">
@@ -63,7 +79,6 @@ export function SecretManager() {
           </div>
         </div>
 
-        {/* Secrets Table */}
         <div className="bg-white border border-gray-200 overflow-hidden">
           <table className="w-full">
             <thead className="bg-gray-50">
@@ -75,7 +90,21 @@ export function SecretManager() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
-              {mockSecrets.map((secret) => (
+              {loading && (
+                <tr>
+                  <td className="px-4 py-3 text-sm text-gray-400" colSpan={4}>
+                    Loading secrets...
+                  </td>
+                </tr>
+              )}
+              {!loading && secrets.length === 0 && (
+                <tr>
+                  <td className="px-4 py-3 text-sm text-gray-400" colSpan={4}>
+                    No secrets available
+                  </td>
+                </tr>
+              )}
+              {secrets.map((secret) => (
                 <tr key={secret.key} className="hover:bg-gray-50">
                   <td className="px-4 py-3 text-sm font-mono">{secret.key}</td>
                   <td className="px-4 py-3">
@@ -97,7 +126,6 @@ export function SecretManager() {
           </table>
         </div>
 
-        {/* Auto-sync status */}
         <div className="mt-4 flex items-center gap-2 text-xs text-gray-500">
           <Clock className="w-4 h-4" />
           <span>Auto-sync every 5 minutes • Last sync: 2 min ago</span>

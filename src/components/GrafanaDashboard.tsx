@@ -1,35 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Activity, Clock, RefreshCw, Settings, Maximize2 } from "lucide-react";
-
-const dashboards = [
-  { id: "cpu", name: "CPU Usage", value: 42, target: 80 },
-  { id: "memory", name: "Memory", value: 58, target: 85 },
-  { id: "requests", name: "Requests/s", value: 1247, target: 2000 },
-  { id: "latency", name: "Latency p99", value: 180, target: 200 },
-  { id: "errors", name: "Error Rate", value: 0.02, target: 1 },
-  { id: "saturation", name: "Saturation", value: 62, target: 80 },
-];
+import { Activity, ExternalLink } from "lucide-react";
+import config from "@/data/config.json";
 
 export function GrafanaDashboard() {
-  const [metrics, setMetrics] = useState(dashboards.map(d => ({ ...d })));
-  const [timeRange, setTimeRange] = useState("5m");
+  const grafanaUrl = process.env.NEXT_PUBLIC_GRAFANA_URL || config.grafana?.url || "https://grafana.thinkai.id.vn";
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMetrics(prev => prev.map(m => ({
-        ...m,
-        value: m.id === "requests"
-          ? Math.floor(m.value + (Math.random() * 200 - 100))
-          : m.id === "latency"
-          ? Math.max(50, Math.min(300, m.value + (Math.random() * 40 - 20)))
-          : Math.max(0, Math.min(100, m.value + (Math.random() * 10 - 5)))
-      })));
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, []);
+  // Note: These IDs should be replaced with actual panel IDs from your Grafana dashboard
+  // For now, I'm using a generic dashboard embed format or a link to the dashboard
+  const dashboardSrc = `${grafanaUrl}/d-solo/thinkai-overview/overview?orgId=1&refresh=5s&theme=light&panelId=1`;
 
   return (
     <section className="border-b border-gray-200 bg-white">
@@ -38,56 +17,37 @@ export function GrafanaDashboard() {
           <div>
             <h2 className="text-xl font-bold flex items-center gap-2">
               <Activity className="w-5 h-5" />
-              Grafana
+              Grafana Live
             </h2>
-            <p className="text-sm text-gray-500">Metrics dashboard</p>
+            <p className="text-sm text-gray-500">Real-time system observability</p>
           </div>
-          <div className="flex gap-2">
-            <select
-              value={timeRange}
-              onChange={(e) => setTimeRange(e.target.value)}
-              className="text-xs border border-gray-200 px-2 py-1"
-            >
-              <option value="1m">Last 1m</option>
-              <option value="5m">Last 5m</option>
-              <option value="15m">Last 15m</option>
-              <option value="1h">Last 1h</option>
-            </select>
-            <button className="p-1 border border-gray-200">
-              <RefreshCw className="w-4 h-4" />
-            </button>
-            <button className="p-1 border border-gray-200">
-              <Settings className="w-4 h-4" />
-            </button>
-          </div>
+          <a
+            href={grafanaUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-xs text-blue-600 hover:underline"
+          >
+            Open Grafana <ExternalLink className="w-3 h-3" />
+          </a>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-          {metrics.map((m) => (
-            <div key={m.id} className="p-3 border border-gray-200">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs text-gray-500">{m.name}</span>
-                <span className="text-xs text-gray-400 flex items-center gap-1">
-                  <Clock className="w-3 h-3" /> {timeRange}
-                </span>
-              </div>
-              <div className="flex items-end justify-between">
-                <span className="text-2xl font-bold">
-                  {typeof m.value === "number" && m.value < 10 ? m.value.toFixed(2) : Math.round(m.value)}
-                  <span className="text-xs font-normal text-gray-500 ml-1">
-                    {m.id === "requests" ? "req/s" : m.id === "errors" ? "%" : m.id === "latency" ? "ms" : "%"}
-                  </span>
-                </span>
-                <div className="w-12 h-8 flex items-end">
-                  <div
-                    className={`w-full ${m.value > m.target ? "bg-red-500" : "bg-black"}`}
-                    style={{ height: `${Math.min(100, (m.value / (m.target * 1.5)) * 100)}%` }}
-                  />
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="aspect-video w-full border border-gray-200 overflow-hidden bg-gray-50 flex items-center justify-center relative">
+          <iframe
+            src={dashboardSrc}
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            title="Grafana Dashboard"
+            className="absolute inset-0"
+          />
+          {/* Fallback if iframe fails or panelId is wrong */}
+          <div className="text-xs text-gray-400 z-0">
+            Loading dashboard from {grafanaUrl}...
+          </div>
         </div>
+        <p className="mt-2 text-[10px] text-gray-400 italic">
+          * Ensure Grafana allows embedding (allow_embedding: true) and anonymous access is enabled for this panel.
+        </p>
       </div>
     </section>
   );
