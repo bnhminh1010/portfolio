@@ -68,6 +68,35 @@ export function PortfolioHeader() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    let fallbackTimer: number | undefined;
+
+    const scrollToHash = () => {
+      const href = window.location.hash;
+      if (!href || href === "#top") return;
+
+      const target = document.querySelector<HTMLElement>(href);
+      const header = headerRef.current;
+      if (!target || !header) return;
+
+      const top = target.getBoundingClientRect().top + window.scrollY - header.getBoundingClientRect().height - 28;
+      window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+    };
+
+    const scheduleHashOffset = () => {
+      window.requestAnimationFrame(scrollToHash);
+      window.clearTimeout(fallbackTimer);
+      fallbackTimer = window.setTimeout(scrollToHash, 160);
+    };
+
+    scheduleHashOffset();
+    window.addEventListener("hashchange", scheduleHashOffset);
+    return () => {
+      window.clearTimeout(fallbackTimer);
+      window.removeEventListener("hashchange", scheduleHashOffset);
+    };
+  }, [headerHeight]);
+
   const navigateToSection = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     event.preventDefault();
     setMenuOpen(false);

@@ -11,10 +11,6 @@ const nextConfig: NextConfig = {
         source: "/(.*)",
         headers: [
           {
-            key: "X-Forwarded-Proto",
-            value: "https",
-          },
-          {
             key: "X-Content-Type-Options",
             value: "nosniff",
           },

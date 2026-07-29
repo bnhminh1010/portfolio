@@ -21,7 +21,6 @@ export function PortfolioHome() {
       <MotionObserver />
       <main>
         <section className="hero-section" aria-labelledby="hero-title">
-          <AmbientOpsProps scene="hero" />
           <div data-motion data-motion-initial className="hero-copy motion-rise">
             <p className="availability"><span aria-hidden="true" />{text.hero.status}</p>
             <p className="eyebrow">{profile.name} · {profile.location}</p>
@@ -52,7 +51,6 @@ export function PortfolioHome() {
         </div>
 
         <section id="work" className="content-section work-section" aria-labelledby="work-title">
-          <AmbientOpsProps scene="work" />
           <div data-motion className="section-intro section-intro-wide motion-rise">
             <p className="section-rail" aria-hidden="true">01</p>
             <div className="section-intro-copy">
