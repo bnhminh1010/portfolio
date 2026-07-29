@@ -13,6 +13,11 @@ const barlowCondensed = localFont({
   variable: "--font-display-local",
 });
 
+// Social crawlers and Vercel's edge cache keep an OG image aggressively. Bump
+// this version whenever the exported thumbnail changes so each release points
+// crawlers at a distinct image URL.
+const socialImage = "/og-image.png?v=20260729";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://binhminh.thinkai.id.vn"),
   title: "Bình Minh — DevOps Engineer",
@@ -28,7 +33,7 @@ export const metadata: Metadata = {
     description: "Containerization, CI/CD, Linux infrastructure and reliable delivery.",
     url: "/",
     siteName: "Binh Minh Portfolio",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "MINH.OPS — DevOps Engineer, systems that ship, observe and recover" }],
+    images: [{ url: socialImage, width: 1200, height: 630, alt: "MINH.OPS — DevOps Engineer, systems that ship, observe and recover" }],
     locale: "en_US",
     type: "website",
   },
@@ -36,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Bình Minh | DevOps Engineer",
     description: "Containerization, CI/CD, Linux infrastructure and reliable delivery.",
-    images: ["/og-image.png"],
+    images: [socialImage],
   },
 };
 
