@@ -1,55 +1,53 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { Language, dictionaries, Dictionary } from "../i18n/dictionaries";
+import { createContext, useContext, useEffect, useSyncExternalStore } from "react";
+import type { Language } from "@/data/portfolio";
 
-interface LanguageContextType {
+type LanguageContextValue = {
   language: Language;
-  t: (section: keyof Dictionary, key: string) => string;
   toggleLanguage: () => void;
+};
+
+const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
+const storageKey = "portfolio-language";
+
+function readLanguage(): Language {
+  if (typeof window === "undefined") return "en";
+  const saved = window.localStorage.getItem(storageKey);
+  return saved === "vi" ? "vi" : "en";
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+function subscribeToLanguage(onStoreChange: () => void) {
+  window.addEventListener("storage", onStoreChange);
+  window.addEventListener("portfolio-language-change", onStoreChange);
+  return () => {
+    window.removeEventListener("storage", onStoreChange);
+    window.removeEventListener("portfolio-language-change", onStoreChange);
+  };
+}
+
+function getServerLanguage(): Language {
+  return "en";
+}
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>("en");
-  const [mounted, setMounted] = useState(false);
+  const language = useSyncExternalStore(subscribeToLanguage, readLanguage, getServerLanguage);
 
   useEffect(() => {
-    // Load preference from local storage on mount
-    const savedLang = localStorage.getItem("lang") as Language | null;
-    if (savedLang === "en" || savedLang === "vi") {
-      setLanguage(savedLang);
-    }
-    setMounted(true);
-  }, []);
-
-  const toggleLanguage = () => {
-    const newLang = language === "en" ? "vi" : "en";
-    setLanguage(newLang);
-    localStorage.setItem("lang", newLang);
-    // Update HTML lang attribute for accessibility and SEO
-    document.documentElement.lang = newLang;
-  };
-
-  const t = (section: keyof Dictionary, key: string): string => {
-    // Basic nested key access, assumes section exists and key exists within it
-    const dict = dictionaries[language];
-    // @ts-ignore
-    return dict[section]?.[key] || key;
-  };
-
-  if (!mounted) {
-    // Prevent hydration mismatch by rendering default initially
-    return (
-      <LanguageContext.Provider value={{ language: "en", t, toggleLanguage }}>
-        {children}
-      </LanguageContext.Provider>
-    );
-  }
+    document.documentElement.lang = language;
+    window.localStorage.setItem("portfolio-language", language);
+  }, [language]);
 
   return (
-    <LanguageContext.Provider value={{ language, t, toggleLanguage }}>
+    <LanguageContext.Provider
+      value={{
+        language,
+        toggleLanguage: () => {
+          window.localStorage.setItem(storageKey, language === "en" ? "vi" : "en");
+          window.dispatchEvent(new Event("portfolio-language-change"));
+        },
+      }}
+    >
       {children}
     </LanguageContext.Provider>
   );
@@ -57,8 +55,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
 export function useLanguage() {
   const context = useContext(LanguageContext);
-  if (context === undefined) {
-    throw new Error("useLanguage must be used within a LanguageProvider");
-  }
+  if (!context) throw new Error("useLanguage must be used within LanguageProvider");
   return context;
 }

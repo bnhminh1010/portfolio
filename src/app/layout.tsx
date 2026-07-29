@@ -1,56 +1,50 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
-import { CustomCursor } from "@/components/CustomCursor";
 
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
+const barlowCondensed = localFont({
+  src: [
+    { path: "./fonts/BarlowCondensed-Regular.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/BarlowCondensed-Bold.ttf", weight: "700", style: "normal" },
+    { path: "./fonts/BarlowCondensed-ExtraBold.ttf", weight: "800", style: "normal" },
+  ],
   display: "swap",
+  variable: "--font-display-local",
 });
 
 export const metadata: Metadata = {
-  title: "Binh Minh — Backend & DevOps Engineer",
-  description:
-    "Backend Developer & DevOps Engineer — system architecture, scalable deployments, and CI/CD.",
-  openGraph: {
-    title: "Binh Minh | Backend & DevOps",
-    description: "System architecture, scalable deployments, and CI/CD. View my interactive portfolio.",
-    url: "https://binhminh-devops.vercel.app",
-    siteName: "Binh Minh Portfolio",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Binh Minh - Backend & DevOps Engineer Portfolio",
-      },
+  metadataBase: new URL("https://binhminh.thinkai.id.vn"),
+  title: "Bình Minh — DevOps Engineer",
+  description: "DevOps Engineer portfolio: containerization, CI/CD, Linux infrastructure and reliability-focused delivery.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
     ],
+  },
+  openGraph: {
+    title: "Bình Minh | DevOps Engineer",
+    description: "Containerization, CI/CD, Linux infrastructure and reliable delivery.",
+    url: "/",
+    siteName: "Binh Minh Portfolio",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "MINH.OPS — DevOps Engineer, systems that ship, observe and recover" }],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Binh Minh | Backend & DevOps",
-    description: "System architecture, scalable deployments, and CI/CD. View my interactive portfolio.",
+    title: "Bình Minh | DevOps Engineer",
+    description: "Containerization, CI/CD, Linux infrastructure and reliable delivery.",
     images: ["/og-image.png"],
   },
 };
 
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="bg-white text-black antialiased">
-        <LanguageProvider>
-          <CustomCursor />
-          {children}
-        </LanguageProvider>
+    <html lang="en" className={barlowCondensed.variable}>
+      <body>
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">MINH.OPS mark</title>
+  <desc id="desc">An isometric M monogram for the MINH.OPS DevOps portfolio.</desc>
+  <rect width="256" height="256" fill="#f7f6f0"/>
+  <g stroke="#101010" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M42 210V50h34l52 58 52-58h34v160h-34v-96l-52 60-52-60v96H42z" transform="translate(-9 11)" fill="#2b2b2b" stroke-width="8"/>
+    <path d="M42 210V50h34l52 58 52-58h34v160h-34v-96l-52 60-52-60v96H42z" transform="translate(9 -11)" fill="#1eaaa1" stroke-width="8"/>
+    <path d="M42 210V50h34l52 58 52-58h34v160h-34v-96l-52 60-52-60v96H42z" fill="#ffd400" stroke-width="9"/>
+    <path d="M128 89l19 19-19 19-19-19z" fill="#ef87d8" stroke-width="6"/>
+  </g>
+</svg>

@@ -1,29 +1,19 @@
-# Binh Minh - Backend & DevOps Engineer Portfolio
+# Bình Minh — DevOps Engineer Portfolio
 
-![Portfolio Preview](./public/og-image.png)
+A recruiter-facing portfolio for containerization, CI/CD, Linux infrastructure and reliable delivery. Personal content follows the current DevOps CV; project claims are checked against their repositories.
 
-A personal portfolio website and web-based Brutalist CV tailored for showcasing Backend and DevOps engineering skills. Built with modern web technologies, this project emphasizes performance, clean code, and a unique Brutalist aesthetic.
+## Live routes
 
-## 🚀 Live Demo
-- **Portfolio (EN/VI)**: [https://portfolio-binhminh.vercel.app](https://portfolio-binhminh.vercel.app)
-- **Web CV (EN)**: [https://portfolio-binhminh.vercel.app/cv](https://portfolio-binhminh.vercel.app/cv)
-- **Web CV (VI)**: [https://portfolio-binhminh.vercel.app/cv-vi](https://portfolio-binhminh.vercel.app/cv-vi)
+- **Portfolio (EN/VI):** [https://binhminh.thinkai.id.vn](https://binhminh.thinkai.id.vn)
+- **DevOps CV:** [https://binhminh.thinkai.id.vn/cv](https://binhminh.thinkai.id.vn/cv)
 
-## 🛠️ Tech Stack & Features
-- **Framework**: [Next.js](https://nextjs.org) 15 (App Router, React 19)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Icons**: Lucide React
-- **Language**: TypeScript
+## Stack and behaviour
 
-### ✨ Key Capabilities
-- **Brutalist Design System**: High-contrast, monochromatic aesthetic with bold typography and raw structural elements mimicking early internet design.
-- **i18n Localization**: Fully integrated English and Vietnamese context-based translation switcher without external heavy libraries.
-- **Printable Single-Page CV**: Custom `@page` CSS optimizations ensuring the `/cv` and `/cv-vi` routes output perfect, 1-page A4 PDFs directly from the browser's native print menu.
-- **Interactive Technical Components**: Includes custom implementations of complex UI flows:
-  - **GitOps CI/CD Pipeline Flow**: Interactive diagram explaining deployment stages.
-  - **Grafana/K8s Visualizations**: Mock dashboard components illustrating complex system observability.
-  - **Web Terminal Console**: An interactive terminal component for browsing skills via CLI commands.
-- **SEO Ready**: Programmatic OpenGraph images and structured metadata.
+- **Framework:** [Next.js](https://nextjs.org) 16 with React 19
+- **Styling:** Tailwind CSS 4 and a locked CSS token system in [`design.md`](./design.md)
+- **Language:** TypeScript; English is default with a Vietnamese toggle stored locally
+- **Project evidence:** HomeLab Dashboard and ThinkAI Backend are presented as repository-backed case studies; diagrams are explicitly labelled demonstrations, never live telemetry
+- **OpenScreen previews:** each case study has an accessible preview dialog ready for a 20–30 second MP4/WebM recording and poster. Record with demo data only; redact hostnames, identities, internal URLs and secrets before publishing.
 
 ## 📥 Local Development
 
@@ -39,10 +29,9 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 🖨️ PDF Generation (CV)
-To export the CV, navigate to `/cv` or `/cv-vi` on your local or deployed environment.
-Click the **Print / Save as PDF** button or press \`(Ctrl+P / Cmd+P)\`. 
-*Note: Make sure to enable "Background graphics" in your print dialog if your browser disables it by default.*
+## CV
+
+`/cv` and the legacy `/cv/backend` route redirect to the current single-page DevOps PDF. Other old specialist CV routes were intentionally removed.
 
 ## 📄 License
 This project is open-source and available under the MIT License.

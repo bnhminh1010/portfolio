@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Binh Minh — DevOps Engineer</title>
+  <desc id="description">A DevOps portfolio focused on reliable delivery.</desc>
+  <rect width="1200" height="630" fill="#f7f6f0"/>
+  <g stroke="#101010" stroke-width="5">
+    <path d="M0 90h1200M0 180h1200M0 270h1200M0 360h1200M0 450h1200M0 540h1200M120 0v630M240 0v630M360 0v630M480 0v630M600 0v630M720 0v630M840 0v630M960 0v630M1080 0v630" opacity=".12"/>
+    <rect x="74" y="66" width="254" height="58" fill="#ffd400"/>
+    <rect x="690" y="126" width="388" height="284" fill="#1eaaa1"/>
+    <rect x="748" y="186" width="272" height="68" fill="#ffd400"/>
+    <rect x="748" y="286" width="212" height="44" fill="#ef87d8"/>
+  </g>
+  <g fill="#101010" font-family="Arial, Helvetica, sans-serif" font-weight="900">
+    <text x="90" y="106" font-size="38">MINH.OPS</text>
+    <text x="76" y="255" font-size="95">DEVOPS</text>
+    <text x="76" y="342" font-size="95">ENGINEER</text>
+    <text x="80" y="414" font-family="Courier New, monospace" font-size="28">RELIABLE PATHS FROM CODE TO PRODUCTION</text>
+    <text x="766" y="230" font-family="Courier New, monospace" font-size="29">CI / CD</text>
+    <text x="766" y="320" font-family="Courier New, monospace" font-size="24">CONTAINERS · LINUX · DELIVERY</text>
+  </g>
+</svg>
