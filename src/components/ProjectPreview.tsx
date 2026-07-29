@@ -61,12 +61,12 @@ export function ProjectPreview({ project, language, buttonLabel, motionClassName
 
   return (
     <>
-      <figure data-motion className={`project-preview project-preview-${project.accent} ${motionClassName}`}>
-        <div className="project-preview-label" aria-hidden="true">{content.category}</div>
-        <ArchitectureDiagram projectId={project.id} />
-        <ProjectFlow projectId={project.id} />
-        <figcaption>{content.diagramLabel}</figcaption>
-        <button type="button" className="preview-trigger" onClick={() => setOpen(true)}>
+      <figure data-motion className={`project-preview project-preview-${project.accent} ${motionClassName} motion-stage`}>
+        <div className="project-preview-label motion-item" aria-hidden="true">{content.category}</div>
+        <div className="motion-item motion-diagram"><ArchitectureDiagram projectId={project.id} /></div>
+        <div className="motion-item"><ProjectFlow projectId={project.id} /></div>
+        <figcaption className="motion-item">{content.diagramLabel}</figcaption>
+        <button type="button" className="preview-trigger motion-item" onClick={() => setOpen(true)}>
           <Play aria-hidden="true" size={16} /> {buttonLabel}
         </button>
       </figure>

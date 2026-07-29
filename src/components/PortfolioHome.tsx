@@ -51,9 +51,9 @@ export function PortfolioHome() {
         </div>
 
         <section id="work" className="content-section work-section" aria-labelledby="work-title">
-          <div data-motion className="section-intro section-intro-wide motion-rise">
-            <p className="section-rail" aria-hidden="true">01</p>
-            <div className="section-intro-copy">
+          <div data-motion className="section-intro section-intro-wide motion-rise motion-stage">
+            <p className="section-rail motion-item" aria-hidden="true">01</p>
+            <div className="section-intro-copy motion-item">
               <p className="eyebrow">{text.work.eyebrow}</p>
               <h2 id="work-title">{text.work.title}</h2>
               <p className="section-intro-body">{text.work.body}</p>
@@ -66,10 +66,10 @@ export function PortfolioHome() {
               return (
                 <article key={project.id} className={`project-case ${index % 2 ? "project-case-reversed" : ""}`}>
                   <ProjectPreview project={project} language={language} buttonLabel={text.work.preview} motionClassName={index % 2 ? "motion-from-right" : "motion-from-left"} />
-                  <div data-motion className={`project-copy ${index % 2 ? "motion-from-left" : "motion-from-right"}`}>
-                    <p className="eyebrow">{projectText.category} · {project.period}</p>
-                    <h3>{projectText.title}</h3>
-                    <p className="project-summary">{projectText.summary}</p>
+                  <div data-motion className={`project-copy motion-stage ${index % 2 ? "motion-from-left" : "motion-from-right"}`}>
+                    <p className="eyebrow motion-item">{projectText.category} · {project.period}</p>
+                    <h3 className="motion-item">{projectText.title}</h3>
+                    <p className="project-summary motion-item">{projectText.summary}</p>
                     <dl className="case-story" aria-label={`${projectText.title} case study`}>
                       <div>
                         <dt>{text.work.storyLabels.problem}</dt>
@@ -84,8 +84,8 @@ export function PortfolioHome() {
                         <dd>{projectText.story.outcome}</dd>
                       </div>
                     </dl>
-                    <div className="project-stack">{project.stack.map((item) => <span key={item}>{item}</span>)}</div>
-                    <a href={project.repo} target="_blank" rel="noreferrer" className="button-secondary source-button">
+                    <div className="project-stack motion-item">{project.stack.map((item) => <span key={item}>{item}</span>)}</div>
+                    <a href={project.repo} target="_blank" rel="noreferrer" className="button-secondary source-button motion-item">
                       {text.work.source} <ArrowUpRight aria-hidden="true" size={18} />
                     </a>
                   </div>
@@ -97,17 +97,17 @@ export function PortfolioHome() {
 
         <section id="experience" className="content-section experience-section" aria-labelledby="experience-title">
           <AmbientOpsProps scene="experience" />
-          <div data-motion className="section-intro motion-rise">
-            <p className="section-rail" aria-hidden="true">02</p>
-            <div className="section-intro-copy">
+          <div data-motion className="section-intro motion-rise motion-stage">
+            <p className="section-rail motion-item" aria-hidden="true">02</p>
+            <div className="section-intro-copy motion-item">
               <p className="eyebrow">{text.experience.eyebrow}</p>
               <h2 id="experience-title">{text.experience.title}</h2>
               <p className="section-intro-body">{text.experience.body}</p>
             </div>
           </div>
-          <article data-motion className="experience-card motion-from-right">
-            <div className="experience-card-meta"><MapPin aria-hidden="true" size={18} /> {text.experience.period}</div>
-            <h3>{text.experience.role}</h3>
+          <article data-motion className="experience-card motion-from-right motion-stage">
+            <div className="experience-card-meta motion-item"><MapPin aria-hidden="true" size={18} /> {text.experience.period}</div>
+            <h3 className="motion-item">{text.experience.role}</h3>
             <dl className="case-story case-story-experience">
               <div>
                 <dt>{text.work.storyLabels.problem}</dt>
@@ -127,14 +127,14 @@ export function PortfolioHome() {
 
         <section id="skills" className="content-section skills-section" aria-labelledby="skills-title">
           <AmbientOpsProps scene="skills" />
-          <div data-motion className="section-intro motion-rise">
-            <p className="section-rail" aria-hidden="true">03</p>
-            <div className="section-intro-copy">
+          <div data-motion className="section-intro motion-rise motion-stage">
+            <p className="section-rail motion-item" aria-hidden="true">03</p>
+            <div className="section-intro-copy motion-item">
               <p className="eyebrow">{text.skills.eyebrow}</p>
               <h2 id="skills-title">{text.skills.title}</h2>
             </div>
           </div>
-          <div data-motion className="skill-grid motion-rise">
+          <div data-motion className="skill-grid motion-rise motion-stage">
             {text.skills.groups.map((group) => (
               <section key={group.label} className="skill-group" aria-label={group.label}>
                 <h3>{group.label}</h3>
@@ -146,17 +146,17 @@ export function PortfolioHome() {
 
         <section id="education" className="content-section education-section" aria-labelledby="education-title">
           <AmbientOpsProps scene="education" />
-          <div data-motion className="section-intro motion-rise">
-            <p className="section-rail" aria-hidden="true">04</p>
-            <div className="section-intro-copy">
+          <div data-motion className="section-intro motion-rise motion-stage">
+            <p className="section-rail motion-item" aria-hidden="true">04</p>
+            <div className="section-intro-copy motion-item">
               <p className="eyebrow">{text.education.eyebrow}</p>
               <h2 id="education-title">{text.education.title}</h2>
             </div>
           </div>
-          <div data-motion className="education-card motion-from-right">
-            <p>{text.education.school}</p>
-            <p>{text.education.degree}</p>
-            <div id="awards" className="education-recognition">
+          <div data-motion className="education-card motion-from-right motion-stage">
+            <p className="motion-item">{text.education.school}</p>
+            <p className="motion-item">{text.education.degree}</p>
+            <div id="awards" className="education-recognition motion-item">
               <span>{text.education.recognition.eyebrow}</span>
               <strong>{text.education.recognition.title}</strong>
               <em>{text.education.recognition.detail}</em>

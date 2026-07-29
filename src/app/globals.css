@@ -170,20 +170,63 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--color-focus); o
   @keyframes diagram-draw { to { stroke-dashoffset: 0; } }
   @keyframes diagram-node-in { 0% { opacity: 0.25; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
 
-  .ambient-ops[data-motion-ready="true"] .ambient-prop, .hero-sticker[data-motion-ready="true"] { opacity: 0; transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out); }
+  .ambient-ops[data-motion-ready="true"] .ambient-prop, .hero-sticker[data-motion-ready="true"] { opacity: 0; transition: opacity 300ms var(--ease-out) var(--ambient-delay, 0ms), transform 300ms var(--ease-out) var(--ambient-delay, 0ms); }
   .motion-rise[data-motion-ready="true"], .motion-from-left[data-motion-ready="true"], .motion-from-right[data-motion-ready="true"] { opacity: 0; transition: opacity 440ms var(--ease-out), transform 440ms var(--ease-out); }
   .motion-rise[data-motion-ready="true"] { transform: translate3d(0, 1rem, 0); }
   .motion-from-left[data-motion-ready="true"] { transform: translate3d(-1.25rem, 0.45rem, 0); }
   .motion-from-right[data-motion-ready="true"] { transform: translate3d(1.25rem, 0.45rem, 0); }
   .motion-rise[data-motion-ready="true"][data-motion-revealed="true"], .motion-from-left[data-motion-ready="true"][data-motion-revealed="true"], .motion-from-right[data-motion-ready="true"][data-motion-revealed="true"] { opacity: 1; transform: translate3d(0, 0, 0); }
+
+  .motion-stage[data-motion-ready="true"] .motion-item, .motion-stage[data-motion-ready="true"] .case-story > div { opacity: 0; transform: translate3d(0, 0.8rem, 0) scale(0.975); }
+  .motion-stage[data-motion-ready="true"][data-motion-revealed="true"] .motion-item, .motion-stage[data-motion-ready="true"][data-motion-revealed="true"] .case-story > div { animation: stage-item-in 460ms var(--ease-out) var(--stage-delay, 0ms) both; }
+  @keyframes stage-item-in { 0% { opacity: 0; transform: translate3d(0, 0.8rem, 0) scale(0.975); } 72% { opacity: 1; transform: translate3d(0, -0.08rem, 0) scale(1.015); } 100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); } }
+  .section-intro .motion-item:nth-child(1) { --stage-delay: 40ms; }
+  .section-intro .motion-item:nth-child(2) { --stage-delay: 110ms; }
+  .project-preview .motion-item:nth-child(1) { --stage-delay: 70ms; }
+  .project-preview .motion-item:nth-child(2) { --stage-delay: 140ms; }
+  .project-preview .motion-item:nth-child(3) { --stage-delay: 250ms; }
+  .project-preview .motion-item:nth-child(4) { --stage-delay: 320ms; }
+  .project-preview .motion-item:nth-child(5) { --stage-delay: 390ms; }
+  .project-copy > .motion-item:nth-child(1) { --stage-delay: 60ms; }
+  .project-copy > .motion-item:nth-child(2) { --stage-delay: 120ms; }
+  .project-copy > .motion-item:nth-child(3) { --stage-delay: 180ms; }
+  .project-copy .case-story > div:nth-child(1) { --stage-delay: 250ms; }
+  .project-copy .case-story > div:nth-child(2) { --stage-delay: 320ms; }
+  .project-copy .case-story > div:nth-child(3) { --stage-delay: 390ms; }
+  .project-copy > .motion-item:nth-child(5) { --stage-delay: 460ms; }
+  .project-copy > .motion-item:nth-child(6) { --stage-delay: 530ms; }
+  .experience-card > .motion-item:nth-child(1) { --stage-delay: 70ms; }
+  .experience-card > .motion-item:nth-child(2) { --stage-delay: 140ms; }
+  .experience-card .case-story > div:nth-child(1) { --stage-delay: 220ms; }
+  .experience-card .case-story > div:nth-child(2) { --stage-delay: 290ms; }
+  .experience-card .case-story > div:nth-child(3) { --stage-delay: 360ms; }
+  .education-card > .motion-item:nth-child(1) { --stage-delay: 70ms; }
+  .education-card > .motion-item:nth-child(2) { --stage-delay: 150ms; }
+  .education-card > .motion-item:nth-child(3) { --stage-delay: 240ms; }
+
   .skill-grid[data-motion-ready="true"] .skill-group { opacity: 0; transform: translate3d(0, 0.85rem, 0); }
   .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group { animation: skill-group-in 340ms var(--ease-out) both; }
-  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group:nth-child(2) { animation-delay: 70ms; }
-  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group:nth-child(3) { animation-delay: 140ms; }
-  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group:nth-child(4) { animation-delay: 210ms; }
-  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group:nth-child(5) { animation-delay: 280ms; }
-  @keyframes skill-group-in { to { opacity: 1; transform: translate3d(0, 0, 0); } }
+  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group:nth-child(2) { --skill-delay: 70ms; animation-delay: var(--skill-delay); }
+  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group:nth-child(3) { --skill-delay: 140ms; animation-delay: var(--skill-delay); }
+  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group:nth-child(4) { --skill-delay: 210ms; animation-delay: var(--skill-delay); }
+  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group:nth-child(5) { --skill-delay: 280ms; animation-delay: var(--skill-delay); }
+  .skill-grid[data-motion-ready="true"] .skill-group h3, .skill-grid[data-motion-ready="true"] .skill-group span { opacity: 0; transform: translate3d(0, 0.55rem, 0) scale(0.98); }
+  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group h3 { animation: stage-item-in 320ms var(--ease-out) calc(var(--skill-delay, 0ms) + 130ms) both; }
+  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group span { animation: stage-item-in 300ms var(--ease-out) calc(var(--skill-delay, 0ms) + 200ms) both; }
+  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group span:nth-child(2) { animation-delay: calc(var(--skill-delay, 0ms) + 240ms); }
+  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group span:nth-child(3) { animation-delay: calc(var(--skill-delay, 0ms) + 280ms); }
+  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group span:nth-child(4) { animation-delay: calc(var(--skill-delay, 0ms) + 320ms); }
+  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group span:nth-child(5) { animation-delay: calc(var(--skill-delay, 0ms) + 360ms); }
+  .skill-grid[data-motion-ready="true"][data-motion-revealed="true"] .skill-group span:nth-child(6) { animation-delay: calc(var(--skill-delay, 0ms) + 400ms); }
+  @keyframes skill-group-in { 0% { opacity: 0; transform: translate3d(0, 0.85rem, 0) scale(0.98); } 78% { opacity: 1; transform: translate3d(0, -0.05rem, 0) scale(1.01); } 100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); } }
   .ambient-ops[data-motion-ready="true"] .ambient-prop { transform-box: fill-box; transform-origin: center; transform: translate3d(0, 0.75rem, 0) scale(0.92); }
+  .ambient-ops-main > .ambient-prop:nth-child(2) { --ambient-delay: 80ms; }
+  .ambient-ops-main > .ambient-prop:nth-child(3) { --ambient-delay: 150ms; }
+  .ambient-ops-main > .ambient-prop:nth-child(4) { --ambient-delay: 220ms; }
+  .ambient-ops-main > .ambient-prop:nth-child(5) { --ambient-delay: 290ms; }
+  .ambient-ops-main > .ambient-prop:nth-child(6) { --ambient-delay: 360ms; }
+  .ambient-ops-satellite .ambient-prop:nth-child(2) { --ambient-delay: 100ms; }
+  .ambient-ops-satellite .ambient-prop:nth-child(3) { --ambient-delay: 180ms; }
   .hero-sticker-top[data-motion-ready="true"] { transform: translate3d(0, 0.5rem, 0) scale(0.9) rotate(-5deg); }
   .hero-sticker-side[data-motion-ready="true"] { transform: translate3d(0, 0.5rem, 0) scale(0.9) rotate(5deg); }
   .hero-sticker-bottom[data-motion-ready="true"] { transform: translate3d(0, 0.5rem, 0) scale(0.9) rotate(-2deg); }
@@ -191,16 +234,20 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--color-focus); o
   .hero-sticker-top[data-motion-ready="true"][data-motion-revealed="true"] { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotate(-5deg); }
   .hero-sticker-side[data-motion-ready="true"][data-motion-revealed="true"] { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotate(5deg); }
   .hero-sticker-bottom[data-motion-ready="true"][data-motion-revealed="true"] { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotate(-2deg); }
-  .ambient-ops[data-motion-ready="true"][data-motion-revealed="true"] .ambient-prop-large { animation: ambient-float-large 12s var(--ease-in-out) 440ms infinite alternate; }
-  .ambient-ops[data-motion-ready="true"][data-motion-revealed="true"] .ambient-prop-medium { animation: ambient-float-medium 8.5s var(--ease-in-out) 620ms infinite alternate-reverse; }
-  .ambient-ops[data-motion-ready="true"][data-motion-revealed="true"] .ambient-prop-packet { animation: ambient-packet-travel 6.2s var(--ease-in-out) 320ms infinite alternate; }
-  .ambient-ops[data-motion-ready="true"][data-motion-revealed="true"] .ambient-prop-micro { animation: ambient-micro-drift 7.4s var(--ease-in-out) 780ms infinite alternate; }
+  .ambient-ops[data-motion-ready="true"][data-motion-revealed="true"] .ambient-prop-large { animation: ambient-prop-in 420ms var(--ease-out) var(--ambient-delay, 0ms) both, ambient-float-large 12s var(--ease-in-out) calc(var(--ambient-delay, 0ms) + 480ms) infinite alternate; }
+  .ambient-ops[data-motion-ready="true"][data-motion-revealed="true"] .ambient-prop-medium { animation: ambient-prop-in 420ms var(--ease-out) var(--ambient-delay, 0ms) both, ambient-float-medium 8.5s var(--ease-in-out) calc(var(--ambient-delay, 0ms) + 620ms) infinite alternate-reverse; }
+  .ambient-ops[data-motion-ready="true"][data-motion-revealed="true"] .ambient-prop-packet { animation: ambient-prop-in 420ms var(--ease-out) var(--ambient-delay, 0ms) both, ambient-packet-travel 6.2s var(--ease-in-out) calc(var(--ambient-delay, 0ms) + 520ms) infinite alternate; }
+  .ambient-ops[data-motion-ready="true"][data-motion-revealed="true"] .ambient-prop-micro { animation: ambient-prop-in 420ms var(--ease-out) var(--ambient-delay, 0ms) both, ambient-micro-drift 7.4s var(--ease-in-out) calc(var(--ambient-delay, 0ms) + 580ms) infinite alternate; }
   .ambient-ops[data-motion-ready="true"][data-motion-revealed="true"] .ambient-led { animation: ambient-led-pulse 2.6s var(--ease-in-out) 240ms infinite alternate; }
+  @keyframes ambient-prop-in { 0% { opacity: 0; transform: translate3d(0, 0.75rem, 0) scale(0.88); } 72% { opacity: 1; transform: translate3d(0, -0.08rem, 0) scale(1.025); } 100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); } }
   @keyframes ambient-float-large { from { transform: translate3d(0, 0, 0) rotate(0); } to { transform: translate3d(0, -0.55rem, 0) rotate(0.8deg); } }
   @keyframes ambient-float-medium { from { transform: translate3d(0, 0, 0) rotate(0); } to { transform: translate3d(0.45rem, 0.35rem, 0) rotate(-1.3deg); } }
   @keyframes ambient-packet-travel { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(1.05rem, -0.35rem, 0); } }
   @keyframes ambient-micro-drift { from { transform: translate3d(0, 0, 0) rotate(0); } to { transform: translate3d(-0.35rem, -0.45rem, 0) rotate(2deg); } }
   @keyframes ambient-led-pulse { from { opacity: 0.45; } to { opacity: 1; } }
+
+  [data-motion][data-motion-ready="true"]:focus-within { opacity: 1; transform: translate3d(0, 0, 0); }
+  .motion-stage[data-motion-ready="true"]:focus-within .motion-item, .motion-stage[data-motion-ready="true"]:focus-within .case-story > div, .skill-grid[data-motion-ready="true"]:focus-within .skill-group, .skill-grid[data-motion-ready="true"]:focus-within .skill-group h3, .skill-grid[data-motion-ready="true"]:focus-within .skill-group span { opacity: 1; transform: none; animation: none; }
 
   .dialog-backdrop { animation: dialog-backdrop-in 160ms var(--ease-out) both; }
   .preview-dialog { animation: preview-dialog-in 220ms var(--ease-out) both; }
@@ -385,6 +432,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--color-focus); o
   .marquee div { animation: none !important; transform: none !important; }
   .ambient-ops { display: none !important; }
   .global-ops-field { display: none !important; }
-  [data-motion], [data-motion] .motion-item { opacity: 1 !important; transform: none !important; clip-path: none !important; animation: none !important; }
+  [data-motion], [data-motion] .motion-item, [data-motion] .case-story > div, [data-motion] .skill-group, [data-motion] .skill-group h3, [data-motion] .skill-group span { opacity: 1 !important; transform: none !important; clip-path: none !important; animation: none !important; }
   [data-motion] .illustration-wire, [data-motion] .illustration-arrow, [data-motion] .diagram-wire, [data-motion] .diagram-arrow { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; }
 }

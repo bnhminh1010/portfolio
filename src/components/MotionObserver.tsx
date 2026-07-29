@@ -11,7 +11,6 @@ export function MotionObserver() {
 
     let observer: IntersectionObserver | undefined;
     let armFrame = 0;
-    let safetyTimer = 0;
     const reveal = (element: HTMLElement) => {
       element.dataset.motionRevealed = "true";
       observer?.unobserve(element);
@@ -37,14 +36,10 @@ export function MotionObserver() {
         else observer?.observe(element);
       });
 
-      // Preserve scroll-triggered entrances in normal browsing, while avoiding
-      // permanently hidden content if a browser fails to deliver observer events.
-      safetyTimer = window.setTimeout(() => elements.forEach(reveal), 6000);
     });
 
     return () => {
       window.cancelAnimationFrame(armFrame);
-      window.clearTimeout(safetyTimer);
       observer?.disconnect();
     };
   }, []);

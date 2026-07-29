@@ -22,6 +22,25 @@ test("work anchor clears the sticky header", async ({ page }) => {
   await expect.poll(() => page.locator("#work").evaluate((element) => element.getBoundingClientRect().top)).toBeGreaterThan(70);
 });
 
+test("section stages reveal when they enter the viewport", async ({ page }) => {
+  await page.goto("/");
+
+  for (const selector of ["#work .project-preview", "#experience .experience-card", "#skills .skill-grid", "#education .education-card"]) {
+    const stage = page.locator(selector).first();
+    await stage.scrollIntoViewIfNeeded();
+    await expect.poll(() => stage.getAttribute("data-motion-revealed")).toBe("true");
+  }
+});
+
+test("reduced motion keeps staged content visible", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+
+  const previewButton = page.locator("#work .preview-trigger").first();
+  await expect(previewButton).toBeVisible();
+  await expect.poll(() => previewButton.evaluate((element) => getComputedStyle(element).opacity)).toBe("1");
+});
+
 test("home publishes an absolute social thumbnail", async ({ page, request }) => {
   await page.goto("/");
   const image = await page.locator('meta[property="og:image"]').getAttribute("content");
