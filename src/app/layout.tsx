@@ -20,7 +20,7 @@ const socialImage = "/og-image.png?v=20260729";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://binhminh.thinkai.id.vn"),
-  title: "Bình Minh — DevOps Engineer",
+  title: "Bình Minh - DevOps Engineer",
   description: "DevOps Engineer portfolio: containerization, CI/CD, Linux infrastructure and reliability-focused delivery.",
   icons: {
     icon: [
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     description: "Containerization, CI/CD, Linux infrastructure and reliable delivery.",
     url: "/",
     siteName: "Binh Minh Portfolio",
-    images: [{ url: socialImage, width: 1200, height: 630, alt: "MINH.OPS — DevOps Engineer, systems that ship, observe and recover" }],
+    images: [{ url: socialImage, width: 1200, height: 630, alt: "MINH.OPS - DevOps Engineer, systems that ship, observe and recover" }],
     locale: "en_US",
     type: "website",
   },

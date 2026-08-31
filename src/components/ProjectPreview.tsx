@@ -55,16 +55,17 @@ export function ProjectPreview({ project, language, buttonLabel, motionClassName
   }, [open]);
 
   const content = project.content[language];
-  const heading = language === "en" ? "OpenScreen preview" : "Preview OpenScreen";
-  const comingSoon = language === "en" ? "Recording slot ready" : "Đã sẵn sàng vị trí recording";
+  const heading = project.preview.ready
+    ? (language === "en" ? "OpenScreen preview" : "Preview OpenScreen")
+    : (language === "en" ? "Architecture overview" : "Tổng quan kiến trúc");
   const closeLabel = language === "en" ? "Close preview" : "Đóng preview";
 
   return (
     <>
       <figure data-motion className={`project-preview project-preview-${project.accent} ${motionClassName} motion-stage`}>
         <div className="project-preview-label motion-item" aria-hidden="true">{content.category}</div>
-        <div className="motion-item motion-diagram"><ArchitectureDiagram projectId={project.id} /></div>
-        <div className="motion-item"><ProjectFlow projectId={project.id} /></div>
+        <div className="motion-item motion-diagram"><ArchitectureDiagram projectId={project.id} language={language} /></div>
+        <div className="motion-item"><ProjectFlow projectId={project.id} language={language} /></div>
         <figcaption className="motion-item">{content.diagramLabel}</figcaption>
         <button type="button" className="preview-trigger motion-item" onClick={() => setOpen(true)}>
           <Play aria-hidden="true" size={16} /> {buttonLabel}
@@ -81,7 +82,7 @@ export function ProjectPreview({ project, language, buttonLabel, motionClassName
               </button>
             </div>
             <div className="preview-dialog-content">
-              <p className="eyebrow">{project.period}</p>
+              <p className="dialog-meta">{project.period}</p>
               <h2 id={`${project.id}-preview-title`}>{content.title}</h2>
               {project.preview.ready ? (
                 <video controls preload="metadata" poster={`/projects/${project.preview.assetStem}-poster.webp`} className="project-video">
@@ -90,11 +91,11 @@ export function ProjectPreview({ project, language, buttonLabel, motionClassName
                   {language === "en" ? "Your browser does not support this preview." : "Trình duyệt không hỗ trợ preview này."}
                 </video>
               ) : (
-                <div className="recording-ready">
-                  <ArchitectureDiagram projectId={project.id} />
-                  <ProjectFlow projectId={project.id} />
+                <div className="architecture-overview">
+                  <ArchitectureDiagram projectId={project.id} language={language} />
+                  <ProjectFlow projectId={project.id} language={language} />
                   <div>
-                    <p className="recording-ready-title">{comingSoon}</p>
+                    <p className="architecture-overview-title">{language === "en" ? "Architecture evidence" : "Bằng chứng kiến trúc"}</p>
                     <p>{project.preview.capture[language]}</p>
                   </div>
                 </div>
@@ -102,14 +103,25 @@ export function ProjectPreview({ project, language, buttonLabel, motionClassName
               <div className="preview-safety-note">
                 <ShieldCheck aria-hidden="true" size={18} />
                 <span>
-                  {language === "en"
-                    ? "Capture rule: use demo data only; redact identities, addresses, internal URLs and all secrets before export."
-                    : "Quy tắc quay: chỉ dùng dữ liệu demo; che danh tính, địa chỉ, URL nội bộ và mọi secret trước khi export."}
+                  {project.preview.ready
+                    ? (language === "en"
+                      ? "Capture rule: use demo data only; redact identities, addresses, internal URLs and all secrets before export."
+                      : "Quy tắc quay: chỉ dùng dữ liệu demo; che danh tính, địa chỉ, URL nội bộ và mọi secret trước khi export.")
+                    : (language === "en"
+                      ? "This portfolio exposes architecture evidence and source history, not the private production environment."
+                      : "Portfolio này chỉ trình bày bằng chứng kiến trúc và lịch sử mã nguồn, không công khai môi trường production riêng tư.")}
                 </span>
               </div>
-              <a className="source-link" href={project.repo} target="_blank" rel="noreferrer">
-                <ExternalLink aria-hidden="true" size={16} /> {language === "en" ? "Open repository" : "Mở repository"}
-              </a>
+              <div className="preview-dialog-links">
+                {project.liveUrl && (
+                  <a className="source-link" href={project.liveUrl} target="_blank" rel="noreferrer">
+                    <ExternalLink aria-hidden="true" size={16} /> {language === "en" ? "Visit live" : "Xem live"}
+                  </a>
+                )}
+                <a className="source-link" href={project.repo} target="_blank" rel="noreferrer">
+                  <ExternalLink aria-hidden="true" size={16} /> {language === "en" ? "Open repository" : "Mở repository"}
+                </a>
+              </div>
             </div>
           </div>
         </div>

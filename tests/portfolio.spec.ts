@@ -16,10 +16,22 @@ test("CV route redirects to the published PDF", async ({ page }) => {
   expect(response?.headers()["content-type"]).toContain("application/pdf");
 });
 
-test("work anchor clears the sticky header", async ({ page }) => {
+test("deep links clear the sticky header", async ({ page }) => {
+  for (const id of ["work", "experience", "skills", "education", "contact"]) {
+    await page.goto(`/#${id}`);
+    const section = page.locator(`#${id}`);
+    await expect(section).toBeInViewport();
+    await expect.poll(() => section.evaluate((element) => element.getBoundingClientRect().top)).toBeGreaterThan(70);
+  }
+});
+
+test("unrecorded projects present architecture evidence, not a fake preview", async ({ page }) => {
   await page.goto("/#work");
-  await expect(page.locator("#work")).toBeInViewport();
-  await expect.poll(() => page.locator("#work").evaluate((element) => element.getBoundingClientRect().top)).toBeGreaterThan(70);
+  const trigger = page.locator("#work .preview-trigger").first();
+  await expect(trigger).toContainText(/architecture/i);
+  await trigger.click();
+  await expect(page.getByRole("dialog")).toContainText(/architecture overview/i);
+  await expect(page.getByRole("dialog")).toContainText(/private production environment/i);
 });
 
 test("section stages reveal when they enter the viewport", async ({ page }) => {

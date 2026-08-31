@@ -104,7 +104,7 @@ function SceneLarge({ scene, label }: { scene: AmbientScene; label: string }) {
       <path d="M112 202h83M112 230h61M112 258h84" className="ambient-line" />
       <circle cx="265" cy="186" r="10" className="ambient-yellow ambient-led" />
       <circle cx="265" cy="219" r="10" className="ambient-paper ambient-led" />
-      <text x="118" y="161" className="ambient-label">GIT · LINUX · DEPLOY</text>
+      <text x="118" y="161" className="ambient-label">GIT / LINUX / DEPLOY</text>
     </g>
   );
 }

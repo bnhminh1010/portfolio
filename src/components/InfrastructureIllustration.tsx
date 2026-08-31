@@ -21,17 +21,21 @@ export function InfrastructureIllustration() {
       <circle cx="350" cy="406" r="18" className="illustration-accent" />
       <circle cx="490" cy="406" r="18" className="illustration-panel-alt" />
       <path d="M228 406h104M368 406h104" pathLength={1} className="illustration-wire" />
-      <text x="190" y="352" className="illustration-label">OBSERVE · PROTECT · DELIVER</text>
+      <text x="190" y="352" className="illustration-label">OBSERVE / PROTECT / DELIVER</text>
       <path d="M500 258v72" pathLength={1} className="illustration-wire" />
       <path d="M486 312l14 18 14-18" pathLength={1} className="illustration-arrow" />
     </svg>
   );
 }
 
-export function ArchitectureDiagram({ projectId }: { projectId: "homelab" | "thinkai" }) {
+export function ArchitectureDiagram({ projectId, language = "en" }: { projectId: "homelab" | "thinkai"; language?: "en" | "vi" }) {
+  const diagramLabel = projectId === "homelab"
+    ? (language === "en" ? "HomeLab architecture diagram" : "Sơ đồ kiến trúc HomeLab")
+    : (language === "en" ? "ThinkAI delivery pipeline diagram" : "Sơ đồ pipeline phân phối ThinkAI");
+
   if (projectId === "homelab") {
     return (
-      <svg className="architecture-diagram" viewBox="0 0 720 330" role="img" aria-label="HomeLab architecture diagram">
+      <svg className="architecture-diagram" viewBox="0 0 720 330" role="img" aria-label={diagramLabel}>
         <rect x="34" y="112" width="182" height="98" className="diagram-node diagram-node-yellow" />
         <text x="125" y="151" className="diagram-text">PRIVATE</text><text x="125" y="176" className="diagram-text">MESH</text>
         <rect x="269" y="112" width="182" height="98" className="diagram-node diagram-node-teal" />
@@ -45,7 +49,7 @@ export function ArchitectureDiagram({ projectId }: { projectId: "homelab" | "thi
   }
 
   return (
-    <svg className="architecture-diagram" viewBox="0 0 720 330" role="img" aria-label="ThinkAI delivery pipeline diagram">
+    <svg className="architecture-diagram" viewBox="0 0 720 330" role="img" aria-label={diagramLabel}>
       <rect x="34" y="112" width="182" height="98" className="diagram-node diagram-node-paper" />
       <text x="125" y="151" className="diagram-text">PULL</text><text x="125" y="176" className="diagram-text">REQUEST</text>
       <rect x="269" y="112" width="182" height="98" className="diagram-node diagram-node-yellow" />
@@ -59,14 +63,21 @@ export function ArchitectureDiagram({ projectId }: { projectId: "homelab" | "thi
 }
 
 const projectFlow = {
-  homelab: ["Tailscale mesh", "Host agent", "Podman services", "Operations dashboard"],
-  thinkai: ["Pull request", "GitHub Actions security checks", "Spring Boot image", "Local Compose deployment"],
+  en: {
+    homelab: ["Tailscale mesh", "Host agent", "Podman services", "Operations dashboard"],
+    thinkai: ["Pull request", "GitHub Actions security checks", "Spring Boot image", "Local Compose deployment"],
+  },
+  vi: {
+    homelab: ["Tailscale mesh", "Host agent", "Podman service", "Operations dashboard"],
+    thinkai: ["Pull request", "Kiểm tra bảo mật GitHub Actions", "Spring Boot image", "Triển khai Local Compose"],
+  },
 } as const;
 
-export function ProjectFlow({ projectId }: { projectId: "homelab" | "thinkai" }) {
+export function ProjectFlow({ projectId, language = "en" }: { projectId: "homelab" | "thinkai"; language?: "en" | "vi" }) {
+  const flowLabel = language === "en" ? `${projectId} delivery flow` : `Luồng phân phối ${projectId}`;
   return (
-    <ol className="project-flow" aria-label={`${projectId} delivery flow`}>
-      {projectFlow[projectId].map((step) => <li key={step}>{step}</li>)}
+    <ol className="project-flow" aria-label={flowLabel}>
+      {projectFlow[language][projectId].map((step) => <li key={step}>{step}</li>)}
     </ol>
   );
 }

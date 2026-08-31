@@ -1,33 +1,4 @@
-"use client";
-
-import { useEffect } from "react";
-
 export function GlobalOpsField() {
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let resetTimer = 0;
-    let lastScrollY = window.scrollY;
-
-    const onScroll = () => {
-      const delta = window.scrollY - lastScrollY;
-      lastScrollY = window.scrollY;
-      const impulse = Math.max(-1, Math.min(1, delta / 72));
-      document.documentElement.style.setProperty("--ops-scroll-impulse", `${(impulse * 6).toFixed(2)}px`);
-      window.clearTimeout(resetTimer);
-      resetTimer = window.setTimeout(() => {
-        document.documentElement.style.setProperty("--ops-scroll-impulse", "0px");
-      }, 120);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.clearTimeout(resetTimer);
-      window.removeEventListener("scroll", onScroll);
-      document.documentElement.style.removeProperty("--ops-scroll-impulse");
-    };
-  }, []);
-
   return (
     <div className="global-ops-field" aria-hidden="true">
       <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" focusable="false">

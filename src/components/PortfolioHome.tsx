@@ -23,10 +23,8 @@ export function PortfolioHome() {
         <section className="hero-section" aria-labelledby="hero-title">
           <div data-motion data-motion-initial className="hero-copy motion-rise">
             <p className="availability"><span aria-hidden="true" />{text.hero.status}</p>
-            <p className="eyebrow">{profile.name} · {profile.location}</p>
             <h1 id="hero-title">{text.hero.roleHeadline}</h1>
             <p className="hero-statement">{text.hero.statement}</p>
-            <p className="hero-specialization">{text.hero.specialization}</p>
             <p className="hero-body">{text.hero.body}</p>
             <div className="hero-actions">
               <a href="#work" className="button-primary">{text.hero.primary} <ArrowDown aria-hidden="true" size={18} /></a>
@@ -39,22 +37,16 @@ export function PortfolioHome() {
             </div>
           </div>
           <div className="hero-scene">
-            <p data-motion data-motion-initial aria-hidden="true" className="hero-sticker hero-sticker-top motion-pop motion-delay-2">DELIVERY SYSTEMS</p>
-            <p data-motion data-motion-initial aria-hidden="true" className="hero-sticker hero-sticker-side motion-pop motion-delay-3">CODE → PRODUCTION</p>
-            <p data-motion data-motion-initial aria-hidden="true" className="hero-sticker hero-sticker-bottom motion-pop motion-delay-4">OBSERVE · PROTECT · DELIVER</p>
+            <p className="hero-sticker hero-sticker-top" aria-hidden="true">DELIVERY SYSTEMS</p>
+            <p className="hero-sticker hero-sticker-side" aria-hidden="true">CODE → PRODUCTION</p>
+            <p className="hero-sticker hero-sticker-bottom" aria-hidden="true">OBSERVE · PROTECT · DELIVER</p>
             <div className="hero-visual"><InfrastructureIllustration /></div>
           </div>
         </section>
 
-        <div className="marquee" aria-label="DevOps capabilities">
-          <div>CONTAINERS <span>✦</span> CI/CD <span>✦</span> LINUX INFRASTRUCTURE <span>✦</span> DELIVERY OWNERSHIP <span>✦</span> SECURITY BY DESIGN <span>✦</span></div>
-        </div>
-
         <section id="work" className="content-section work-section" aria-labelledby="work-title">
           <div data-motion className="section-intro section-intro-wide motion-rise motion-stage">
-            <p className="section-rail motion-item" aria-hidden="true">01</p>
             <div className="section-intro-copy motion-item">
-              <p className="eyebrow">{text.work.eyebrow}</p>
               <h2 id="work-title">{text.work.title}</h2>
               <p className="section-intro-body">{text.work.body}</p>
             </div>
@@ -65,12 +57,17 @@ export function PortfolioHome() {
               const projectText = project.content[language];
               return (
                 <article key={project.id} className={`project-case ${index % 2 ? "project-case-reversed" : ""}`}>
-                  <ProjectPreview project={project} language={language} buttonLabel={text.work.preview} motionClassName={index % 2 ? "motion-from-right" : "motion-from-left"} />
+                  <ProjectPreview
+                    project={project}
+                    language={language}
+                    buttonLabel={project.preview.ready ? text.work.preview : text.work.architecture}
+                    motionClassName={index % 2 ? "motion-from-right" : "motion-from-left"}
+                  />
                   <div data-motion className={`project-copy motion-stage ${index % 2 ? "motion-from-left" : "motion-from-right"}`}>
-                    <p className="eyebrow motion-item">{projectText.category} · {project.period}</p>
+                    <p className="project-meta motion-item"><span>{projectText.category}</span><span>{project.period}</span></p>
                     <h3 className="motion-item">{projectText.title}</h3>
                     <p className="project-summary motion-item">{projectText.summary}</p>
-                    <dl className="case-story" aria-label={`${projectText.title} case study`}>
+                    <dl className="case-story" aria-label={language === "en" ? `${projectText.title} case study` : `Case study ${projectText.title}`}>
                       <div>
                         <dt>{text.work.storyLabels.problem}</dt>
                         <dd>{projectText.story.problem}</dd>
@@ -85,9 +82,16 @@ export function PortfolioHome() {
                       </div>
                     </dl>
                     <div className="project-stack motion-item">{project.stack.map((item) => <span key={item}>{item}</span>)}</div>
-                    <a href={project.repo} target="_blank" rel="noreferrer" className="button-secondary source-button motion-item">
-                      {text.work.source} <ArrowUpRight aria-hidden="true" size={18} />
-                    </a>
+                    <div className="project-actions motion-item">
+                      {project.liveUrl && (
+                        <a href={project.liveUrl} target="_blank" rel="noreferrer" className="button-primary live-button">
+                          {text.work.live} <ArrowUpRight aria-hidden="true" size={18} />
+                        </a>
+                      )}
+                      <a href={project.repo} target="_blank" rel="noreferrer" className="button-secondary source-button">
+                        {text.work.source} <ArrowUpRight aria-hidden="true" size={18} />
+                      </a>
+                    </div>
                   </div>
                 </article>
               );
@@ -98,9 +102,7 @@ export function PortfolioHome() {
         <section id="experience" className="content-section experience-section" aria-labelledby="experience-title">
           <AmbientOpsProps scene="experience" />
           <div data-motion className="section-intro motion-rise motion-stage">
-            <p className="section-rail motion-item" aria-hidden="true">02</p>
             <div className="section-intro-copy motion-item">
-              <p className="eyebrow">{text.experience.eyebrow}</p>
               <h2 id="experience-title">{text.experience.title}</h2>
               <p className="section-intro-body">{text.experience.body}</p>
             </div>
@@ -126,11 +128,8 @@ export function PortfolioHome() {
         </section>
 
         <section id="skills" className="content-section skills-section" aria-labelledby="skills-title">
-          <AmbientOpsProps scene="skills" />
           <div data-motion className="section-intro motion-rise motion-stage">
-            <p className="section-rail motion-item" aria-hidden="true">03</p>
             <div className="section-intro-copy motion-item">
-              <p className="eyebrow">{text.skills.eyebrow}</p>
               <h2 id="skills-title">{text.skills.title}</h2>
             </div>
           </div>
@@ -138,6 +137,7 @@ export function PortfolioHome() {
             {text.skills.groups.map((group) => (
               <section key={group.label} className="skill-group" aria-label={group.label}>
                 <h3>{group.label}</h3>
+                <p>{group.proof}</p>
                 <div>{group.items.map((item) => <span key={item}>{item}</span>)}</div>
               </section>
             ))}
@@ -145,11 +145,8 @@ export function PortfolioHome() {
         </section>
 
         <section id="education" className="content-section education-section" aria-labelledby="education-title">
-          <AmbientOpsProps scene="education" />
           <div data-motion className="section-intro motion-rise motion-stage">
-            <p className="section-rail motion-item" aria-hidden="true">04</p>
             <div className="section-intro-copy motion-item">
-              <p className="eyebrow">{text.education.eyebrow}</p>
               <h2 id="education-title">{text.education.title}</h2>
             </div>
           </div>
@@ -157,7 +154,7 @@ export function PortfolioHome() {
             <p className="motion-item">{text.education.school}</p>
             <p className="motion-item">{text.education.degree}</p>
             <div id="awards" className="education-recognition motion-item">
-              <span>{text.education.recognition.eyebrow}</span>
+              <span>{text.education.recognition.label}</span>
               <strong>{text.education.recognition.title}</strong>
               <em>{text.education.recognition.detail}</em>
             </div>
@@ -165,7 +162,6 @@ export function PortfolioHome() {
         </section>
 
         <section id="contact" data-motion className="contact-section motion-rise" aria-labelledby="contact-title">
-          <p className="eyebrow">05 · CONTACT</p>
           <h2 id="contact-title">{text.contact.title}</h2>
           <p>{text.contact.body}</p>
           <div className="contact-actions">
@@ -174,7 +170,7 @@ export function PortfolioHome() {
           </div>
         </section>
       </main>
-      <footer className="site-footer"><span>© 2026 — {text.footer}</span></footer>
+      <footer className="site-footer"><span>© 2026 - {text.footer}</span></footer>
     </div>
   );
 }

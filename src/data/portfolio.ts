@@ -5,6 +5,7 @@ export type Localized<T> = Record<Language, T>;
 export type Project = {
   id: "homelab" | "thinkai";
   repo: string;
+  liveUrl?: string;
   period: string;
   stack: string[];
   accent: "teal" | "pink";
@@ -43,11 +44,11 @@ export const profile = {
 
 export const copy: Localized<{
   nav: { work: string; experience: string; skills: string; about: string; resume: string };
-  hero: { status: string; roleHeadline: string; statement: string; specialization: string; body: string; primary: string; secondary: string };
-  work: { eyebrow: string; title: string; body: string; source: string; preview: string; storyLabels: { problem: string; approach: string; outcome: string } };
-  experience: { eyebrow: string; title: string; body: string; role: string; period: string; story: { problem: string; approach: string; outcome: string } };
-  skills: { eyebrow: string; title: string; groups: Array<{ label: string; items: string[] }> };
-  education: { eyebrow: string; title: string; school: string; degree: string; recognition: { eyebrow: string; title: string; detail: string } };
+  hero: { status: string; roleHeadline: string; statement: string; body: string; primary: string; secondary: string };
+  work: { title: string; body: string; source: string; live: string; preview: string; architecture: string; storyLabels: { problem: string; approach: string; outcome: string } };
+  experience: { title: string; body: string; role: string; period: string; story: { problem: string; approach: string; outcome: string } };
+  skills: { title: string; groups: Array<{ label: string; proof: string; items: string[] }> };
+  education: { title: string; school: string; degree: string; recognition: { label: string; title: string; detail: string } };
   contact: { title: string; body: string; email: string; cv: string };
   footer: string;
 }> = {
@@ -56,26 +57,25 @@ export const copy: Localized<{
     hero: {
       status: "Available for DevOps opportunities",
       roleHeadline: "DevOps Engineer",
-      statement: "Platform · delivery · security.",
-      specialization: "Build systems that are easier to ship, observe and recover",
+      statement: "I build delivery systems that are easier to ship, operate and recover.",
       body: "Software Engineering graduate focused on the delivery systems behind dependable services: CI/CD, containers, Linux infrastructure and practical security controls.",
       primary: "View case studies",
       secondary: "Download DevOps CV",
     },
     work: {
-      eyebrow: "Selected work",
       title: "The work behind the release.",
       body: "Two case studies grounded in CV outcomes and repository evidence: a private operations workbench and an education-platform delivery path.",
       source: "View source",
-      preview: "Preview workflow",
+      live: "Visit live",
+      preview: "OpenScreen preview",
+      architecture: "View architecture",
       storyLabels: { problem: "Challenge", approach: "Engineering decision", outcome: "Evidence delivered" },
     },
     experience: {
-      eyebrow: "Experience",
       title: "Controls that make a release easier to trust.",
       body: "A DevOps internship focused on safeguarding an internal .NET workflow and making its delivery path repeatable.",
-      role: "DevOps Engineer Intern · Ung Buou Hospital",
-      period: "May 2026 — July 2026 · Ho Chi Minh City",
+      role: "DevOps Engineer Intern, Ung Buou Hospital",
+      period: "May to July 2026, Ho Chi Minh City",
       story: {
         problem: "An internal .NET procurement workflow needed stronger request boundaries and a repeatable release path before its approved hospital deployment.",
         approach: "I added GitHub Actions checks, CodeQL and SonarQube visibility, API-security review, CSRF remediation and package-vulnerability fixes; repository contracts clarify the access and request risks behind those controls.",
@@ -83,56 +83,52 @@ export const copy: Localized<{
       },
     },
     skills: {
-      eyebrow: "Toolchain",
-      title: "The layers I work across.",
+      title: "Capabilities proven in the work.",
       groups: [
-        { label: "Code", items: ["Go", "Python", "Bash"] },
-        { label: "Infrastructure", items: ["Linux", "systemd", "Podman", "Docker", "Terraform", "K3s"] },
-        { label: "Delivery", items: ["GitHub Actions", "GitLab CI/CD", "ArgoCD", "Git"] },
-        { label: "Security & network", items: ["Cloudflare", "SonarQube", "Trivy", "Zero Trust", "Tailscale"] },
-        { label: "Data", items: ["PostgreSQL", "Redis", "SQLite"] },
+        { label: "Build and automate", proof: "Source checks, container builds and repeatable delivery paths represented in the work above.", items: ["Go", "Git", "GitHub Actions", "Spring Boot", "Docker"] },
+        { label: "Operate and recover", proof: "Operate containerized services with private connectivity, host controls and retained service evidence.", items: ["Podman", "Tailscale", "SQLite", "PostgreSQL", "Redis", "WebSocket", "systemd", "K3s"] },
+        { label: "Protect and deliver", proof: "Quality gates and security controls used before handing work to production.", items: ["CodeQL", "SonarQube", "Trivy", "Argo CD"] },
+        { label: "Familiar with", proof: "Used in labs, coursework or smaller exercises; not presented here as production evidence.", items: ["Python", "Bash", "GitLab CI/CD", "Terraform", "Cloudflare"] },
       ],
     },
     education: {
-      eyebrow: "Education & recognition",
       title: "A software engineering foundation.",
-      school: "HUTECH University · 2022 — 2026",
-      degree: "Bachelor of Software Engineering · GPA 3.24 · English B1",
-      recognition: { eyebrow: "Recognition", title: "IT Got Talent 2025", detail: "Semifinalist" },
+      school: "HUTECH University, 2022-2026",
+      degree: "Bachelor of Software Engineering. GPA 3.24. English B1.",
+      recognition: { label: "Recognition", title: "IT Got Talent 2025", detail: "Semifinalist" },
     },
     contact: {
-      title: "Let’s make delivery boring—in the best way.",
+      title: "Open to DevOps work where reliable delivery matters.",
       body: "I am looking for a DevOps Engineer role where automation, reliability and clear operational ownership matter.",
       email: "Email Minh",
       cv: "Download DevOps CV",
     },
-    footer: "Binh Minh · DevOps Engineer · Ho Chi Minh City",
+    footer: "Binh Minh, DevOps Engineer, Ho Chi Minh City",
   },
   vi: {
     nav: { work: "Dự án", experience: "Kinh nghiệm", skills: "Kỹ năng", about: "Thông tin", resume: "CV DevOps" },
     hero: {
       status: "Sẵn sàng cho cơ hội DevOps",
       roleHeadline: "Kỹ sư DevOps",
-      statement: "Nền tảng · phân phối · bảo mật.",
-      specialization: "Xây hệ thống dễ phát hành, quan sát và phục hồi hơn",
+      statement: "Tôi xây hệ thống phân phối dễ phát hành, vận hành và phục hồi hơn.",
       body: "Kỹ sư Phần mềm mới tốt nghiệp, tập trung vào hệ thống phía sau các dịch vụ đáng tin cậy: CI/CD, container, Linux infrastructure và kiểm soát bảo mật thực dụng.",
       primary: "Xem case study",
       secondary: "Tải CV DevOps",
     },
     work: {
-      eyebrow: "Dự án chọn lọc",
       title: "Công việc phía sau mỗi lần phát hành.",
       body: "Hai case study đặt kết quả trong CV cạnh bằng chứng repository: một operations workbench riêng tư và một delivery path cho nền tảng giáo dục.",
       source: "Xem mã nguồn",
-      preview: "Xem luồng thao tác",
+      live: "Xem live",
+      preview: "Xem preview OpenScreen",
+      architecture: "Xem kiến trúc",
       storyLabels: { problem: "Thách thức", approach: "Quyết định kỹ thuật", outcome: "Bằng chứng bàn giao" },
     },
     experience: {
-      eyebrow: "Kinh nghiệm",
       title: "Kiểm soát giúp một bản phát hành đáng tin hơn.",
       body: "Kỳ thực tập DevOps tập trung vào bảo vệ workflow .NET nội bộ và làm cho đường phát hành có thể lặp lại.",
-      role: "Thực tập sinh DevOps · Bệnh viện Ung Bướu",
-      period: "05/2026 — 07/2026 · TP. Hồ Chí Minh",
+      role: "Thực tập sinh DevOps, Bệnh viện Ung Bướu",
+      period: "Tháng 05 đến tháng 07 năm 2026, TP. Hồ Chí Minh",
       story: {
         problem: "Một workflow mua sắm .NET nội bộ cần boundary request chặt hơn và một đường phát hành lặp lại được trước khi triển khai theo quy trình bệnh viện đã duyệt.",
         approach: "Tôi bổ sung GitHub Actions, CodeQL, SonarQube, rà soát API, xử lý CSRF và package-vulnerability; các contract trong repo làm rõ rủi ro access/request mà các kiểm soát này giải quyết.",
@@ -140,30 +136,27 @@ export const copy: Localized<{
       },
     },
     skills: {
-      eyebrow: "Toolchain",
-      title: "Các lớp công việc tôi đảm nhiệm.",
+      title: "Năng lực được chứng minh qua công việc.",
       groups: [
-        { label: "Code", items: ["Go", "Python", "Bash"] },
-        { label: "Hạ tầng", items: ["Linux", "systemd", "Podman", "Docker", "Terraform", "K3s"] },
-        { label: "Phân phối", items: ["GitHub Actions", "GitLab CI/CD", "ArgoCD", "Git"] },
-        { label: "Bảo mật & mạng", items: ["Cloudflare", "SonarQube", "Trivy", "Zero Trust", "Tailscale"] },
-        { label: "Dữ liệu", items: ["PostgreSQL", "Redis", "SQLite"] },
+        { label: "Xây dựng và tự động hóa", proof: "Source check, container build và delivery path có thể lặp lại xuất hiện trong các phần phía trên.", items: ["Go", "Git", "GitHub Actions", "Spring Boot", "Docker"] },
+        { label: "Vận hành và phục hồi", proof: "Vận hành service container với kết nối riêng, host control và service evidence được lưu lại.", items: ["Podman", "Tailscale", "SQLite", "PostgreSQL", "Redis", "WebSocket", "systemd", "K3s"] },
+        { label: "Bảo vệ và phân phối", proof: "Quality gate và security control được dùng trước khi bàn giao production.", items: ["CodeQL", "SonarQube", "Trivy", "Argo CD"] },
+        { label: "Đã làm quen", proof: "Đã dùng trong lab, môn học hoặc bài tập nhỏ; không trình bày tại đây như bằng chứng production.", items: ["Python", "Bash", "GitLab CI/CD", "Terraform", "Cloudflare"] },
       ],
     },
     education: {
-      eyebrow: "Học vấn & ghi nhận",
       title: "Nền tảng kỹ thuật phần mềm.",
-      school: "Đại học HUTECH · 2022 — 2026",
-      degree: "Cử nhân Kỹ thuật Phần mềm · GPA 3.24 · Tiếng Anh B1",
-      recognition: { eyebrow: "Ghi nhận", title: "IT Got Talent 2025", detail: "Bán kết" },
+      school: "Đại học HUTECH, 2022-2026",
+      degree: "Cử nhân Kỹ thuật Phần mềm. GPA 3.24. Tiếng Anh B1.",
+      recognition: { label: "Ghi nhận", title: "IT Got Talent 2025", detail: "Bán kết" },
     },
     contact: {
-      title: "Hãy biến việc phát hành trở nên đơn giản—theo nghĩa tốt nhất.",
+      title: "Sẵn sàng cho vị trí DevOps coi trọng phát hành đáng tin cậy.",
       body: "Tôi tìm kiếm vị trí DevOps Engineer coi trọng automation, reliability và trách nhiệm vận hành rõ ràng.",
       email: "Email cho Minh",
       cv: "Tải CV DevOps",
     },
-    footer: "Bình Minh · DevOps Engineer · TP. Hồ Chí Minh",
+    footer: "Bình Minh, DevOps Engineer, TP. Hồ Chí Minh",
   },
 };
 
@@ -171,7 +164,8 @@ export const projects: Project[] = [
   {
     id: "homelab",
     repo: "https://github.com/bnhminh1010/HomeLab-Dashboard",
-    period: "2026 — Present",
+    liveUrl: "https://hostdeck.thinkai.id.vn",
+    period: "2026 to present",
     stack: ["Go", "Podman", "Tailscale", "SQLite", "WebSocket"],
     accent: "teal",
     evidence: {
@@ -186,8 +180,8 @@ export const projects: Project[] = [
       assetStem: "homelab-preview",
       ready: false,
       capture: {
-        en: "Show a service state, drill into operational evidence, then return to the dashboard—using redacted demo data only.",
-        vi: "Hiển thị trạng thái dịch vụ, drill-down vào bằng chứng vận hành rồi quay về dashboard—chỉ dùng dữ liệu demo đã che thông tin.",
+        en: "Maps the private path from the Tailscale mesh to the host agent, Podman services and operations dashboard.",
+        vi: "Mô tả đường đi riêng tư từ Tailscale mesh đến host agent, Podman service và operations dashboard.",
       },
     },
     content: {
@@ -218,7 +212,8 @@ export const projects: Project[] = [
   {
     id: "thinkai",
     repo: "https://github.com/ThinkAI-team/thinkai-backend",
-    period: "2025 — 2026",
+    liveUrl: "https://learning.thinkai.id.vn",
+    period: "2025-2026",
     stack: ["Spring Boot", "GitHub Actions", "Docker", "Kubernetes", "Argo CD", "Trivy"],
     accent: "pink",
     evidence: {
@@ -233,8 +228,8 @@ export const projects: Project[] = [
       assetStem: "thinkai-preview",
       ready: false,
       capture: {
-        en: "Walk through a pull request check, then show the application using its local Docker Compose dependencies with sample education data.",
-        vi: "Đi qua kiểm tra pull request, sau đó hiển thị ứng dụng chạy với các dependency Docker Compose cục bộ bằng dữ liệu giáo dục mẫu.",
+        en: "Maps the pull request security gate, multi-stage image build and local Docker Compose dependencies.",
+        vi: "Mô tả security gate của pull request, multi-stage image build và dependency Docker Compose cục bộ.",
       },
     },
     content: {
