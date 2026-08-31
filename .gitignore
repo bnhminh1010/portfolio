@@ -25,6 +25,14 @@
 # misc
 .DS_Store
 *.pem
+*.py
+skills-lock.json
+
+# AI Agent Caches & Metadata (Except .github)
+.agents/
+.claude/
+.hallmark/
+.omc/
 
 # debug
 npm-debug.log*

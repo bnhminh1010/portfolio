@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 const barlowCondensed = localFont({
   src: [
@@ -13,43 +14,46 @@ const barlowCondensed = localFont({
   variable: "--font-display-local",
 });
 
-// Social crawlers and Vercel's edge cache keep an OG image aggressively. Bump
-// this version whenever the exported thumbnail changes so each release points
-// crawlers at a distinct image URL.
-const socialImage = "/og-image.png?v=20260729";
+const socialImage = "/og-image.png?v=20260901";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://binhminh.thinkai.id.vn"),
-  title: "Bình Minh - DevOps Engineer",
-  description: "DevOps Engineer portfolio: containerization, CI/CD, Linux infrastructure and reliability-focused delivery.",
+  title: "ThinkAI Studio",
+  description: "ThinkAI Studio: Reliable infrastructure as code, rootless container orchestration, and continuous GitOps delivery platforms.",
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
   openGraph: {
-    title: "Bình Minh | DevOps Engineer",
-    description: "Containerization, CI/CD, Linux infrastructure and reliable delivery.",
+    title: "ThinkAI Studio",
+    description: "ThinkAI Studio: Reliable infrastructure as code, rootless container orchestration, and continuous GitOps delivery platforms.",
     url: "/",
-    siteName: "Binh Minh Portfolio",
-    images: [{ url: socialImage, width: 1200, height: 630, alt: "MINH.OPS - DevOps Engineer, systems that ship, observe and recover" }],
+    siteName: "ThinkAI Studio",
+    images: [{ url: socialImage, width: 1200, height: 630, alt: "ThinkAI Studio: DevOps & Systems Engineer" }],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bình Minh | DevOps Engineer",
-    description: "Containerization, CI/CD, Linux infrastructure and reliable delivery.",
+    title: "ThinkAI Studio",
+    description: "ThinkAI Studio: Reliable infrastructure as code, rootless container orchestration, and continuous GitOps delivery platforms.",
     images: [socialImage],
   },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={barlowCondensed.variable}>
+    <html lang="en" className={barlowCondensed.variable} data-theme="dark">
       <body>
-        <LanguageProvider>{children}</LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider>{children}</LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
