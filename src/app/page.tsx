@@ -1199,7 +1199,7 @@ export default function SoraPreviewPage() {
                 alt="ThinkAI Studio"
                 fill
                 sizes="24px"
-                className="object-contain invert"
+                className="object-contain"
               />
             </div>
             <span className="whitespace-nowrap inline-flex items-center leading-none select-none text-[11px] sm:text-xs md:text-sm">

@@ -87,7 +87,7 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
         }
         className="fixed top-0 inset-x-0 z-50 bg-transparent px-5 sm:px-10 lg:px-12 py-4 sm:py-6 flex items-center justify-between pointer-events-none select-none"
       >
-        {/* Left: Pure Floating Logo Icon (Authentic SoraLabs Studio Style) */}
+        {/* Left: Pure Floating Logo Icon (Authentic Studio Style) */}
         <button
           type="button"
           onClick={handleLogoClick}
@@ -96,13 +96,14 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
           }`}
           aria-label="ThinkAI Studio"
         >
-          <div className="relative w-6 h-6 sm:w-7 sm:h-7 shrink-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
+          <div className="relative w-6 h-6 sm:w-7 sm:h-7 shrink-0 drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
             <Image
               src="/images/thinkai_studio_logo.png"
               alt="ThinkAI Studio"
               fill
               sizes="28px"
-              className="object-contain invert"
+              className="object-contain"
+              priority
             />
           </div>
         </button>
