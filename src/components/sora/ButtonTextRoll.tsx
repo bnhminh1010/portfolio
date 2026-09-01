@@ -24,13 +24,13 @@ export function ButtonTextRoll({
         )}
       >
         {/* Primary text */}
-        <span className="inline-flex items-center justify-center leading-none transform transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">
+        <span className="inline-flex items-center justify-center leading-none transform transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[135%]">
           {text}
         </span>
         {/* Duplicate text rolling in simultaneously from bottom */}
         <span
           aria-hidden="true"
-          className="absolute inset-0 flex items-center justify-center leading-none translate-y-full transform transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0"
+          className="absolute inset-0 flex items-center justify-center leading-none translate-y-[135%] transform transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0"
         >
           {text}
         </span>

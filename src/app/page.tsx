@@ -251,7 +251,7 @@ export default function SoraPreviewPage() {
       {/* ─── 02. HERO SECTION (High-Contrast View-Only Window Over Ocean Canvas) ─── */}
       <section
         id="top"
-        className="relative z-10 min-h-[96vh] flex flex-col justify-center items-center text-center px-6 pt-28 pb-20 bg-transparent pointer-events-none"
+        className="relative z-10 min-h-screen h-screen min-h-[100dvh] flex flex-col justify-center items-center text-center px-6 pt-24 pb-16 bg-transparent pointer-events-none"
       >
         {/* Subtle Atmospheric Radial Spotlight for High-Contrast Hero Separation */}
         <div className="absolute inset-0 max-w-5xl mx-auto -z-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(4,6,10,0.68)_0%,rgba(4,6,10,0.32)_50%,transparent_78%)] blur-2xl" />
