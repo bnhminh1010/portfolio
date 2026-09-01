@@ -169,11 +169,11 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
             hoverTextColor="#ffffff"
             borderColor="#ffffff"
             hoverBorderColor="rgba(255, 255, 255, 0.4)"
-            className="group h-10 inline-flex items-center justify-center gap-2 sm:gap-2.5 px-3 sm:px-5 rounded-[6px] text-xs sm:text-[15.5px] font-extrabold cursor-pointer shadow-xl select-none bg-white border border-white active:scale-[0.93] transition-transform duration-150 leading-none shrink-0"
+            className="group h-11 inline-flex items-center justify-center gap-2.5 px-3.5 sm:px-5 rounded-[6px] text-xs sm:text-[16px] font-extrabold cursor-pointer shadow-xl select-none bg-white border border-white active:scale-[0.93] transition-transform duration-150 leading-none shrink-0"
           >
             <ButtonTextRoll
               text="Start a project"
-              className="font-extrabold text-xs sm:text-[15.5px] tracking-tight leading-none"
+              className="font-extrabold text-xs sm:text-[16px] tracking-tight leading-none"
             />
             <ArrowRoll size="md" />
           </WipeButton>

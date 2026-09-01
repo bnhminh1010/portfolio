@@ -75,7 +75,7 @@ export function WipeButton({
       />
       {/* Foreground Content */}
       <span
-        className="relative z-10 flex items-center justify-center gap-2 w-full h-full transition-colors duration-300"
+        className="relative z-10 inline-flex items-center justify-center gap-2.5 sm:gap-3.5 w-full h-full transition-colors duration-300 leading-none"
         style={{
           color: wipeState === "in" ? hoverTextColor : textColor,
         }}

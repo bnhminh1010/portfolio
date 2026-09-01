@@ -19,18 +19,18 @@ export function ButtonTextRoll({
     return (
       <span
         className={cn(
-          "relative inline-flex flex-col overflow-hidden h-[1.18em] leading-[1.18em] select-none",
+          "relative inline-flex items-center justify-center overflow-hidden h-[1.12em] leading-none select-none",
           className
         )}
       >
         {/* Primary text */}
-        <span className="inline-flex items-center justify-center transform transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">
+        <span className="inline-flex items-center justify-center leading-none transform transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">
           {text}
         </span>
         {/* Duplicate text rolling in simultaneously from bottom */}
         <span
           aria-hidden="true"
-          className="absolute top-full left-0 inline-flex items-center justify-center transform transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full"
+          className="absolute inset-0 flex items-center justify-center leading-none translate-y-full transform transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0"
         >
           {text}
         </span>

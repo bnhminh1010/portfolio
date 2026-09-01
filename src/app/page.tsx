@@ -961,11 +961,11 @@ export default function SoraPreviewPage() {
               hoverTextColor="#ffffff"
               borderColor="#ffffff"
               hoverBorderColor="rgba(255, 255, 255, 0.4)"
-              className="group inline-flex items-center justify-center gap-4 px-9 sm:px-12 py-4.5 sm:py-5 rounded-[4px] text-lg sm:text-[22px] font-extrabold cursor-pointer shadow-2xl select-none bg-white border border-white active:scale-[0.94] transition-transform duration-150"
+              className="group h-16 sm:h-20 inline-flex items-center justify-center gap-4 sm:gap-5 px-8 sm:px-12 rounded-[6px] text-xl sm:text-[26px] font-extrabold cursor-pointer shadow-2xl select-none bg-white border border-white active:scale-[0.94] transition-transform duration-150 leading-none"
             >
               <ButtonTextRoll
                 text="Start a project"
-                className="font-extrabold text-lg sm:text-[22px] tracking-tight leading-none"
+                className="font-extrabold text-xl sm:text-[26px] tracking-tight leading-none"
               />
               <ArrowRoll size="lg" />
             </WipeButton>
