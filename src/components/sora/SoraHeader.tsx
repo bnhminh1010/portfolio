@@ -18,6 +18,7 @@ const LUXURY_EASE = [0.16, 1, 0.3, 1] as const;
 export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
   const [isHeaderHidden, setIsHeaderHidden] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [hoveredNav, setHoveredNav] = useState<string | null>(null);
 
   // Hide header when scrolling into the CTA section (#contact) or Footer
   useEffect(() => {
@@ -106,48 +107,52 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
           </div>
         </button>
 
-        {/* Center: Pure Floating Navigation Links with Text Roll Motion */}
+        {/* Center: Pure Floating Navigation Links with Sliding Box Hover Motion */}
         <nav
-          className={`hidden sm:flex items-center gap-7 lg:gap-9 ${
+          onMouseLeave={() => setHoveredNav(null)}
+          className={`hidden sm:flex items-center gap-1.5 lg:gap-2 relative ${
             isHeaderHidden ? "pointer-events-none" : "pointer-events-auto"
           }`}
         >
-          <button
-            onClick={onOpenAbout}
-            className="group text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
-          >
-            <ButtonTextRoll
-              text="About"
-              className="font-medium text-sm sm:text-[15px] tracking-tight leading-none"
-            />
-          </button>
-          <a
-            href="#work"
-            className="group text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
-          >
-            <ButtonTextRoll
-              text="Work"
-              className="font-medium text-sm sm:text-[15px] tracking-tight leading-none"
-            />
-          </a>
-          <a
-            href="#products"
-            className="group text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
-          >
-            <ButtonTextRoll
-              text="Products"
-              className="font-medium text-sm sm:text-[15px] tracking-tight leading-none"
-            />
-          </a>
-          <a
-            href="#contact"
-            className="group text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
-          >
-            <ButtonTextRoll
-              text="Contact"
-              className="font-medium text-sm sm:text-[15px] tracking-tight leading-none"
-            />
-          </a>
+          {[
+            { id: "about", label: "About", onClick: onOpenAbout },
+            { id: "work", label: "Work", href: "#work" },
+            { id: "products", label: "Products", href: "#products" },
+            { id: "contact", label: "Contact", href: "#contact" },
+          ].map((item) => {
+            const isHovered = hoveredNav === item.id;
+            return (
+              <div
+                key={item.id}
+                onMouseEnter={() => setHoveredNav(item.id)}
+                className="relative"
+              >
+                {isHovered && (
+                  <motion.div
+                    layoutId="headerNavHoverPill"
+                    className="absolute inset-0 rounded-[5px] bg-white/[0.12] border border-white/15 backdrop-blur-md shadow-sm"
+                    transition={{ type: "spring", bounce: 0.15, duration: 0.35 }}
+                  />
+                )}
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    className="relative z-10 px-3.5 py-1.5 rounded-[5px] text-sm sm:text-[15px] font-medium text-white/90 hover:text-white tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] block select-none cursor-pointer"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={item.onClick}
+                    className="relative z-10 px-3.5 py-1.5 rounded-[5px] text-sm sm:text-[15px] font-medium text-white/90 hover:text-white tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] block select-none cursor-pointer"
+                  >
+                    {item.label}
+                  </button>
+                )}
+              </div>
+            );
+          })}
         </nav>
 
         {/* Right: Start a project Button + Mobile Close / Menu Toggle */}
