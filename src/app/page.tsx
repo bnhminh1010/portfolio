@@ -253,23 +253,26 @@ export default function SoraPreviewPage() {
         id="top"
         className="relative z-10 min-h-[96vh] flex flex-col justify-center items-center text-center px-6 pt-28 pb-20 bg-transparent pointer-events-none"
       >
-        <div className="max-w-6xl mx-auto space-y-6 sm:space-y-7 pointer-events-auto">
+        {/* Subtle Atmospheric Radial Spotlight for High-Contrast Hero Separation */}
+        <div className="absolute inset-0 max-w-5xl mx-auto -z-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(4,6,10,0.68)_0%,rgba(4,6,10,0.32)_50%,transparent_78%)] blur-2xl" />
+
+        <div className="max-w-6xl mx-auto space-y-6 sm:space-y-7 pointer-events-auto relative z-10">
           {/* SoraLabs Authentic Floating Eyebrow */}
-          <div className="text-xs sm:text-[13px] font-mono font-medium tracking-[0.22em] text-white/90 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] uppercase select-none">
+          <div className="text-xs sm:text-[13.5px] font-mono font-bold tracking-[0.24em] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] uppercase select-none">
             A SYSTEMS STUDIO
           </div>
 
-          {/* SoraLabs Authentic Grotesque Masked Headline */}
+          {/* SoraLabs Authentic Grotesque Masked Headline with High-Contrast Optical Shadow */}
           <div className="py-1 sm:py-2">
             <MaskedTextReveal
               as="h1"
               text={"RELIABLE\nDELIVERY"}
-              className="sora-heading-hero text-white tracking-[-0.026em] drop-shadow-[0_12px_36px_rgba(0,0,0,0.75)]"
+              className="sora-heading-hero text-white tracking-[-0.026em] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_12px_36px_rgba(0,0,0,0.90)] drop-shadow-[0_24px_64px_rgba(0,0,0,0.80)]"
             />
           </div>
 
           {/* SoraLabs Authentic Floating Subline */}
-          <div className="text-xs sm:text-[13px] font-mono font-medium tracking-[0.20em] text-white/80 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] uppercase max-w-2xl mx-auto leading-relaxed select-none px-4">
+          <div className="text-xs sm:text-[13.5px] font-mono font-medium tracking-[0.20em] text-neutral-100 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] uppercase max-w-2xl mx-auto leading-relaxed select-none px-4">
             INFRASTRUCTURE AS CODE · GITOPS PLATFORMS · CRAFT WEB SYSTEMS
           </div>
         </div>
