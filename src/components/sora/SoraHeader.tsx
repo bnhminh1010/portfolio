@@ -18,7 +18,6 @@ const LUXURY_EASE = [0.16, 1, 0.3, 1] as const;
 export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
   const [isHeaderHidden, setIsHeaderHidden] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [hoveredNav, setHoveredNav] = useState<string | null>(null);
 
   // Hide header when scrolling into the CTA section (#contact) or Footer
   useEffect(() => {
@@ -108,52 +107,59 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
           </div>
         </button>
 
-        {/* Center: Pure Floating Navigation Links with Sliding Box Hover Motion */}
+        {/* Center: Floating Navigation Links with Directional Wipe Motion */}
         <nav
-          onMouseLeave={() => setHoveredNav(null)}
-          className={`hidden sm:flex items-center gap-1.5 lg:gap-2 relative ${
+          className={`hidden sm:flex items-center gap-1.5 lg:gap-2.5 ${
             isHeaderHidden ? "pointer-events-none" : "pointer-events-auto"
           }`}
         >
-          {[
-            { id: "about", label: "About", onClick: onOpenAbout },
-            { id: "work", label: "Work", href: "#work" },
-            { id: "products", label: "Products", href: "#products" },
-            { id: "contact", label: "Contact", href: "#contact" },
-          ].map((item) => {
-            const isHovered = hoveredNav === item.id;
-            return (
-              <div
-                key={item.id}
-                onMouseEnter={() => setHoveredNav(item.id)}
-                className="relative"
-              >
-                {isHovered && (
-                  <motion.div
-                    layoutId="headerNavHoverPill"
-                    className="absolute inset-0 rounded-[5px] bg-white/[0.12] border border-white/15 backdrop-blur-md shadow-sm"
-                    transition={{ type: "spring", bounce: 0.15, duration: 0.35 }}
-                  />
-                )}
-                {item.href ? (
-                  <a
-                    href={item.href}
-                    className="relative z-10 px-3.5 py-1.5 rounded-[5px] text-sm sm:text-[15px] font-medium text-white/90 hover:text-white tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] block select-none cursor-pointer"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={item.onClick}
-                    className="relative z-10 px-3.5 py-1.5 rounded-[5px] text-sm sm:text-[15px] font-medium text-white/90 hover:text-white tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] block select-none cursor-pointer"
-                  >
-                    {item.label}
-                  </button>
-                )}
-              </div>
-            );
-          })}
+          <WipeButton
+            onClick={onOpenAbout}
+            wipeColor="#ffffff"
+            textColor="#ffffff"
+            hoverTextColor="#05070a"
+            borderColor="rgba(255, 255, 255, 0.15)"
+            hoverBorderColor="#ffffff"
+            className="group h-8.5 sm:h-9 inline-flex items-center justify-center px-3.5 sm:px-4 rounded-[4px] text-xs sm:text-[13.5px] font-medium tracking-tight cursor-pointer shadow-md select-none bg-black/35 backdrop-blur-md border active:scale-[0.95] transition-transform duration-150 leading-none"
+          >
+            About
+          </WipeButton>
+          <WipeButton
+            as="a"
+            href="#work"
+            wipeColor="#ffffff"
+            textColor="#ffffff"
+            hoverTextColor="#05070a"
+            borderColor="rgba(255, 255, 255, 0.15)"
+            hoverBorderColor="#ffffff"
+            className="group h-8.5 sm:h-9 inline-flex items-center justify-center px-3.5 sm:px-4 rounded-[4px] text-xs sm:text-[13.5px] font-medium tracking-tight cursor-pointer shadow-md select-none bg-black/35 backdrop-blur-md border active:scale-[0.95] transition-transform duration-150 leading-none"
+          >
+            Work
+          </WipeButton>
+          <WipeButton
+            as="a"
+            href="#products"
+            wipeColor="#ffffff"
+            textColor="#ffffff"
+            hoverTextColor="#05070a"
+            borderColor="rgba(255, 255, 255, 0.15)"
+            hoverBorderColor="#ffffff"
+            className="group h-8.5 sm:h-9 inline-flex items-center justify-center px-3.5 sm:px-4 rounded-[4px] text-xs sm:text-[13.5px] font-medium tracking-tight cursor-pointer shadow-md select-none bg-black/35 backdrop-blur-md border active:scale-[0.95] transition-transform duration-150 leading-none"
+          >
+            Products
+          </WipeButton>
+          <WipeButton
+            as="a"
+            href="#contact"
+            wipeColor="#ffffff"
+            textColor="#ffffff"
+            hoverTextColor="#05070a"
+            borderColor="rgba(255, 255, 255, 0.15)"
+            hoverBorderColor="#ffffff"
+            className="group h-8.5 sm:h-9 inline-flex items-center justify-center px-3.5 sm:px-4 rounded-[4px] text-xs sm:text-[13.5px] font-medium tracking-tight cursor-pointer shadow-md select-none bg-black/35 backdrop-blur-md border active:scale-[0.95] transition-transform duration-150 leading-none"
+          >
+            Contact
+          </WipeButton>
         </nav>
 
         {/* Right: Start a project Button + Mobile Close / Menu Toggle */}
