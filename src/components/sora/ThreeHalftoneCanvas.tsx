@@ -100,12 +100,13 @@ export function ThreeHalftoneCanvas({ className = "" }: ThreeHalftoneCanvasProps
         return mat2(c, -s, s, c) * v;
       }
 
-      // Rotated 45-degree halftone print screen
+      // Soft-Rotated 45-degree halftone print screen with delicate anti-aliased dots
       vec3 applyRotatedHalftone(vec3 color, vec2 fragCoord, float spacing, float dotSize, float darkness) {
         vec2 rotCoord = rotate2D(fragCoord, 0.785398);
         vec2 cell = fract(rotCoord / spacing) - 0.5;
         float dist = length(cell);
-        float mask = 1.0 - smoothstep(dotSize - 0.05, dotSize + 0.05, dist);
+        // Soft Gaussian-like feathering for velvety dot edges
+        float mask = 1.0 - smoothstep(dotSize - 0.12, dotSize + 0.12, dist);
         return mix(color, vec3(0.012, 0.022, 0.032), mask * darkness);
       }
 
@@ -155,8 +156,8 @@ export function ThreeHalftoneCanvas({ className = "" }: ThreeHalftoneCanvasProps
         col = mix(col, cCrystalAqua, caustics * 0.78);
         col = mix(col, cSunlightFoam, pow(smoothstep(0.45, 0.90, wave + caustics * 0.45), 2.8) * 0.65);
 
-        // Apply Rotated Halftone Print Screen
-        col = applyRotatedHalftone(col, gl_FragCoord.xy, 6.5, 0.23, 0.70);
+        // Apply Soft Rotated Halftone Print Screen (Reduced opacity & soft blurred dots)
+        col = applyRotatedHalftone(col, gl_FragCoord.xy, 5.8, 0.19, 0.36);
 
         gl_FragColor = vec4(col, 1.0);
       }
@@ -254,9 +255,19 @@ export function ThreeHalftoneCanvas({ className = "" }: ThreeHalftoneCanvasProps
 
   return (
     <div
-      ref={containerRef}
       className={`fixed inset-0 pointer-events-none ${className}`}
       style={{ zIndex: 0 }}
-    />
+    >
+      <div ref={containerRef} className="absolute inset-0" />
+      {/* Soft Gaussian Blur & Atmospheric Diffusion Layer */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backdropFilter: "blur(1px)",
+          WebkitBackdropFilter: "blur(1px)",
+          background: "radial-gradient(ellipse at 50% 40%, rgba(10,14,20,0.06) 0%, rgba(6,8,12,0.36) 100%)",
+        }}
+      />
+    </div>
   );
 }
