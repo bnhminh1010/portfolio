@@ -105,6 +105,9 @@ export default function SoraPreviewPage() {
     document.title = "ThinkAI Studio";
   }, []);
 
+  const [storyTab0, setStoryTab0] = useState<"problem" | "approach" | "outcome">("problem");
+  const [storyTab1, setStoryTab1] = useState<"problem" | "approach" | "outcome">("problem");
+
   // Chapter 01 Carousel State & Progress Bar
   const [activeSlide, setActiveSlide] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -393,31 +396,77 @@ export default function SoraPreviewPage() {
                 {projects[0].content[lang].summary}
               </p>
 
-              {/* 3-Pillar Architectural Story */}
-              <div className="space-y-4 border-y border-white/[0.08] py-6">
-                <div>
-                  <span className="text-neutral-400 font-mono text-xs font-bold uppercase tracking-wider block">
-                    PROBLEM
-                  </span>
-                  <p className="text-sm sm:text-[15px] text-neutral-200 mt-1 leading-relaxed font-light">
-                    {projects[0].content[lang].story.problem}
-                  </p>
+              {/* 3-Pillar Interactive Segmented Story Switcher */}
+              <div className="space-y-4 border-y border-white/[0.08] py-5">
+                {/* Segmented Pill Switcher */}
+                <div className="flex items-center gap-1.5 p-1 rounded-lg bg-white/[0.04] border border-white/[0.08] w-fit">
+                  {[
+                    { id: "problem", label: "Problem" },
+                    { id: "approach", label: "Approach" },
+                    { id: "outcome", label: "Outcome" },
+                  ].map((tab) => {
+                    const isActive = storyTab0 === tab.id;
+                    return (
+                      <button
+                        key={tab.id}
+                        type="button"
+                        onClick={() => setStoryTab0(tab.id as "problem" | "approach" | "outcome")}
+                        className={`relative px-3.5 py-1.5 rounded-[5px] text-xs font-mono font-bold tracking-wide transition-colors cursor-pointer select-none ${
+                          isActive ? "text-[#0a0a0c]" : "text-neutral-400 hover:text-white"
+                        }`}
+                      >
+                        {isActive && (
+                          <motion.div
+                            layoutId="storyTabIndicator0"
+                            className="absolute inset-0 rounded-[5px] bg-white shadow-md"
+                            transition={{ type: "spring", bounce: 0.15, duration: 0.4 }}
+                          />
+                        )}
+                        <span className="relative z-10">{tab.label}</span>
+                      </button>
+                    );
+                  })}
                 </div>
-                <div>
-                  <span className="text-neutral-400 font-mono text-xs font-bold uppercase tracking-wider block">
-                    APPROACH
-                  </span>
-                  <p className="text-sm sm:text-[15px] text-neutral-200 mt-1 leading-relaxed font-light">
-                    {projects[0].content[lang].story.approach}
-                  </p>
-                </div>
-                <div>
-                  <span className="text-neutral-400 font-mono text-xs font-bold uppercase tracking-wider block">
-                    OUTCOME
-                  </span>
-                  <p className="text-sm sm:text-[15px] text-neutral-200 mt-1 leading-relaxed font-light">
-                    {projects[0].content[lang].story.outcome}
-                  </p>
+
+                {/* Active Narrative Card with Large Typography */}
+                <div className="min-h-[105px] sm:min-h-[120px] flex flex-col justify-center">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={storyTab0}
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                      className="space-y-2"
+                    >
+                      <div className="flex items-center gap-2">
+                        {storyTab0 === "problem" && (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 text-[10.5px] font-mono font-bold uppercase tracking-wider">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                            CORE CHALLENGE
+                          </span>
+                        )}
+                        {storyTab0 === "approach" && (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20 text-[10.5px] font-mono font-bold uppercase tracking-wider">
+                            <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                            SYSTEM ARCHITECTURE
+                          </span>
+                        )}
+                        {storyTab0 === "outcome" && (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 text-[10.5px] font-mono font-bold uppercase tracking-wider">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                            VERIFIED IMPACT
+                          </span>
+                        )}
+                      </div>
+
+                      <p className="text-base sm:text-[17.5px] lg:text-[18px] text-neutral-100 leading-[1.65] font-light">
+                        {storyTab0 === "problem" && projects[0].content[lang].story.problem}
+                        {storyTab0 === "approach" && projects[0].content[lang].story.approach}
+                        {storyTab0 === "outcome" && projects[0].content[lang].story.outcome}
+                      </p>
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
               </div>
 
@@ -525,31 +574,77 @@ export default function SoraPreviewPage() {
                 {projects[1].content[lang].summary}
               </p>
 
-              {/* 3-Pillar Architectural Story */}
-              <div className="space-y-4 border-y border-white/[0.08] py-6">
-                <div>
-                  <span className="text-neutral-400 font-mono text-xs font-bold uppercase tracking-wider block">
-                    PROBLEM
-                  </span>
-                  <p className="text-sm sm:text-[15px] text-neutral-200 mt-1 leading-relaxed font-light">
-                    {projects[1].content[lang].story.problem}
-                  </p>
+              {/* 3-Pillar Interactive Segmented Story Switcher */}
+              <div className="space-y-4 border-y border-white/[0.08] py-5">
+                {/* Segmented Pill Switcher */}
+                <div className="flex items-center gap-1.5 p-1 rounded-lg bg-white/[0.04] border border-white/[0.08] w-fit">
+                  {[
+                    { id: "problem", label: "Problem" },
+                    { id: "approach", label: "Approach" },
+                    { id: "outcome", label: "Outcome" },
+                  ].map((tab) => {
+                    const isActive = storyTab1 === tab.id;
+                    return (
+                      <button
+                        key={tab.id}
+                        type="button"
+                        onClick={() => setStoryTab1(tab.id as "problem" | "approach" | "outcome")}
+                        className={`relative px-3.5 py-1.5 rounded-[5px] text-xs font-mono font-bold tracking-wide transition-colors cursor-pointer select-none ${
+                          isActive ? "text-[#0a0a0c]" : "text-neutral-400 hover:text-white"
+                        }`}
+                      >
+                        {isActive && (
+                          <motion.div
+                            layoutId="storyTabIndicator1"
+                            className="absolute inset-0 rounded-[5px] bg-white shadow-md"
+                            transition={{ type: "spring", bounce: 0.15, duration: 0.4 }}
+                          />
+                        )}
+                        <span className="relative z-10">{tab.label}</span>
+                      </button>
+                    );
+                  })}
                 </div>
-                <div>
-                  <span className="text-neutral-400 font-mono text-xs font-bold uppercase tracking-wider block">
-                    APPROACH
-                  </span>
-                  <p className="text-sm sm:text-[15px] text-neutral-200 mt-1 leading-relaxed font-light">
-                    {projects[1].content[lang].story.approach}
-                  </p>
-                </div>
-                <div>
-                  <span className="text-neutral-400 font-mono text-xs font-bold uppercase tracking-wider block">
-                    OUTCOME
-                  </span>
-                  <p className="text-sm sm:text-[15px] text-neutral-200 mt-1 leading-relaxed font-light">
-                    {projects[1].content[lang].story.outcome}
-                  </p>
+
+                {/* Active Narrative Card with Large Typography */}
+                <div className="min-h-[105px] sm:min-h-[120px] flex flex-col justify-center">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={storyTab1}
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                      className="space-y-2"
+                    >
+                      <div className="flex items-center gap-2">
+                        {storyTab1 === "problem" && (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 text-[10.5px] font-mono font-bold uppercase tracking-wider">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                            CORE CHALLENGE
+                          </span>
+                        )}
+                        {storyTab1 === "approach" && (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20 text-[10.5px] font-mono font-bold uppercase tracking-wider">
+                            <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                            SYSTEM ARCHITECTURE
+                          </span>
+                        )}
+                        {storyTab1 === "outcome" && (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 text-[10.5px] font-mono font-bold uppercase tracking-wider">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                            VERIFIED IMPACT
+                          </span>
+                        )}
+                      </div>
+
+                      <p className="text-base sm:text-[17.5px] lg:text-[18px] text-neutral-100 leading-[1.65] font-light">
+                        {storyTab1 === "problem" && projects[1].content[lang].story.problem}
+                        {storyTab1 === "approach" && projects[1].content[lang].story.approach}
+                        {storyTab1 === "outcome" && projects[1].content[lang].story.outcome}
+                      </p>
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
               </div>
 
