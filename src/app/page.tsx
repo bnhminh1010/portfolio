@@ -262,15 +262,9 @@ export default function SoraPreviewPage() {
         {/* Subtle Atmospheric Radial Spotlight for High-Contrast Hero Separation */}
         <div className="absolute inset-0 max-w-5xl mx-auto -z-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(4,6,10,0.68)_0%,rgba(4,6,10,0.32)_50%,transparent_78%)] blur-2xl" />
 
-        <div className="max-w-6xl mx-auto space-y-5 sm:space-y-6 pointer-events-auto relative z-10">
-          {/* Systems Telemetry Coordinates HUD */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-none bg-black/40 border border-white/15 backdrop-blur-md font-mono text-[10.5px] sm:text-xs text-neutral-300 tracking-wider uppercase select-none mx-auto drop-shadow-md">
-            <span className="w-1.5 h-1.5 rounded-none bg-emerald-400 animate-pulse" />
-            <span>10.8231° N, 106.6297° E · LATENCY 24MS · ALL SYSTEMS NOMINAL</span>
-          </div>
-
+        <div className="max-w-6xl mx-auto space-y-6 sm:space-y-7 pointer-events-auto relative z-10">
           {/* SoraLabs Authentic Floating Eyebrow */}
-          <div className="text-xs sm:text-[13px] font-mono font-bold tracking-[0.24em] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] uppercase select-none">
+          <div className="text-xs sm:text-[13.5px] font-mono font-bold tracking-[0.24em] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] uppercase select-none">
             A SYSTEMS STUDIO
           </div>
 
@@ -846,19 +840,23 @@ export default function SoraPreviewPage() {
       <section id="stack" className="py-28 sm:py-36 relative z-20 bg-[#111113] border-t border-white/[0.08] shadow-2xl">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 lg:px-16 space-y-16">
           {/* Top Banner Link with Forward Wipe */}
-          <div className="flex items-center justify-between border-b border-white/[0.08] pb-8 text-xl sm:text-3xl font-medium text-white">
-            <div className="text-sm font-mono text-neutral-400">CLI</div>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/[0.08] pb-6 sm:pb-8 text-white gap-4 sm:gap-0">
+            <div className="flex items-center gap-2 text-xs sm:text-sm font-mono text-neutral-400">
+              <span className="w-2 h-2 rounded-none bg-neutral-400" />
+              <span>CLI</span>
+            </div>
             <WipeButton
               as="a"
               href="#products"
               wipeColor="#ffffff"
               textColor="#ffffff"
               hoverTextColor="#05070a"
-              className="px-5 py-2.5 rounded-none flex items-center gap-2 text-sm sm:text-base font-bold bg-white/[0.05] border border-white/15 cursor-pointer"
+              className="px-4 sm:px-5 py-2.5 rounded-none flex items-center justify-center gap-2 text-xs sm:text-sm md:text-base font-bold bg-white/[0.05] border border-white/15 cursor-pointer w-full sm:w-auto text-center"
             >
-              Browse Architecture Blueprint
+              <span>Browse Architecture Blueprint</span>
+              <span className="sm:hidden font-mono text-xs">→</span>
             </WipeButton>
-            <div className="text-2xl font-mono text-neutral-400">(→)</div>
+            <div className="hidden sm:block text-2xl font-mono text-neutral-400">(→)</div>
           </div>
 
           {/* Clean Masked Rolling Headline - Rolls 2 times on hover */}
