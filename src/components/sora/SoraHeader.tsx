@@ -84,81 +84,63 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
                 transition: { duration: 0.45, ease: LUXURY_EASE },
               }
         }
-        className="fixed top-0 inset-x-0 z-50 bg-transparent px-3 sm:px-10 lg:px-14 py-3 sm:py-5 flex items-center justify-between pointer-events-none"
+        className="fixed top-0 inset-x-0 z-50 bg-transparent px-5 sm:px-10 lg:px-12 py-4 sm:py-6 flex items-center justify-between pointer-events-none select-none"
       >
-        {/* Left: ThinkAI Studio Logo Mark (Click to Reload Entire Web) */}
+        {/* Left: Pure Floating Logo Icon (Authentic SoraLabs Studio Style) */}
         <button
           type="button"
           onClick={handleLogoClick}
-          className={`h-10 inline-flex items-center justify-center gap-2 sm:gap-2.5 group cursor-pointer px-2.5 sm:px-3.5 rounded-[6px] bg-black/50 border border-white/20 backdrop-blur-md hover:bg-black/70 transition-all shadow-xl leading-none shrink-0 ${
+          className={`group cursor-pointer flex items-center justify-center p-1 select-none transition-transform hover:scale-105 active:scale-95 ${
             isHeaderHidden && !isMobileMenuOpen ? "pointer-events-none" : "pointer-events-auto"
           }`}
-          aria-label="Reload ThinkAI Studio Website"
+          aria-label="ThinkAI Studio"
         >
-          <div className="relative w-5 h-5 rounded overflow-hidden shrink-0 flex items-center justify-center">
+          <div className="relative w-6 h-6 sm:w-7 sm:h-7 shrink-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
             <Image
               src="/images/thinkai_studio_logo.png"
-              alt="ThinkAI Studio Logo"
+              alt="ThinkAI Studio"
               fill
-              sizes="20px"
-              className="object-contain invert group-hover:scale-105 transition-transform"
+              sizes="28px"
+              className="object-contain invert"
             />
           </div>
-          <span className="text-white font-bold font-mono text-[11px] sm:text-xs tracking-wider uppercase drop-shadow inline-flex items-center leading-none select-none whitespace-nowrap">
-            ThinkAI Studio
-          </span>
         </button>
 
-        {/* Center-Right: Desktop Nav Links */}
+        {/* Center: Pure Floating Navigation Links (No Pill Container) */}
         <nav
-          className={`h-10 hidden sm:inline-flex items-center gap-1 p-1 rounded-[6px] bg-black/50 border border-white/20 backdrop-blur-md shadow-xl ${
+          className={`hidden sm:flex items-center gap-7 lg:gap-9 ${
             isHeaderHidden ? "pointer-events-none" : "pointer-events-auto"
           }`}
         >
-          <WipeButton
+          <button
             onClick={onOpenAbout}
-            className="h-full inline-flex items-center justify-center px-3.5 rounded-[4px] font-sans font-bold text-xs sm:text-[13px] tracking-tight cursor-pointer leading-none"
-            wipeColor="#ffffff"
-            textColor="#ffffff"
-            hoverTextColor="#05070a"
+            className="text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
           >
             About
-          </WipeButton>
-          <WipeButton
-            as="a"
+          </button>
+          <a
             href="#work"
-            className="h-full inline-flex items-center justify-center px-3.5 rounded-[4px] font-sans font-bold text-xs sm:text-[13px] tracking-tight cursor-pointer leading-none"
-            wipeColor="#ffffff"
-            textColor="#ffffff"
-            hoverTextColor="#05070a"
+            className="text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
           >
             Work
-          </WipeButton>
-          <WipeButton
-            as="a"
+          </a>
+          <a
             href="#products"
-            className="h-full inline-flex items-center justify-center px-3.5 rounded-[4px] font-sans font-bold text-xs sm:text-[13px] tracking-tight cursor-pointer leading-none"
-            wipeColor="#ffffff"
-            textColor="#ffffff"
-            hoverTextColor="#05070a"
+            className="text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
           >
             Products
-          </WipeButton>
-          <WipeButton
-            as="a"
+          </a>
+          <a
             href="#contact"
-            className="h-full inline-flex items-center justify-center px-3.5 rounded-[4px] font-sans font-bold text-xs sm:text-[13px] tracking-tight cursor-pointer leading-none"
-            wipeColor="#ffffff"
-            textColor="#ffffff"
-            hoverTextColor="#05070a"
+            className="text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
           >
             Contact
-          </WipeButton>
+          </a>
         </nav>
 
-        {/* Far Right: Start a project Button + Mobile Menu Toggle */}
+        {/* Right: Start a project Button + Mobile Close / Menu Toggle */}
         <div
-          className={`flex items-center gap-2.5 sm:gap-3 ${
+          className={`flex items-center gap-3 sm:gap-4 ${
             isHeaderHidden && !isMobileMenuOpen ? "pointer-events-none" : "pointer-events-auto"
           }`}
         >
@@ -169,22 +151,22 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
             hoverTextColor="#ffffff"
             borderColor="#ffffff"
             hoverBorderColor="rgba(255, 255, 255, 0.4)"
-            className="group h-11 inline-flex items-center justify-center gap-2.5 px-3.5 sm:px-5 rounded-[6px] text-xs sm:text-[16px] font-extrabold cursor-pointer shadow-xl select-none bg-white border border-white active:scale-[0.93] transition-transform duration-150 leading-none shrink-0"
+            className="group h-8.5 sm:h-9.5 inline-flex items-center justify-center gap-2 sm:gap-2.5 px-3 sm:px-4 rounded-[4px] text-xs sm:text-[13.5px] font-bold cursor-pointer shadow-lg select-none bg-white border border-white active:scale-[0.94] transition-transform duration-150 leading-none shrink-0"
           >
             <ButtonTextRoll
               text="Start a project"
-              className="font-extrabold text-xs sm:text-[16px] tracking-tight leading-none"
+              className="font-bold text-xs sm:text-[13.5px] tracking-tight leading-none"
             />
-            <ArrowRoll size="md" />
+            <ArrowRoll size="sm" />
           </WipeButton>
 
-          {/* Mobile Menu Button with Vertical Text Flip Roll Transition */}
+          {/* Mobile Menu / Close Text Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="h-11 sm:hidden inline-flex items-center justify-center px-3.5 rounded-[6px] text-xs font-mono font-bold text-white bg-black/50 hover:bg-black/75 border border-white/20 backdrop-blur-md transition-colors cursor-pointer shadow-xl leading-none shrink-0"
+            className="sm:hidden text-white hover:text-neutral-300 font-medium text-sm tracking-tight cursor-pointer px-1 py-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] select-none"
             aria-label="Toggle navigation menu"
           >
-            <div className="relative h-[1.15em] w-11 overflow-hidden text-center flex items-center justify-center">
+            <div className="relative h-[1.2em] w-11 overflow-hidden text-right flex items-center justify-end">
               <AnimatePresence mode="popLayout" initial={false}>
                 <motion.span
                   key={isMobileMenuOpen ? "Close" : "Menu"}
@@ -192,7 +174,7 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: isMobileMenuOpen ? -14 : 14, opacity: 0 }}
                   transition={{ duration: 0.28, ease: LUXURY_EASE }}
-                  className="block font-mono text-xs font-bold leading-none select-none"
+                  className="block text-sm font-medium leading-none"
                 >
                   {isMobileMenuOpen ? "Close" : "Menu"}
                 </motion.span>
@@ -202,126 +184,116 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
         </div>
       </motion.header>
 
-      {/* ─── ELEGANT FLOATING DROPDOWN PANEL (Expand / Collapse Motion) ─── */}
+      {/* ─── AUTHENTIC SORALABS MOBILE NAVIGATION DRAWER (Upper Curtain with Grab Handle) ─── */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <>
-            {/* Ambient Soft Backdrop Overlay */}
+          <motion.div
+            initial={{ y: "-100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: "-100%", opacity: 0 }}
+            transition={{ duration: 0.45, ease: LUXURY_EASE }}
+            className="fixed top-0 inset-x-0 z-40 bg-[#09090b]/98 backdrop-blur-3xl pt-24 pb-4 px-6 border-b border-white/[0.08] shadow-[0_30px_80px_rgba(0,0,0,0.95)] sm:hidden flex flex-col justify-between"
+          >
+            {/* Big Bold Vertical Links */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.28 }}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm sm:hidden"
-            />
-
-            {/* Floating Dropdown Card with Smooth Reveal & Collapse Motion */}
-            <motion.div
-              initial={{ opacity: 0, y: -14, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -14, scale: 0.96 }}
-              transition={{ duration: 0.35, ease: LUXURY_EASE }}
-              className="fixed top-[68px] inset-x-3.5 max-w-md mx-auto z-40 bg-[#0d0d10]/96 backdrop-blur-3xl border border-white/15 rounded-2xl p-5 sm:hidden shadow-[0_24px_60px_rgba(0,0,0,0.85)] overflow-hidden"
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={{
+                open: {
+                  transition: {
+                    staggerChildren: 0.06,
+                    delayChildren: 0.1,
+                  },
+                },
+                closed: {
+                  transition: {
+                    staggerChildren: 0.03,
+                    staggerDirection: -1,
+                  },
+                },
+              }}
+              className="flex flex-col gap-4 text-4xl font-bold tracking-tight text-white pt-2"
             >
-              {/* Vertical Navigation Links with Staggered Slide-In */}
-              <motion.div
-                initial="closed"
-                animate="open"
-                exit="closed"
-                variants={{
-                  open: {
-                    transition: {
-                      staggerChildren: 0.06,
-                      delayChildren: 0.05,
+              {[
+                { label: "About", action: () => onOpenAbout() },
+                { label: "Work", action: () => handleNavClick("work") },
+                { label: "Products", action: () => handleNavClick("products") },
+                { label: "Contact", action: () => handleNavClick("contact") },
+              ].map((item) => (
+                <motion.div
+                  key={item.label}
+                  variants={{
+                    open: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 0.4, ease: LUXURY_EASE },
                     },
-                  },
-                  closed: {
-                    transition: {
-                      staggerChildren: 0.03,
-                      staggerDirection: -1,
+                    closed: {
+                      opacity: 0,
+                      y: 16,
+                      transition: { duration: 0.2, ease: LUXURY_EASE },
                     },
-                  },
-                }}
-                className="flex flex-col gap-1 text-2xl font-bold tracking-tight text-white"
-              >
-                {[
-                  { label: "About", action: () => onOpenAbout() },
-                  { label: "Work", action: () => handleNavClick("work") },
-                  { label: "Products", action: () => handleNavClick("products") },
-                  { label: "Contact", action: () => handleNavClick("contact") },
-                ].map((item, idx) => (
-                  <motion.div
-                    key={item.label}
-                    variants={{
-                      open: {
-                        opacity: 1,
-                        y: 0,
-                        transition: { duration: 0.35, ease: LUXURY_EASE },
-                      },
-                      closed: {
-                        opacity: 0,
-                        y: 12,
-                        transition: { duration: 0.2, ease: LUXURY_EASE },
-                      },
-                    }}
-                  >
-                    <button
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                        item.action();
-                      }}
-                      className="w-full text-left py-2.5 px-3 rounded-xl flex items-center justify-between group hover:bg-white/[0.06] active:scale-[0.98] transition-all cursor-pointer"
-                    >
-                      <span className="group-hover:text-neutral-200 transition-colors">
-                        {item.label}
-                      </span>
-                      <span className="text-xs font-mono font-medium text-neutral-500 group-hover:text-white transition-colors">
-                        0{idx + 1}
-                      </span>
-                    </button>
-                  </motion.div>
-                ))}
-              </motion.div>
-
-              {/* Bottom Featured Live Product Callout Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 8 }}
-                transition={{ duration: 0.35, delay: 0.22, ease: LUXURY_EASE }}
-                className="pt-3.5 border-t border-white/[0.08] mt-3"
-              >
-                <a
-                  href="https://hostdeck.thinkai.id.vn"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-3 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-between gap-3 group hover:bg-white/[0.08] transition-all"
+                  }}
                 >
-                  <div className="flex items-center gap-3 overflow-hidden">
-                    <div className="relative w-10 h-8 rounded-lg overflow-hidden border border-white/10 shrink-0 bg-[#161619]">
-                      <Image
-                        src="/images/products/hostdeck-screen.png"
-                        alt="HostDeck Console"
-                        fill
-                        sizes="40px"
-                        className="object-cover object-top"
-                      />
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      item.action();
+                    }}
+                    className="text-left text-white hover:text-neutral-300 active:scale-[0.98] transition-all cursor-pointer font-bold"
+                  >
+                    {item.label}
+                  </button>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Bottom Featured Live Product Callout Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.4, delay: 0.28, ease: LUXURY_EASE }}
+              className="mt-8 mb-4"
+            >
+              <a
+                href="https://hostdeck.thinkai.id.vn"
+                target="_blank"
+                rel="noreferrer"
+                className="p-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-between gap-3 group hover:bg-white/[0.08] transition-all"
+              >
+                <div className="flex items-center gap-3 overflow-hidden">
+                  <div className="relative w-12 h-10 rounded-lg overflow-hidden border border-white/10 shrink-0 bg-[#161619]">
+                    <Image
+                      src="/images/products/hostdeck-screen.png"
+                      alt="HostDeck Console"
+                      fill
+                      sizes="48px"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  <div className="space-y-0.5 overflow-hidden">
+                    <div className="text-xs font-bold text-white tracking-tight truncate">
+                      HostDeck is live — Bare-Metal CLI
                     </div>
-                    <div className="space-y-0.5 overflow-hidden">
-                      <div className="text-xs font-bold text-white tracking-tight truncate">
-                        HostDeck Console is live
-                      </div>
-                      <div className="text-[10px] font-mono text-neutral-400">
-                        AUGUST 2026 · PRODUCTION ACTIVE
-                      </div>
+                    <div className="text-[10px] font-mono text-neutral-400">
+                      AUGUST 2026
                     </div>
                   </div>
-                  <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-white shrink-0 transition-colors" />
-                </a>
-              </motion.div>
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-white shrink-0 transition-colors" />
+              </a>
             </motion.div>
-          </>
+
+            {/* Bottom Grab Bar Handle Icon matching Sora */}
+            <div className="flex justify-center items-center py-2">
+              <div className="flex flex-col gap-1 items-center">
+                <div className="w-8 h-[2px] rounded-full bg-neutral-600/80" />
+                <div className="w-8 h-[2px] rounded-full bg-neutral-600/80" />
+              </div>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
