@@ -48,16 +48,16 @@ export function ProductMockup({
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative w-full rounded-[14px] sm:rounded-[16px] overflow-hidden border border-white/15 bg-[#121215] ring-1 ring-white/[0.08] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.9)] group transition-all duration-500 hover:border-white/30 hover:shadow-[0_36px_90px_-15px_rgba(0,0,0,0.95)]"
+      className="relative w-full rounded-none overflow-hidden border border-white/15 bg-[#121215] ring-1 ring-white/[0.08] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.9)] group transition-all duration-500 hover:border-white/30 hover:shadow-[0_36px_90px_-15px_rgba(0,0,0,0.95)]"
     >
       {/* ─── LUXURY BROWSER WINDOW HEADER ─── */}
       <div className="px-4 sm:px-5 py-3 border-b border-white/[0.1] bg-[#0c0c0e]/95 backdrop-blur-md flex items-center justify-between gap-3 select-none">
         {/* Left: Window Traffic Dots + App Category */}
         <div className="flex items-center gap-3 shrink-0">
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-white/20 group-hover:bg-[#ff5f56] transition-colors duration-300 shadow-sm" />
-            <span className="w-2.5 h-2.5 rounded-full bg-white/20 group-hover:bg-[#ffbd2e] transition-colors duration-300 shadow-sm" />
-            <span className="w-2.5 h-2.5 rounded-full bg-white/20 group-hover:bg-[#27c93f] transition-colors duration-300 shadow-sm" />
+            <span className="w-2.5 h-2.5 rounded-none bg-white/20 group-hover:bg-[#ff5f56] transition-colors duration-300 shadow-sm" />
+            <span className="w-2.5 h-2.5 rounded-none bg-white/20 group-hover:bg-[#ffbd2e] transition-colors duration-300 shadow-sm" />
+            <span className="w-2.5 h-2.5 rounded-none bg-white/20 group-hover:bg-[#27c93f] transition-colors duration-300 shadow-sm" />
           </div>
           <div className="hidden sm:flex items-center gap-1.5 pl-2 text-[11px] font-mono font-bold text-neutral-400 uppercase tracking-wider">
             <Terminal className="w-3 h-3 text-neutral-500" />
@@ -71,7 +71,7 @@ export function ProductMockup({
             href={`https://${domain}`}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center justify-center gap-2 px-3.5 py-1 rounded-[4px] bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/20 text-neutral-300 hover:text-white transition-all duration-300 font-mono text-[11px] truncate shadow-inner group/url"
+            className="flex items-center justify-center gap-2 px-3.5 py-1 rounded-none bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/20 text-neutral-300 hover:text-white transition-all duration-300 font-mono text-[11px] truncate shadow-inner group/url"
           >
             <Lock className="w-2.5 h-2.5 text-emerald-400 shrink-0" />
             <span className="truncate font-semibold tracking-tight text-neutral-200 group-hover/url:text-white">
@@ -83,8 +83,8 @@ export function ProductMockup({
 
         {/* Right: Telemetry Latency Indicator */}
         <div className="hidden sm:flex items-center gap-2 shrink-0 text-[10.5px] font-mono text-neutral-400">
-          <span className="flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="flex items-center gap-1 px-2 py-0.5 rounded-none bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">
+            <span className="w-1.5 h-1.5 rounded-none bg-emerald-400 animate-pulse" />
             LIVE
           </span>
           <span className="text-neutral-500">24ms</span>
@@ -119,7 +119,7 @@ export function ProductMockup({
 
         {/* Floating Quick Action Badge on Hover */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/25 backdrop-blur-[1.5px]">
-          <div className="inline-flex items-center gap-2 px-4.5 py-2.5 rounded-[6px] bg-white text-black font-mono font-bold text-xs tracking-wider shadow-2xl transform scale-90 group-hover:scale-100 transition-transform duration-300">
+          <div className="inline-flex items-center gap-2 px-4.5 py-2.5 rounded-none bg-white text-black font-mono font-bold text-xs tracking-wider shadow-2xl transform scale-90 group-hover:scale-100 transition-transform duration-300">
             <span>VISIT {domain.toUpperCase()}</span>
             <ArrowUpRight className="w-4 h-4 text-black shrink-0" />
           </div>

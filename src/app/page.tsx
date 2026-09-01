@@ -115,6 +115,7 @@ export default function SoraPreviewPage() {
   // Bottom Ocean Interactive "Hold to create waves" State
   const [isOceanHovered, setIsOceanHovered] = useState(false);
   const [isOceanHolding, setIsOceanHolding] = useState(false);
+  const [isEquilibrium, setIsEquilibrium] = useState(false);
   const [holdProgress, setHoldProgress] = useState(0);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const oceanZoneRef = useRef<HTMLDivElement>(null);
@@ -146,7 +147,7 @@ export default function SoraPreviewPage() {
   }, [activeSlide]);
 
   const handlePrevSlide = () => {
-    setActiveSlide((prev) => (prev === 0 ? CHAPTER_SLIDES.length - 1 : prev - 1));
+    setActiveSlide((prev) => (prev - 1 + CHAPTER_SLIDES.length) % CHAPTER_SLIDES.length);
     setProgress(0);
   };
 
@@ -207,6 +208,7 @@ export default function SoraPreviewPage() {
 
   const startHolding = (clientX: number, clientY: number) => {
     setIsOceanHolding(true);
+    setIsEquilibrium(false);
     setCursorPos({ x: clientX, y: clientY });
     updateStirBridge(0.25, clientX, clientY);
 
@@ -216,7 +218,8 @@ export default function SoraPreviewPage() {
       p += 3;
       if (p >= 100) {
         p = 100;
-        updateStirBridge(0.75, clientX, clientY);
+        setIsEquilibrium(true);
+        updateStirBridge(0.85, clientX, clientY);
       } else {
         updateStirBridge(0.25 + (p / 100) * 0.5, clientX, clientY);
       }
@@ -226,12 +229,15 @@ export default function SoraPreviewPage() {
 
   const stopHolding = () => {
     setIsOceanHolding(false);
-    setHoldProgress(0);
     if (holdTimerRef.current) {
       clearInterval(holdTimerRef.current);
       holdTimerRef.current = null;
     }
     updateStirBridge(0.0);
+    setTimeout(() => {
+      setHoldProgress(0);
+      setIsEquilibrium(false);
+    }, 900);
   };
 
   return (
@@ -256,9 +262,15 @@ export default function SoraPreviewPage() {
         {/* Subtle Atmospheric Radial Spotlight for High-Contrast Hero Separation */}
         <div className="absolute inset-0 max-w-5xl mx-auto -z-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(4,6,10,0.68)_0%,rgba(4,6,10,0.32)_50%,transparent_78%)] blur-2xl" />
 
-        <div className="max-w-6xl mx-auto space-y-6 sm:space-y-7 pointer-events-auto relative z-10">
+        <div className="max-w-6xl mx-auto space-y-5 sm:space-y-6 pointer-events-auto relative z-10">
+          {/* Systems Telemetry Coordinates HUD */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-none bg-black/40 border border-white/15 backdrop-blur-md font-mono text-[10.5px] sm:text-xs text-neutral-300 tracking-wider uppercase select-none mx-auto drop-shadow-md">
+            <span className="w-1.5 h-1.5 rounded-none bg-emerald-400 animate-pulse" />
+            <span>10.8231° N, 106.6297° E · LATENCY 24MS · ALL SYSTEMS NOMINAL</span>
+          </div>
+
           {/* SoraLabs Authentic Floating Eyebrow */}
-          <div className="text-xs sm:text-[13.5px] font-mono font-bold tracking-[0.24em] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] uppercase select-none">
+          <div className="text-xs sm:text-[13px] font-mono font-bold tracking-[0.24em] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] uppercase select-none">
             A SYSTEMS STUDIO
           </div>
 
@@ -289,7 +301,7 @@ export default function SoraPreviewPage() {
                 <div className="flex items-center gap-2">
                   <WipeButton
                     onClick={handlePrevSlide}
-                    className="w-8 h-8 rounded-[4px] flex items-center justify-center cursor-pointer text-sm font-mono"
+                    className="w-8 h-8 rounded-none flex items-center justify-center cursor-pointer text-sm font-mono"
                     wipeColor="#ffffff"
                     textColor="#ffffff"
                     hoverTextColor="#05070a"
@@ -299,7 +311,7 @@ export default function SoraPreviewPage() {
                   </WipeButton>
                   <WipeButton
                     onClick={handleNextSlide}
-                    className="w-8 h-8 rounded-[4px] flex items-center justify-center cursor-pointer text-sm font-mono"
+                    className="w-8 h-8 rounded-none flex items-center justify-center cursor-pointer text-sm font-mono"
                     wipeColor="#ffffff"
                     textColor="#ffffff"
                     hoverTextColor="#05070a"
@@ -308,7 +320,7 @@ export default function SoraPreviewPage() {
                     →
                   </WipeButton>
                 </div>
-                <div className="px-2.5 py-1 rounded bg-white/[0.06] text-xs font-mono font-bold text-neutral-200">
+                <div className="px-2.5 py-1 rounded-none bg-white/[0.06] text-xs font-mono font-bold text-neutral-200">
                   {CHAPTER_SLIDES[activeSlide].tag}
                 </div>
 
@@ -369,7 +381,7 @@ export default function SoraPreviewPage() {
             {/* Left 2 Cols: Section Label */}
             <div className="lg:col-span-2">
               <div className="flex items-center gap-2 text-sm sm:text-base font-bold text-neutral-200">
-                <span className="w-2.5 h-2.5 rounded-full bg-neutral-300" />
+                <span className="w-2.5 h-2.5 rounded-none bg-neutral-300" />
                 <span>Products</span>
               </div>
             </div>
@@ -402,7 +414,7 @@ export default function SoraPreviewPage() {
               {/* 3-Pillar Interactive Segmented Story Switcher */}
               <div className="space-y-4 border-y border-white/[0.08] py-5">
                 {/* Segmented Pill Switcher */}
-                <div className="flex items-center gap-1.5 p-1 rounded-lg bg-white/[0.04] border border-white/[0.08] w-fit">
+                <div className="flex items-center gap-1.5 p-1 rounded-none bg-white/[0.04] border border-white/[0.08] w-fit">
                   {[
                     { id: "problem", label: "Problem" },
                     { id: "approach", label: "Approach" },
@@ -414,14 +426,14 @@ export default function SoraPreviewPage() {
                         key={tab.id}
                         type="button"
                         onClick={() => setStoryTab0(tab.id as "problem" | "approach" | "outcome")}
-                        className={`relative px-3.5 py-1.5 rounded-[5px] text-xs font-mono font-bold tracking-wide transition-colors cursor-pointer select-none ${
+                        className={`relative px-3.5 py-1.5 rounded-none text-xs font-mono font-bold tracking-wide transition-colors cursor-pointer select-none ${
                           isActive ? "text-[#0a0a0c]" : "text-neutral-400 hover:text-white"
                         }`}
                       >
                         {isActive && (
                           <motion.div
                             layoutId="storyTabIndicator0"
-                            className="absolute inset-0 rounded-[5px] bg-white shadow-md"
+                            className="absolute inset-0 rounded-none bg-white shadow-md"
                             transition={{ type: "spring", bounce: 0.15, duration: 0.4 }}
                           />
                         )}
@@ -432,7 +444,7 @@ export default function SoraPreviewPage() {
                 </div>
 
                 {/* Active Narrative Card with Large Typography */}
-                <div className="min-h-[105px] sm:min-h-[120px] flex flex-col justify-center">
+                <div className="min-h-[85px] sm:min-h-[95px] flex flex-col justify-center">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={storyTab0}
@@ -440,29 +452,7 @@ export default function SoraPreviewPage() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -6 }}
                       transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                      className="space-y-2"
                     >
-                      <div className="flex items-center gap-2">
-                        {storyTab0 === "problem" && (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 text-[10.5px] font-mono font-bold uppercase tracking-wider">
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                            CORE CHALLENGE
-                          </span>
-                        )}
-                        {storyTab0 === "approach" && (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20 text-[10.5px] font-mono font-bold uppercase tracking-wider">
-                            <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-                            SYSTEM ARCHITECTURE
-                          </span>
-                        )}
-                        {storyTab0 === "outcome" && (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 text-[10.5px] font-mono font-bold uppercase tracking-wider">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                            VERIFIED IMPACT
-                          </span>
-                        )}
-                      </div>
-
                       <p className="text-base sm:text-[17.5px] lg:text-[18px] text-neutral-100 leading-[1.65] font-light">
                         {storyTab0 === "problem" && projects[0].content[lang].story.problem}
                         {storyTab0 === "approach" && projects[0].content[lang].story.approach}
@@ -478,7 +468,7 @@ export default function SoraPreviewPage() {
                 {projects[0].stack.map((item) => (
                   <span
                     key={item}
-                    className="sora-tag-pill px-3 py-1 rounded-[4px] text-xs sm:text-[13px] font-mono cursor-default"
+                    className="sora-tag-pill px-3 py-1 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
                   >
                     {item}
                   </span>
@@ -500,7 +490,7 @@ export default function SoraPreviewPage() {
                   wipeColor="#ffffff"
                   textColor="#d4d4d8"
                   hoverTextColor="#05070a"
-                  className="p-3.5 rounded-[4px] flex items-center justify-between cursor-pointer font-mono text-xs sm:text-[13px] shadow-sm bg-[#161619] border border-white/[0.08]"
+                  className="p-3.5 rounded-none flex items-center justify-between cursor-pointer font-mono text-xs sm:text-[13px] shadow-sm bg-[#161619] border border-white/[0.08]"
                 >
                   <span className="truncate">
                     curl -fsSL https://github.com/bnhminh1010/hostdeck/releases/latest/download/install.sh | bash
@@ -525,7 +515,7 @@ export default function SoraPreviewPage() {
                     wipeColor="#ffffff"
                     textColor="#ffffff"
                     hoverTextColor="#05070a"
-                    className="group px-4 py-2 rounded-[4px] flex items-center gap-2 bg-white/[0.06] border border-white/15 cursor-pointer active:scale-[0.95] transition-transform duration-150"
+                    className="group px-4 py-2 rounded-none flex items-center gap-2 bg-white/[0.06] border border-white/15 cursor-pointer active:scale-[0.95] transition-transform duration-150"
                   >
                     <span>Live Console</span>
                     <ArrowRoll size="sm" />
@@ -539,7 +529,7 @@ export default function SoraPreviewPage() {
                   wipeColor="#ffffff"
                   textColor="#ffffff"
                   hoverTextColor="#05070a"
-                  className="group px-4 py-2 rounded-[4px] flex items-center gap-2 bg-white/[0.06] border border-white/15 cursor-pointer active:scale-[0.95] transition-transform duration-150"
+                  className="group px-4 py-2 rounded-none flex items-center gap-2 bg-white/[0.06] border border-white/15 cursor-pointer active:scale-[0.95] transition-transform duration-150"
                 >
                   <span>Source Code</span>
                   <ArrowRoll size="sm" />
@@ -580,7 +570,7 @@ export default function SoraPreviewPage() {
               {/* 3-Pillar Interactive Segmented Story Switcher */}
               <div className="space-y-4 border-y border-white/[0.08] py-5">
                 {/* Segmented Pill Switcher */}
-                <div className="flex items-center gap-1.5 p-1 rounded-lg bg-white/[0.04] border border-white/[0.08] w-fit">
+                <div className="flex items-center gap-1.5 p-1 rounded-none bg-white/[0.04] border border-white/[0.08] w-fit">
                   {[
                     { id: "problem", label: "Problem" },
                     { id: "approach", label: "Approach" },
@@ -592,14 +582,14 @@ export default function SoraPreviewPage() {
                         key={tab.id}
                         type="button"
                         onClick={() => setStoryTab1(tab.id as "problem" | "approach" | "outcome")}
-                        className={`relative px-3.5 py-1.5 rounded-[5px] text-xs font-mono font-bold tracking-wide transition-colors cursor-pointer select-none ${
+                        className={`relative px-3.5 py-1.5 rounded-none text-xs font-mono font-bold tracking-wide transition-colors cursor-pointer select-none ${
                           isActive ? "text-[#0a0a0c]" : "text-neutral-400 hover:text-white"
                         }`}
                       >
                         {isActive && (
                           <motion.div
                             layoutId="storyTabIndicator1"
-                            className="absolute inset-0 rounded-[5px] bg-white shadow-md"
+                            className="absolute inset-0 rounded-none bg-white shadow-md"
                             transition={{ type: "spring", bounce: 0.15, duration: 0.4 }}
                           />
                         )}
@@ -610,7 +600,7 @@ export default function SoraPreviewPage() {
                 </div>
 
                 {/* Active Narrative Card with Large Typography */}
-                <div className="min-h-[105px] sm:min-h-[120px] flex flex-col justify-center">
+                <div className="min-h-[85px] sm:min-h-[95px] flex flex-col justify-center">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={storyTab1}
@@ -618,29 +608,7 @@ export default function SoraPreviewPage() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -6 }}
                       transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                      className="space-y-2"
                     >
-                      <div className="flex items-center gap-2">
-                        {storyTab1 === "problem" && (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 text-[10.5px] font-mono font-bold uppercase tracking-wider">
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                            CORE CHALLENGE
-                          </span>
-                        )}
-                        {storyTab1 === "approach" && (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20 text-[10.5px] font-mono font-bold uppercase tracking-wider">
-                            <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-                            SYSTEM ARCHITECTURE
-                          </span>
-                        )}
-                        {storyTab1 === "outcome" && (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 text-[10.5px] font-mono font-bold uppercase tracking-wider">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                            VERIFIED IMPACT
-                          </span>
-                        )}
-                      </div>
-
                       <p className="text-base sm:text-[17.5px] lg:text-[18px] text-neutral-100 leading-[1.65] font-light">
                         {storyTab1 === "problem" && projects[1].content[lang].story.problem}
                         {storyTab1 === "approach" && projects[1].content[lang].story.approach}
@@ -656,7 +624,7 @@ export default function SoraPreviewPage() {
                 {projects[1].stack.map((item) => (
                   <span
                     key={item}
-                    className="sora-tag-pill px-3 py-1 rounded-[4px] text-xs sm:text-[13px] font-mono cursor-default"
+                    className="sora-tag-pill px-3 py-1 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
                   >
                     {item}
                   </span>
@@ -674,7 +642,7 @@ export default function SoraPreviewPage() {
                   wipeColor="#ffffff"
                   textColor="#d4d4d8"
                   hoverTextColor="#05070a"
-                  className="p-3.5 rounded-[4px] flex items-center justify-between cursor-pointer font-mono text-xs sm:text-[13px] shadow-sm bg-[#161619] border border-white/[0.08]"
+                  className="p-3.5 rounded-none flex items-center justify-between cursor-pointer font-mono text-xs sm:text-[13px] shadow-sm bg-[#161619] border border-white/[0.08]"
                 >
                   <span className="truncate">docker compose up -d mysql backend</span>
                   {copiedCli === "docker compose up -d mysql backend" ? (
@@ -696,7 +664,7 @@ export default function SoraPreviewPage() {
                     wipeColor="#ffffff"
                     textColor="#ffffff"
                     hoverTextColor="#05070a"
-                    className="group px-4 py-2 rounded-[4px] flex items-center gap-2 bg-white/[0.06] border border-white/15 cursor-pointer active:scale-[0.95] transition-transform duration-150"
+                    className="group px-4 py-2 rounded-none flex items-center gap-2 bg-white/[0.06] border border-white/15 cursor-pointer active:scale-[0.95] transition-transform duration-150"
                   >
                     <span>Live Platform</span>
                     <ArrowRoll size="sm" />
@@ -710,7 +678,7 @@ export default function SoraPreviewPage() {
                   wipeColor="#ffffff"
                   textColor="#ffffff"
                   hoverTextColor="#05070a"
-                  className="group px-4 py-2 rounded-[4px] flex items-center gap-2 bg-white/[0.06] border border-white/15 cursor-pointer active:scale-[0.95] transition-transform duration-150"
+                  className="group px-4 py-2 rounded-none flex items-center gap-2 bg-white/[0.06] border border-white/15 cursor-pointer active:scale-[0.95] transition-transform duration-150"
                 >
                   <span>Source Code</span>
                   <ArrowRoll size="sm" />
@@ -728,7 +696,7 @@ export default function SoraPreviewPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
             <div className="lg:col-span-2">
               <div className="flex items-center gap-2 text-sm sm:text-base font-bold text-neutral-200">
-                <span className="w-2.5 h-2.5 rounded-full bg-neutral-300" />
+                <span className="w-2.5 h-2.5 rounded-none bg-neutral-300" />
                 <span>Experience</span>
               </div>
             </div>
@@ -782,7 +750,7 @@ export default function SoraPreviewPage() {
                   {[".NET 8", "CodeQL SAST", "SonarQube Gates", "CSRF Remediation", "Package Fixes", "FTP Secure Baseline"].map((tag) => (
                     <span
                       key={tag}
-                      className="sora-tag-pill px-3 py-1.5 rounded-[4px] text-xs sm:text-[13px] font-mono cursor-default"
+                      className="sora-tag-pill px-3 py-1.5 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
                     >
                       {tag}
                     </span>
@@ -796,7 +764,7 @@ export default function SoraPreviewPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-20 border-t border-white/[0.08]">
             <div className="lg:col-span-2">
               <div className="flex items-center gap-2 text-sm sm:text-base font-bold text-neutral-200">
-                <span className="w-2.5 h-2.5 rounded-full bg-neutral-300" />
+                <span className="w-2.5 h-2.5 rounded-none bg-neutral-300" />
                 <span>Education</span>
               </div>
             </div>
@@ -825,7 +793,7 @@ export default function SoraPreviewPage() {
                   {["GPA 3.24", "Software Engineering", "HUTECH 2022-2026", "English B1"].map((tag) => (
                     <span
                       key={tag}
-                      className="sora-tag-pill px-3 py-1 rounded-[4px] text-xs sm:text-[13px] font-mono cursor-default"
+                      className="sora-tag-pill px-3 py-1 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
                     >
                       {tag}
                     </span>
@@ -862,7 +830,7 @@ export default function SoraPreviewPage() {
                   {["IT Got Talent 2025", "Semifinalist", "Academic Scholarship", "DevOps Focus"].map((tag) => (
                     <span
                       key={tag}
-                      className="sora-tag-pill px-3 py-1 rounded-[4px] text-xs sm:text-[13px] font-mono cursor-default"
+                      className="sora-tag-pill px-3 py-1 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
                     >
                       {tag}
                     </span>
@@ -886,7 +854,7 @@ export default function SoraPreviewPage() {
               wipeColor="#ffffff"
               textColor="#ffffff"
               hoverTextColor="#05070a"
-              className="px-5 py-2.5 rounded-md flex items-center gap-2 text-sm sm:text-base font-bold bg-white/[0.05] border border-white/15 cursor-pointer"
+              className="px-5 py-2.5 rounded-none flex items-center gap-2 text-sm sm:text-base font-bold bg-white/[0.05] border border-white/15 cursor-pointer"
             >
               Browse Architecture Blueprint
             </WipeButton>
@@ -964,7 +932,7 @@ export default function SoraPreviewPage() {
               hoverTextColor="#ffffff"
               borderColor="#ffffff"
               hoverBorderColor="rgba(255, 255, 255, 0.4)"
-              className="group h-16 sm:h-20 inline-flex items-center justify-center gap-4 sm:gap-5 px-8 sm:px-12 rounded-[6px] text-xl sm:text-[26px] font-extrabold cursor-pointer shadow-2xl select-none bg-white border border-white active:scale-[0.94] transition-transform duration-150 leading-none"
+              className="group h-16 sm:h-20 inline-flex items-center justify-center gap-4 sm:gap-5 px-8 sm:px-12 rounded-none text-xl sm:text-[26px] font-extrabold cursor-pointer shadow-2xl select-none bg-white border border-white active:scale-[0.94] transition-transform duration-150 leading-none"
             >
               <ButtonTextRoll
                 text="Start a project"
@@ -984,7 +952,7 @@ export default function SoraPreviewPage() {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-14 items-start">
               {/* Col 1: Navigation Label */}
               <div className="md:col-span-2 flex items-start gap-2 text-sm font-bold text-neutral-300">
-                <span className="w-2.5 h-2.5 rounded-full bg-neutral-400 mt-1" />
+                <span className="w-2.5 h-2.5 rounded-none bg-neutral-400 mt-1" />
                 <span>Navigation</span>
               </div>
 
@@ -995,19 +963,9 @@ export default function SoraPreviewPage() {
                   wipeColor="#ffffff"
                   textColor="#ffffff"
                   hoverTextColor="#05070a"
-                  className="text-left px-3 py-1 -ml-3 rounded-lg cursor-pointer w-fit"
+                  className="text-left px-3 py-1 -ml-3 rounded-none cursor-pointer w-fit"
                 >
                   About
-                </WipeButton>
-                <WipeButton
-                  as="a"
-                  href="#work"
-                  wipeColor="#ffffff"
-                  textColor="#ffffff"
-                  hoverTextColor="#05070a"
-                  className="px-3 py-1 -ml-3 rounded-lg w-fit"
-                >
-                  Work
                 </WipeButton>
                 <WipeButton
                   as="a"
@@ -1015,9 +973,19 @@ export default function SoraPreviewPage() {
                   wipeColor="#ffffff"
                   textColor="#ffffff"
                   hoverTextColor="#05070a"
-                  className="px-3 py-1 -ml-3 rounded-lg w-fit"
+                  className="px-3 py-1 -ml-3 rounded-none w-fit"
                 >
                   Products
+                </WipeButton>
+                <WipeButton
+                  as="a"
+                  href="#work"
+                  wipeColor="#ffffff"
+                  textColor="#ffffff"
+                  hoverTextColor="#05070a"
+                  className="px-3 py-1 -ml-3 rounded-none w-fit"
+                >
+                  Work
                 </WipeButton>
                 <WipeButton
                   as="a"
@@ -1025,7 +993,7 @@ export default function SoraPreviewPage() {
                   wipeColor="#ffffff"
                   textColor="#ffffff"
                   hoverTextColor="#05070a"
-                  className="px-3 py-1 -ml-3 rounded-lg w-fit"
+                  className="px-3 py-1 -ml-3 rounded-none w-fit"
                 >
                   Contact
                 </WipeButton>
@@ -1046,7 +1014,7 @@ export default function SoraPreviewPage() {
                       wipeColor="#ffffff"
                       textColor="#ffffff"
                       hoverTextColor="#05070a"
-                      className="inline-block px-2.5 py-1 -ml-2.5 rounded font-mono font-bold text-sm"
+                      className="inline-block px-2.5 py-1 -ml-2.5 rounded-none font-mono font-bold text-sm"
                     >
                       bnhminh1010 / ops ↗
                     </WipeButton>
@@ -1058,7 +1026,7 @@ export default function SoraPreviewPage() {
                       wipeColor="#ffffff"
                       textColor="#ffffff"
                       hoverTextColor="#05070a"
-                      className="inline-block px-2.5 py-1 -ml-2.5 rounded font-mono text-sm"
+                      className="inline-block px-2.5 py-1 -ml-2.5 rounded-none font-mono text-sm"
                     >
                       ↳ {profile.email}
                     </WipeButton>
@@ -1092,7 +1060,7 @@ export default function SoraPreviewPage() {
                           textColor="#ffffff"
                           hoverTextColor="#05070a"
                           ariaLabel={`Ask ${platform.name} about Binh Minh and ThinkAI Studio`}
-                          className="w-9 h-9 rounded-[4px] flex items-center justify-center cursor-pointer select-none border border-white/15 bg-white/[0.04] shadow-md"
+                          className="w-9 h-9 rounded-none flex items-center justify-center cursor-pointer select-none border border-white/15 bg-white/[0.04] shadow-md"
                         >
                           <IconComponent className="w-4 h-4" />
                         </WipeButton>
@@ -1119,7 +1087,7 @@ export default function SoraPreviewPage() {
                     wipeColor="#ffffff"
                     textColor="#ffffff"
                     hoverTextColor="#05070a"
-                    className="inline-block px-2.5 py-1 -ml-2.5 rounded text-sm"
+                    className="inline-block px-2.5 py-1 -ml-2.5 rounded-none text-sm"
                   >
                     GitHub ↗
                   </WipeButton>
@@ -1133,7 +1101,7 @@ export default function SoraPreviewPage() {
                     wipeColor="#ffffff"
                     textColor="#ffffff"
                     hoverTextColor="#05070a"
-                    className="inline-block px-2.5 py-1 -ml-2.5 rounded text-sm"
+                    className="inline-block px-2.5 py-1 -ml-2.5 rounded-none text-sm"
                   >
                     LinkedIn ↗
                   </WipeButton>
@@ -1154,7 +1122,7 @@ export default function SoraPreviewPage() {
                   wipeColor="#ffffff"
                   textColor="#ffffff"
                   hoverTextColor="#05070a"
-                  className="px-2.5 py-1 rounded inline-block text-xs"
+                  className="px-2.5 py-1 rounded-none inline-block text-xs"
                 >
                   Back to top ↑
                 </WipeButton>{" "}
@@ -1186,14 +1154,27 @@ export default function SoraPreviewPage() {
           onTouchEnd={stopHolding}
           className="sora-ocean-interactive-zone relative w-full min-h-[13rem] sm:h-72 lg:h-80 bg-transparent border-t border-b border-white/[0.08] flex flex-col sm:flex-row items-center justify-center sm:justify-between px-4 sm:px-12 lg:px-20 xl:px-24 gap-4 py-8 sm:py-0 overflow-hidden"
         >
-          {/* Studio Brand Mark & Glyph with Glassmorphic Badge (Click to Reload) */}
+          {/* Studio Brand Mark & Glyph with Glassmorphic Badge (Click to Reload to Top) */}
           <button
             type="button"
-            onClick={() => window.location.reload()}
-            className="relative z-10 inline-flex items-center justify-center gap-2.5 sm:gap-3 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-[6px] bg-black/50 border border-white/20 backdrop-blur-md text-white font-bold text-xs sm:text-sm tracking-wider uppercase font-mono shadow-2xl pointer-events-auto cursor-pointer hover:bg-black/70 transition-all leading-none shrink-0"
-            aria-label="Reload website"
+            onClick={(e) => {
+              e.preventDefault();
+              if (typeof window !== "undefined") {
+                if ("scrollRestoration" in history) {
+                  history.scrollRestoration = "manual";
+                }
+                window.scrollTo(0, 0);
+                if (window.location.hash) {
+                  window.location.replace(window.location.pathname);
+                } else {
+                  window.location.reload();
+                }
+              }
+            }}
+            className="relative z-10 inline-flex items-center justify-center gap-2.5 sm:gap-3 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-none bg-black/50 border border-white/20 backdrop-blur-md text-white font-bold text-xs sm:text-sm tracking-wider uppercase font-mono shadow-2xl pointer-events-auto cursor-pointer hover:bg-black/70 transition-all leading-none shrink-0"
+            aria-label="Reload and return to top"
           >
-            <div className="relative w-5 h-5 sm:w-6 sm:h-6 rounded overflow-hidden shrink-0 flex items-center justify-center">
+            <div className="relative w-5 h-5 sm:w-6 sm:h-6 rounded-none overflow-hidden shrink-0 flex items-center justify-center">
               <Image
                 src="/images/thinkai_studio_logo.png"
                 alt="ThinkAI Studio"
@@ -1207,7 +1188,7 @@ export default function SoraPreviewPage() {
             </span>
           </button>
 
-          <div className="relative z-10 hidden md:inline-flex items-center justify-center px-4 py-2.5 rounded-[6px] bg-black/50 border border-white/20 backdrop-blur-md text-white font-mono text-xs sm:text-sm tracking-wide shadow-2xl leading-none pointer-events-none whitespace-nowrap">
+          <div className="relative z-10 hidden md:inline-flex items-center justify-center px-4 py-2.5 rounded-none bg-black/50 border border-white/20 backdrop-blur-md text-white font-mono text-xs sm:text-sm tracking-wide shadow-2xl leading-none pointer-events-none whitespace-nowrap">
             <span className="leading-none">『Reliable Infrastructure for Production.』</span>
           </div>
 
@@ -1251,10 +1232,17 @@ export default function SoraPreviewPage() {
                   />
                 </svg>
 
-                <span className="flex items-center gap-2">
-                  {isOceanHolding ? (
+                <span className="flex items-center gap-2 font-mono text-[11px] sm:text-xs">
+                  {holdProgress >= 100 || isEquilibrium ? (
                     <>
-                      <Sparkles className="w-3.5 h-3.5 text-white animate-spin" />
+                      <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span className="text-emerald-300 font-bold tracking-wide">
+                        EQUILIBRIUM REACHED · WAVES SURGING
+                      </span>
+                    </>
+                  ) : isOceanHolding ? (
+                    <>
+                      <Sparkles className="w-3.5 h-3.5 text-white animate-spin shrink-0" />
                       <span>STIRRING OCEAN TIDES {holdProgress}%</span>
                     </>
                   ) : (

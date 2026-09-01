@@ -212,11 +212,24 @@ export function ThreeHalftoneCanvas({ className = "" }: ThreeHalftoneCanvasProps
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleResize);
 
-    // 5. Render Loop (120 FPS capable)
+    // 5. Render Loop (120 FPS capable with battery & tab-switch GPU pause)
     let animationId: number;
+    let isPaused = false;
     const clock = new THREE.Clock();
 
+    const handleVisibilityChange = () => {
+      isPaused = document.hidden;
+      if (!isPaused) {
+        clock.getDelta(); // Reset clock delta to avoid sudden time jump
+        animationId = requestAnimationFrame(animate);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     const animate = () => {
+      if (isPaused || document.hidden) return;
+
       if (prefersReduced) {
         renderer.render(scene, camera);
         return;
@@ -238,6 +251,7 @@ export function ThreeHalftoneCanvas({ className = "" }: ThreeHalftoneCanvasProps
 
     return () => {
       cancelAnimationFrame(animationId);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);

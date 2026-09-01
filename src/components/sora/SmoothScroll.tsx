@@ -24,6 +24,7 @@ export function SmoothScroll({ isLocked = false }: SmoothScrollProps) {
     });
 
     lenisRef.current = lenis;
+    (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
 
     // High-performance RAF loop matching 120Hz / 144Hz / 240Hz display refresh rates
     let rafId: number;
@@ -40,10 +41,19 @@ export function SmoothScroll({ isLocked = false }: SmoothScrollProps) {
       if (!anchor) return;
 
       const href = anchor.getAttribute("href");
-      if (href && href.startsWith("#") && href.length > 1) {
-        e.preventDefault();
+      if (href && href.startsWith("#")) {
+        if (href === "#" || href === "#top") {
+          e.preventDefault();
+          lenis.scrollTo(0, {
+            offset: 0,
+            duration: 1.2,
+            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          });
+          return;
+        }
         const targetElement = document.querySelector(href);
         if (targetElement) {
+          e.preventDefault();
           lenis.scrollTo(targetElement as HTMLElement, {
             offset: 0,
             duration: 1.2,
@@ -60,6 +70,7 @@ export function SmoothScroll({ isLocked = false }: SmoothScrollProps) {
       cancelAnimationFrame(rafId);
       lenis.destroy();
       lenisRef.current = null;
+      (window as unknown as { __lenis?: Lenis | null }).__lenis = null;
     };
   }, []);
 

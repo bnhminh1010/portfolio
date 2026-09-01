@@ -52,6 +52,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={barlowCondensed.variable} data-theme="dark">
       <body>
+        <div className="sora-grain-overlay" aria-hidden="true" />
         <ThemeProvider>
           <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>

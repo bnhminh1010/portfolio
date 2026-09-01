@@ -303,7 +303,7 @@ export function TerminalDrawer({ isOpen, onClose, lang }: TerminalDrawerProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className={`w-full bg-[#0c0c0e] border border-white/[0.12] rounded-xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300 cursor-default ${
+            className={`w-full bg-[#0c0c0e] border border-white/[0.12] rounded-none shadow-2xl flex flex-col overflow-hidden transition-all duration-300 cursor-default ${
               isMaximized ? "h-[94vh] max-w-7xl" : "h-[620px] max-w-3xl"
             }`}
           >
@@ -312,15 +312,15 @@ export function TerminalDrawer({ isOpen, onClose, lang }: TerminalDrawerProps) {
               <div className="flex items-center gap-2">
                 <button
                   onClick={onClose}
-                  className="w-3 h-3 rounded-full bg-rose-500/80 hover:bg-rose-500 transition-colors flex items-center justify-center group"
+                  className="w-3 h-3 rounded-none bg-rose-500/80 hover:bg-rose-500 transition-colors flex items-center justify-center group"
                   title="Close"
                 >
                   <X className="w-2 h-2 text-black opacity-0 group-hover:opacity-100" />
                 </button>
-                <div className="w-3 h-3 rounded-full bg-amber-500/80" />
+                <div className="w-3 h-3 rounded-none bg-amber-500/80" />
                 <button
                   onClick={() => setIsMaximized(!isMaximized)}
-                  className="w-3 h-3 rounded-full bg-emerald-500/80 hover:bg-emerald-500 transition-colors flex items-center justify-center group"
+                  className="w-3 h-3 rounded-none bg-emerald-500/80 hover:bg-emerald-500 transition-colors flex items-center justify-center group"
                   title={isMaximized ? "Restore" : "Maximize"}
                 >
                   {isMaximized ? (

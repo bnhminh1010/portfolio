@@ -129,7 +129,7 @@ export function ProjectSequence({ projects, lang, text, onOpenArch }: ProjectSeq
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border-b border-white/[0.08] pb-6">
         {/* Left: Section Label */}
         <div className="lg:col-span-2 flex items-center gap-2 text-sm font-medium text-neutral-400">
-          <span className="w-2.5 h-2.5 rounded-full bg-neutral-400" />
+          <span className="w-2.5 h-2.5 rounded-none bg-neutral-400" />
           <span className="font-mono text-xs uppercase tracking-widest text-neutral-300">Products</span>
         </div>
 
@@ -148,7 +148,7 @@ export function ProjectSequence({ projects, lang, text, onOpenArch }: ProjectSeq
         {/* Right: Progress Bar & Next/Prev Controls */}
         <div className="lg:col-span-3 flex items-center justify-between lg:justify-end gap-4">
           {/* Progress Bar (Paused on hover) */}
-          <div className="flex-1 lg:w-28 h-1 bg-white/[0.08] rounded-full overflow-hidden relative">
+          <div className="flex-1 lg:w-28 h-1 bg-white/[0.08] rounded-none overflow-hidden relative">
             <motion.div
               className="h-full bg-white transition-all duration-75"
               style={{ width: `${progress}%` }}
@@ -159,14 +159,14 @@ export function ProjectSequence({ projects, lang, text, onOpenArch }: ProjectSeq
             <button
               onClick={handlePrev}
               aria-label="Previous project"
-              className="w-9 h-9 flex items-center justify-center rounded-full border border-white/[0.1] text-neutral-300 hover:text-white hover:bg-white/[0.08] hover:border-white/20 transition-all cursor-pointer"
+              className="w-9 h-9 flex items-center justify-center rounded-none border border-white/[0.1] text-neutral-300 hover:text-white hover:bg-white/[0.08] hover:border-white/20 transition-all cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
             <button
               onClick={handleNext}
               aria-label="Next project"
-              className="w-9 h-9 flex items-center justify-center rounded-full border border-white/[0.1] text-neutral-300 hover:text-white hover:bg-white/[0.08] hover:border-white/20 transition-all cursor-pointer"
+              className="w-9 h-9 flex items-center justify-center rounded-none border border-white/[0.1] text-neutral-300 hover:text-white hover:bg-white/[0.08] hover:border-white/20 transition-all cursor-pointer"
             >
               <ArrowRight className="w-4 h-4" />
             </button>

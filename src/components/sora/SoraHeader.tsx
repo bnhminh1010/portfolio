@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useAnimate } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { WipeButton } from "./WipeButton";
 import { ButtonTextRoll } from "./ButtonTextRoll";
@@ -14,71 +14,6 @@ interface SoraHeaderProps {
 }
 
 const LUXURY_EASE = [0.16, 1, 0.3, 1] as const;
-
-function SlideThroughNavButton({
-  children,
-  onClick,
-  href,
-}: {
-  children: React.ReactNode;
-  onClick?: () => void;
-  href?: string;
-}) {
-  const [scope, animate] = useAnimate();
-
-  const handleMouseEnter = () => {
-    // Slide in from left (-102%) to center (0%) and hold while hovered
-    animate(
-      ".slide-box",
-      { x: ["-102%", "0%"] },
-      { duration: 0.35, ease: LUXURY_EASE }
-    );
-  };
-
-  const handleMouseLeave = async () => {
-    // Continue sliding all the way through to the right (102%) on mouse exit
-    await animate(
-      ".slide-box",
-      { x: "102%" },
-      { duration: 0.35, ease: LUXURY_EASE }
-    );
-    // Instantly reset back to offscreen left (-102%) with zero transition
-    animate(".slide-box", { x: "-102%" }, { duration: 0 });
-  };
-
-  const content = (
-    <>
-      {/* Sliding Through Frosted Glass Box Layer */}
-      <div className="slide-box absolute inset-0 rounded-[5px] bg-white/[0.14] border border-white/25 backdrop-blur-md pointer-events-none -translate-x-[102%]" />
-      {/* Foreground Text */}
-      <span className="relative z-10 text-white/90 group-hover:text-white transition-colors duration-200 block drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] select-none">
-        {children}
-      </span>
-    </>
-  );
-
-  const sharedProps = {
-    ref: scope,
-    onMouseEnter: handleMouseEnter,
-    onMouseLeave: handleMouseLeave,
-    className:
-      "group relative overflow-hidden px-3.5 py-1.5 rounded-[5px] text-sm sm:text-[15px] font-medium tracking-tight transition-transform active:scale-[0.96] flex items-center justify-center cursor-pointer select-none leading-none",
-  };
-
-  if (href) {
-    return (
-      <a href={href} {...sharedProps}>
-        {content}
-      </a>
-    );
-  }
-
-  return (
-    <button type="button" onClick={onClick} {...sharedProps}>
-      {content}
-    </button>
-  );
-}
 
 export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
   const [isHeaderHidden, setIsHeaderHidden] = useState(false);
@@ -127,7 +62,18 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
 
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.location.reload();
+    setIsMobileMenuOpen(false);
+    if (typeof window !== "undefined") {
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+      if (window.location.hash) {
+        window.location.replace(window.location.pathname);
+      } else {
+        window.location.reload();
+      }
+    }
   };
 
   return (
@@ -172,24 +118,59 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
           </div>
         </button>
 
-        {/* Center: Floating Navigation Links with Left-to-Right Through-Sliding Box Motion */}
+        {/* Center: Floating Navigation Links with Signature Directional Wipe Motion */}
         <nav
           className={`hidden sm:flex items-center gap-1.5 lg:gap-2.5 ${
             isHeaderHidden ? "pointer-events-none" : "pointer-events-auto"
           }`}
         >
-          <SlideThroughNavButton onClick={onOpenAbout}>
+          <WipeButton
+            onClick={onOpenAbout}
+            wipeColor="#1e2026"
+            textColor="#ffffff"
+            hoverTextColor="#ffffff"
+            borderColor="transparent"
+            hoverBorderColor="transparent"
+            className="group h-8.5 sm:h-9 inline-flex items-center justify-center px-3.5 sm:px-4 rounded-none text-sm sm:text-[15px] font-bold tracking-tight cursor-pointer select-none bg-transparent border-0 active:scale-[0.96] transition-transform duration-150 leading-none shadow-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
+          >
             About
-          </SlideThroughNavButton>
-          <SlideThroughNavButton href="#work">
-            Work
-          </SlideThroughNavButton>
-          <SlideThroughNavButton href="#products">
+          </WipeButton>
+          <WipeButton
+            as="a"
+            href="#products"
+            wipeColor="#1e2026"
+            textColor="#ffffff"
+            hoverTextColor="#ffffff"
+            borderColor="transparent"
+            hoverBorderColor="transparent"
+            className="group h-8.5 sm:h-9 inline-flex items-center justify-center px-3.5 sm:px-4 rounded-none text-sm sm:text-[15px] font-bold tracking-tight cursor-pointer select-none bg-transparent border-0 active:scale-[0.96] transition-transform duration-150 leading-none shadow-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
+          >
             Products
-          </SlideThroughNavButton>
-          <SlideThroughNavButton href="#contact">
+          </WipeButton>
+          <WipeButton
+            as="a"
+            href="#work"
+            wipeColor="#1e2026"
+            textColor="#ffffff"
+            hoverTextColor="#ffffff"
+            borderColor="transparent"
+            hoverBorderColor="transparent"
+            className="group h-8.5 sm:h-9 inline-flex items-center justify-center px-3.5 sm:px-4 rounded-none text-sm sm:text-[15px] font-bold tracking-tight cursor-pointer select-none bg-transparent border-0 active:scale-[0.96] transition-transform duration-150 leading-none shadow-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
+          >
+            Work
+          </WipeButton>
+          <WipeButton
+            as="a"
+            href="#contact"
+            wipeColor="#1e2026"
+            textColor="#ffffff"
+            hoverTextColor="#ffffff"
+            borderColor="transparent"
+            hoverBorderColor="transparent"
+            className="group h-8.5 sm:h-9 inline-flex items-center justify-center px-3.5 sm:px-4 rounded-none text-sm sm:text-[15px] font-bold tracking-tight cursor-pointer select-none bg-transparent border-0 active:scale-[0.96] transition-transform duration-150 leading-none shadow-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
+          >
             Contact
-          </SlideThroughNavButton>
+          </WipeButton>
         </nav>
 
         {/* Right: Start a project Button + Mobile Close / Menu Toggle */}
@@ -205,7 +186,7 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
             hoverTextColor="#ffffff"
             borderColor="#ffffff"
             hoverBorderColor="rgba(255, 255, 255, 0.4)"
-            className="group h-8.5 sm:h-9.5 inline-flex items-center justify-center gap-2 sm:gap-2.5 px-3 sm:px-4 rounded-[4px] text-xs sm:text-[13.5px] font-bold cursor-pointer shadow-lg select-none bg-white border border-white active:scale-[0.94] transition-transform duration-150 leading-none shrink-0"
+            className="group h-8.5 sm:h-9.5 inline-flex items-center justify-center gap-2 sm:gap-2.5 px-3 sm:px-4 rounded-none text-xs sm:text-[13.5px] font-bold cursor-pointer shadow-lg select-none bg-white border border-white active:scale-[0.94] transition-transform duration-150 leading-none shrink-0"
           >
             <ButtonTextRoll
               text="Start a project"
@@ -271,8 +252,8 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
             >
               {[
                 { label: "About", action: () => onOpenAbout() },
-                { label: "Work", action: () => handleNavClick("work") },
                 { label: "Products", action: () => handleNavClick("products") },
+                { label: "Work", action: () => handleNavClick("work") },
                 { label: "Contact", action: () => handleNavClick("contact") },
               ].map((item) => (
                 <motion.div
@@ -315,10 +296,10 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
                 href="https://hostdeck.thinkai.id.vn"
                 target="_blank"
                 rel="noreferrer"
-                className="p-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-between gap-3 group hover:bg-white/[0.08] transition-all"
+                className="p-3.5 rounded-none bg-white/[0.04] border border-white/[0.08] flex items-center justify-between gap-3 group hover:bg-white/[0.08] transition-all"
               >
                 <div className="flex items-center gap-3 overflow-hidden">
-                  <div className="relative w-12 h-10 rounded-lg overflow-hidden border border-white/10 shrink-0 bg-[#161619]">
+                  <div className="relative w-12 h-10 rounded-none overflow-hidden border border-white/10 shrink-0 bg-[#161619]">
                     <Image
                       src="/images/products/hostdeck-screen.png"
                       alt="HostDeck Console"
@@ -343,8 +324,8 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
             {/* Bottom Grab Bar Handle Icon matching Sora */}
             <div className="flex justify-center items-center py-2">
               <div className="flex flex-col gap-1 items-center">
-                <div className="w-8 h-[2px] rounded-full bg-neutral-600/80" />
-                <div className="w-8 h-[2px] rounded-full bg-neutral-600/80" />
+                <div className="w-8 h-[2px] rounded-none bg-neutral-600/80" />
+                <div className="w-8 h-[2px] rounded-none bg-neutral-600/80" />
               </div>
             </div>
           </motion.div>
