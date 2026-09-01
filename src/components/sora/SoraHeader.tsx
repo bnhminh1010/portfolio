@@ -106,7 +106,7 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
           </div>
         </button>
 
-        {/* Center: Pure Floating Navigation Links (No Pill Container) */}
+        {/* Center: Pure Floating Navigation Links with Text Roll Motion */}
         <nav
           className={`hidden sm:flex items-center gap-7 lg:gap-9 ${
             isHeaderHidden ? "pointer-events-none" : "pointer-events-auto"
@@ -114,27 +114,39 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
         >
           <button
             onClick={onOpenAbout}
-            className="text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
+            className="group text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
           >
-            About
+            <ButtonTextRoll
+              text="About"
+              className="font-medium text-sm sm:text-[15px] tracking-tight leading-none"
+            />
           </button>
           <a
             href="#work"
-            className="text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
+            className="group text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
           >
-            Work
+            <ButtonTextRoll
+              text="Work"
+              className="font-medium text-sm sm:text-[15px] tracking-tight leading-none"
+            />
           </a>
           <a
             href="#products"
-            className="text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
+            className="group text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
           >
-            Products
+            <ButtonTextRoll
+              text="Products"
+              className="font-medium text-sm sm:text-[15px] tracking-tight leading-none"
+            />
           </a>
           <a
             href="#contact"
-            className="text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
+            className="group text-white/90 hover:text-white font-medium text-sm sm:text-[15px] tracking-tight transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] cursor-pointer"
           >
-            Contact
+            <ButtonTextRoll
+              text="Contact"
+              className="font-medium text-sm sm:text-[15px] tracking-tight leading-none"
+            />
           </a>
         </nav>
 
