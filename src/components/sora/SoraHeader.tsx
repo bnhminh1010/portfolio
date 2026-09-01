@@ -192,57 +192,92 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
         </div>
       </motion.header>
 
-      {/* ─── REFINED FROSTED MOBILE NAVIGATION SHEET (Clean Slide-Down Panel) ─── */}
+      {/* ─── REFINED LUXURY MOBILE NAVIGATION SHEET (SoraLabs Studio Style) ─── */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.35, ease: LUXURY_EASE }}
-            className="fixed inset-x-0 top-[66px] z-40 bg-[#0c0c0e]/94 backdrop-blur-3xl border-b border-white/15 px-6 pt-6 pb-8 sm:hidden shadow-[0_20px_50px_rgba(0,0,0,0.85)] max-h-[82vh] overflow-y-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: LUXURY_EASE }}
+            className="fixed inset-0 z-40 bg-[#08080a]/95 backdrop-blur-3xl px-6 pt-28 pb-10 sm:hidden flex flex-col justify-between overflow-y-auto"
           >
-            {/* Giant Vertical Navigation Links */}
-            <div className="flex flex-col gap-4 font-bold text-3xl tracking-tight text-white">
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  onOpenAbout();
-                }}
-                className="text-left py-1 hover:text-neutral-300 transition-colors w-fit cursor-pointer"
-              >
-                About
-              </button>
-              <button
-                onClick={() => handleNavClick("work")}
-                className="text-left py-1 hover:text-neutral-300 transition-colors w-fit cursor-pointer"
-              >
-                Work
-              </button>
-              <button
-                onClick={() => handleNavClick("products")}
-                className="text-left py-1 hover:text-neutral-300 transition-colors w-fit cursor-pointer"
-              >
-                Products
-              </button>
-              <button
-                onClick={() => handleNavClick("contact")}
-                className="text-left py-1 hover:text-neutral-300 transition-colors w-fit cursor-pointer"
-              >
-                Contact
-              </button>
-            </div>
+            {/* Giant Vertical Navigation Links with Luxury Staggered Slide-Up */}
+            <motion.div
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={{
+                open: {
+                  transition: {
+                    staggerChildren: 0.08,
+                    delayChildren: 0.08,
+                  },
+                },
+                closed: {
+                  transition: {
+                    staggerChildren: 0.04,
+                    staggerDirection: -1,
+                  },
+                },
+              }}
+              className="flex flex-col gap-5 text-4xl font-bold tracking-tight text-white pt-2"
+            >
+              {[
+                { label: "About", action: () => onOpenAbout() },
+                { label: "Work", action: () => handleNavClick("work") },
+                { label: "Products", action: () => handleNavClick("products") },
+                { label: "Contact", action: () => handleNavClick("contact") },
+              ].map((item, idx) => (
+                <motion.div
+                  key={item.label}
+                  variants={{
+                    open: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 0.5, ease: LUXURY_EASE },
+                    },
+                    closed: {
+                      opacity: 0,
+                      y: 24,
+                      transition: { duration: 0.25, ease: LUXURY_EASE },
+                    },
+                  }}
+                >
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      item.action();
+                    }}
+                    className="w-full text-left py-2 flex items-center justify-between group active:scale-[0.98] transition-transform cursor-pointer border-b border-white/[0.06] pb-4"
+                  >
+                    <span className="group-hover:text-neutral-300 transition-colors">
+                      {item.label}
+                    </span>
+                    <span className="text-xs font-mono font-medium text-neutral-500 group-hover:text-white transition-colors">
+                      0{idx + 1}
+                    </span>
+                  </button>
+                </motion.div>
+              ))}
+            </motion.div>
 
             {/* Bottom Featured Live Product Callout Card */}
-            <div className="pt-6 mt-4 border-t border-white/[0.08]">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 15 }}
+              transition={{ duration: 0.5, delay: 0.32, ease: LUXURY_EASE }}
+              className="pt-6 border-t border-white/[0.08] mt-8"
+            >
               <a
                 href="https://hostdeck.thinkai.id.vn"
                 target="_blank"
                 rel="noreferrer"
-                className="p-3.5 rounded-lg bg-white/[0.04] border border-white/[0.1] flex items-center justify-between gap-3 group hover:bg-white/[0.08] transition-all"
+                className="p-4 rounded-xl bg-white/[0.04] border border-white/[0.1] flex items-center justify-between gap-3 group hover:bg-white/[0.08] transition-all"
               >
-                <div className="flex items-center gap-3 overflow-hidden">
-                  <div className="relative w-12 h-9 rounded overflow-hidden border border-white/10 shrink-0 bg-[#161619]">
+                <div className="flex items-center gap-3.5 overflow-hidden">
+                  <div className="relative w-12 h-10 rounded-lg overflow-hidden border border-white/10 shrink-0 bg-[#161619]">
                     <Image
                       src="/images/products/hostdeck-screen.png"
                       alt="HostDeck Console"
@@ -262,7 +297,7 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
                 </div>
                 <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-white shrink-0 transition-colors" />
               </a>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
