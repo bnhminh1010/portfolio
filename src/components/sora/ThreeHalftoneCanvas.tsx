@@ -100,16 +100,13 @@ export function ThreeHalftoneCanvas({ className = "" }: ThreeHalftoneCanvasProps
         return mat2(c, -s, s, c) * v;
       }
 
-      // Rotated 45-degree halftone print screen with distinct grey dots
+      // Rotated 45-degree halftone print screen
       vec3 applyRotatedHalftone(vec3 color, vec2 fragCoord, float spacing, float dotSize, float darkness) {
         vec2 rotCoord = rotate2D(fragCoord, 0.785398);
         vec2 cell = fract(rotCoord / spacing) - 0.5;
         float dist = length(cell);
-        // Anti-aliased clean dot boundary
         float mask = 1.0 - smoothstep(dotSize - 0.05, dotSize + 0.05, dist);
-        // Distinct charcoal-grey dot tone
-        vec3 dotGrey = vec3(0.015, 0.025, 0.038);
-        return mix(color, dotGrey, mask * darkness);
+        return mix(color, vec3(0.012, 0.022, 0.032), mask * darkness);
       }
 
       void main() {
@@ -119,48 +116,47 @@ export function ThreeHalftoneCanvas({ className = "" }: ThreeHalftoneCanvasProps
         vec2 p = st;
         p.x *= aspect;
 
-        // Dynamic Wave & Caustic Velocity
+        // 1.5x Dynamic Wave & Caustic Velocity
         float scrollOffset = u_scroll * 1.5;
-        float speed = 0.18 + u_stir * 0.08;
+        float speed = 0.19 + u_stir * 0.08; // Subtle, elegant flow acceleration
         float t = u_time * speed + scrollOffset * 0.2;
 
-        // Interactive Water Ripple
+        // Interactive Subtle Water Ripple (Localized around cursor, no giant blowout)
         vec2 stirOrigin = u_stir_pos;
         stirOrigin.x *= aspect;
         float distToStir = distance(p, stirOrigin);
         float stirWave = sin(distToStir * 44.0 - u_time * 6.5) * exp(-distToStir * 11.5) * u_stir * 0.10;
 
-        // Softly blurred gentle ocean wave undulations
+        // Gentle ocean wave undulations (1.5x velocity)
         vec2 waveUv = rotate2D(p, 0.38);
-        float w1 = sin(waveUv.x * 2.4 + waveUv.y * 1.1 + t * 1.05 + stirWave);
-        float w2 = sin(waveUv.x * 4.8 - waveUv.y * 2.0 - t * 0.85);
+        float w1 = sin(waveUv.x * 2.6 + waveUv.y * 1.2 + t * 1.05 + stirWave);
+        float w2 = sin(waveUv.x * 5.4 - waveUv.y * 2.2 - t * 0.85);
         float wave = w1 * 0.6 + w2 * 0.4;
 
-        // Soft blurred multi-octave water caustic mesh
-        vec2 cCoord = p * 3.6 + vec2(t * 0.22, t * 0.15) + stirWave * 0.30;
-        float n1 = snoise(cCoord);
-        float n2 = snoise(cCoord * 1.6 - vec2(t * 0.16));
-        float n3 = snoise(cCoord * 0.8 + vec2(t * 0.12));
-        float caustics = smoothstep(0.12, 0.88, (n1 * 0.5 + n2 * 0.3 + n3 * 0.2) * 0.5 + 0.5);
+        // Procedural Voronoi-like water caustic mesh
+        vec2 cCoord = p * 4.2 + vec2(t * 0.27, t * 0.18) + stirWave * 0.35;
+        float c1 = abs(snoise(cCoord));
+        float c2 = abs(snoise(cCoord * 1.8 - vec2(t * 0.21)));
+        float caustics = pow(1.0 - (c1 * 0.6 + c2 * 0.4), 2.2);
 
-        // Localized shimmer around cursor
+        // Subtle localized caustic shimmer around cursor
         caustics += u_stir * exp(-distToStir * 12.0) * 0.22;
 
         // Venetian Adriatic Emerald Color Palette
-        vec3 cAdriaticDeep  = vec3(0.035, 0.12, 0.20);
-        vec3 cEmeraldLagoon = vec3(0.10, 0.42, 0.46);
-        vec3 cSapphireBlue  = vec3(0.14, 0.48, 0.68);
-        vec3 cCrystalAqua   = vec3(0.28, 0.64, 0.74);
-        vec3 cSunlightFoam  = vec3(0.48, 0.80, 0.88);
+        vec3 cAdriaticDeep  = vec3(0.04, 0.14, 0.22);
+        vec3 cEmeraldLagoon = vec3(0.12, 0.46, 0.48);
+        vec3 cSapphireBlue  = vec3(0.16, 0.52, 0.72);
+        vec3 cCrystalAqua   = vec3(0.32, 0.68, 0.76);
+        vec3 cSunlightFoam  = vec3(0.55, 0.85, 0.90);
 
         vec3 col = cAdriaticDeep;
-        col = mix(col, cEmeraldLagoon, smoothstep(-0.4, 0.4, wave) * 0.88);
-        col = mix(col, cSapphireBlue, smoothstep(0.1, 0.7, caustics) * 0.82);
-        col = mix(col, cCrystalAqua, caustics * 0.70);
-        col = mix(col, cSunlightFoam, pow(caustics, 2.8) * 0.50);
+        col = mix(col, cEmeraldLagoon, smoothstep(-0.35, 0.35, wave) * 0.92);
+        col = mix(col, cSapphireBlue, smoothstep(0.0, 0.65, caustics) * 0.88);
+        col = mix(col, cCrystalAqua, caustics * 0.78);
+        col = mix(col, cSunlightFoam, pow(smoothstep(0.45, 0.90, wave + caustics * 0.45), 2.8) * 0.65);
 
-        // Apply Rotated Halftone Print Screen (Clearly visible grey micro-dots)
-        col = applyRotatedHalftone(col, gl_FragCoord.xy, 6.2, 0.22, 0.55);
+        // Apply Rotated Halftone Print Screen
+        col = applyRotatedHalftone(col, gl_FragCoord.xy, 6.5, 0.23, 0.70);
 
         gl_FragColor = vec4(col, 1.0);
       }
@@ -258,17 +254,9 @@ export function ThreeHalftoneCanvas({ className = "" }: ThreeHalftoneCanvasProps
 
   return (
     <div
+      ref={containerRef}
       className={`fixed inset-0 pointer-events-none ${className}`}
       style={{ zIndex: 0 }}
-    >
-      <div ref={containerRef} className="absolute inset-0" />
-      {/* Subtle atmospheric vignette (without CSS blur so grey halftone dots stay clearly visible) */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse at 50% 40%, rgba(10,14,20,0.02) 0%, rgba(6,8,12,0.30) 100%)",
-        }}
-      />
-    </div>
+    />
   );
 }
