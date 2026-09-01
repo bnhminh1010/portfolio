@@ -84,13 +84,13 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
                 transition: { duration: 0.45, ease: LUXURY_EASE },
               }
         }
-        className="fixed top-0 inset-x-0 z-50 bg-transparent px-5 sm:px-10 lg:px-14 py-4 sm:py-5 flex items-center justify-between pointer-events-none"
+        className="fixed top-0 inset-x-0 z-50 bg-transparent px-3 sm:px-10 lg:px-14 py-3 sm:py-5 flex items-center justify-between pointer-events-none"
       >
         {/* Left: ThinkAI Studio Logo Mark (Click to Reload Entire Web) */}
         <button
           type="button"
           onClick={handleLogoClick}
-          className={`h-10 inline-flex items-center justify-center gap-2.5 group cursor-pointer px-3.5 rounded-[6px] bg-black/50 border border-white/20 backdrop-blur-md hover:bg-black/70 transition-all shadow-xl leading-none ${
+          className={`h-10 inline-flex items-center justify-center gap-2 sm:gap-2.5 group cursor-pointer px-2.5 sm:px-3.5 rounded-[6px] bg-black/50 border border-white/20 backdrop-blur-md hover:bg-black/70 transition-all shadow-xl leading-none shrink-0 ${
             isHeaderHidden && !isMobileMenuOpen ? "pointer-events-none" : "pointer-events-auto"
           }`}
           aria-label="Reload ThinkAI Studio Website"
@@ -104,7 +104,7 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
               className="object-contain invert group-hover:scale-105 transition-transform"
             />
           </div>
-          <span className="text-white font-bold font-mono text-xs tracking-wider uppercase drop-shadow inline-flex items-center leading-none select-none">
+          <span className="text-white font-bold font-mono text-[11px] sm:text-xs tracking-wider uppercase drop-shadow inline-flex items-center leading-none select-none whitespace-nowrap">
             ThinkAI Studio
           </span>
         </button>
@@ -169,7 +169,7 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
             hoverTextColor="#ffffff"
             borderColor="#ffffff"
             hoverBorderColor="rgba(255, 255, 255, 0.4)"
-            className="group h-10 inline-flex items-center justify-center gap-2.5 px-4 sm:px-5 rounded-[6px] text-xs sm:text-[15.5px] font-extrabold cursor-pointer shadow-xl select-none bg-white border border-white active:scale-[0.93] transition-transform duration-150 leading-none"
+            className="group h-10 inline-flex items-center justify-center gap-2 sm:gap-2.5 px-3 sm:px-5 rounded-[6px] text-xs sm:text-[15.5px] font-extrabold cursor-pointer shadow-xl select-none bg-white border border-white active:scale-[0.93] transition-transform duration-150 leading-none shrink-0"
           >
             <ButtonTextRoll
               text="Start a project"
@@ -181,7 +181,7 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="h-10 sm:hidden inline-flex items-center justify-center px-3.5 rounded-[6px] text-xs font-mono font-bold text-white bg-black/50 hover:bg-black/70 border border-white/20 backdrop-blur-md transition-colors cursor-pointer shadow-xl leading-none"
+            className="h-10 sm:hidden inline-flex items-center justify-center px-2.5 sm:px-3.5 rounded-[6px] text-xs font-mono font-bold text-white bg-black/50 hover:bg-black/70 border border-white/20 backdrop-blur-md transition-colors cursor-pointer shadow-xl leading-none shrink-0"
             aria-label="Toggle navigation menu"
           >
             <ButtonTextRoll

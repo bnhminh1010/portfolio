@@ -22,13 +22,14 @@ export const metadata: Metadata = {
   description: "ThinkAI Studio: Reliable infrastructure as code, rootless container orchestration, and continuous GitOps delivery platforms.",
   icons: {
     icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/icon.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png?v=20260902", sizes: "512x512", type: "image/png" },
+      { url: "/icon.svg?v=20260902", type: "image/svg+xml" },
+      { url: "/favicon.ico?v=20260902", sizes: "any" },
     ],
     apple: [
-      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-icon.png?v=20260902", sizes: "180x180", type: "image/png" },
     ],
+    shortcut: ["/favicon.ico?v=20260902"],
   },
   openGraph: {
     title: "ThinkAI Studio",

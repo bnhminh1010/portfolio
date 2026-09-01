@@ -267,8 +267,8 @@ export default function SoraPreviewPage() {
           </div>
 
           {/* High-Contrast Subline Badge */}
-          <div className="inline-flex items-center justify-center px-5 py-2.5 rounded-[4px] bg-black/50 border border-white/20 backdrop-blur-md text-xs sm:text-sm font-mono font-bold tracking-[0.2em] text-white shadow-2xl leading-none">
-            <span className="inline-flex items-center leading-none">INFRASTRUCTURE AS CODE · GITOPS PLATFORMS · CRAFT WEB SYSTEMS</span>
+          <div className="inline-flex items-center justify-center px-4 sm:px-5 py-2 sm:py-2.5 rounded-[4px] bg-black/50 border border-white/20 backdrop-blur-md text-[10px] sm:text-xs md:text-sm font-mono font-bold tracking-[0.08em] sm:tracking-[0.2em] text-white shadow-2xl leading-snug max-w-[92vw] text-center">
+            <span className="inline-flex items-center text-center">INFRASTRUCTURE AS CODE · GITOPS PLATFORMS · CRAFT WEB SYSTEMS</span>
           </div>
         </div>
       </section>
@@ -1087,16 +1087,16 @@ export default function SoraPreviewPage() {
             if (e.touches[0]) startHolding(e.touches[0].clientX, e.touches[0].clientY);
           }}
           onTouchEnd={stopHolding}
-          className="sora-ocean-interactive-zone relative w-full h-56 sm:h-72 lg:h-80 bg-transparent border-t border-b border-white/[0.08] flex items-center justify-between px-6 sm:px-12 lg:px-20 xl:px-24 overflow-hidden"
+          className="sora-ocean-interactive-zone relative w-full min-h-[13rem] sm:h-72 lg:h-80 bg-transparent border-t border-b border-white/[0.08] flex flex-col sm:flex-row items-center justify-center sm:justify-between px-4 sm:px-12 lg:px-20 xl:px-24 gap-4 py-8 sm:py-0 overflow-hidden"
         >
           {/* Studio Brand Mark & Glyph with Glassmorphic Badge (Click to Reload) */}
           <button
             type="button"
             onClick={() => window.location.reload()}
-            className="relative z-10 inline-flex items-center justify-center gap-3 px-4 py-2.5 rounded-[6px] bg-black/50 border border-white/20 backdrop-blur-md text-white font-bold text-xs sm:text-sm tracking-wider uppercase font-mono shadow-2xl pointer-events-auto cursor-pointer hover:bg-black/70 transition-all leading-none"
+            className="relative z-10 inline-flex items-center justify-center gap-2.5 sm:gap-3 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-[6px] bg-black/50 border border-white/20 backdrop-blur-md text-white font-bold text-xs sm:text-sm tracking-wider uppercase font-mono shadow-2xl pointer-events-auto cursor-pointer hover:bg-black/70 transition-all leading-none shrink-0"
             aria-label="Reload website"
           >
-            <div className="relative w-6 h-6 rounded overflow-hidden shrink-0 flex items-center justify-center">
+            <div className="relative w-5 h-5 sm:w-6 sm:h-6 rounded overflow-hidden shrink-0 flex items-center justify-center">
               <Image
                 src="/images/thinkai_studio_logo.png"
                 alt="ThinkAI Studio"
@@ -1105,10 +1105,12 @@ export default function SoraPreviewPage() {
                 className="object-contain invert"
               />
             </div>
-            <span className="inline-flex items-center leading-none select-none">THINKAI STUDIO / BINH MINH</span>
+            <span className="whitespace-nowrap inline-flex items-center leading-none select-none text-[11px] sm:text-xs md:text-sm">
+              THINKAI STUDIO / BINH MINH
+            </span>
           </button>
 
-          <div className="relative z-10 inline-flex items-center justify-center px-4 py-2.5 rounded-[6px] bg-black/50 border border-white/20 backdrop-blur-md text-white font-mono text-xs sm:text-sm tracking-wide shadow-2xl hidden sm:inline-flex leading-none pointer-events-none">
+          <div className="relative z-10 hidden md:inline-flex items-center justify-center px-4 py-2.5 rounded-[6px] bg-black/50 border border-white/20 backdrop-blur-md text-white font-mono text-xs sm:text-sm tracking-wide shadow-2xl leading-none pointer-events-none whitespace-nowrap">
             <span className="leading-none">『Reliable Infrastructure for Production.』</span>
           </div>
 
