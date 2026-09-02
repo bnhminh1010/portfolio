@@ -1,0 +1,16 @@
+{
+  "name": "masked-text-reveal",
+  "type": "registry:ui",
+  "title": "Masked Text Reveal",
+  "description": "Editorial text reveal using geometric clip-path masking.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "MaskedTextReveal.tsx",
+      "content": "\"use client\";\n\nimport React, { useRef } from \"react\";\nimport { motion, useInView, useReducedMotion } from \"motion/react\";\nimport { cn } from \"@/lib/utils\";\n\ninterface MaskedTextRevealProps {\n  text: string;\n  className?: string;\n  delay?: number;\n  as?: \"h1\" | \"h2\" | \"h3\" | \"h4\" | \"p\" | \"span\" | \"div\";\n  splitBy?: \"lines\" | \"words\";\n  once?: boolean;\n}\n\nconst LUXURY_EASE = [0.16, 1, 0.3, 1] as const;\n\nexport function MaskedTextReveal({\n  text,\n  className = \"\",\n  delay = 0,\n  as: Component = \"h1\",\n  splitBy = \"lines\",\n  once = true,\n}: MaskedTextRevealProps) {\n  const containerRef = useRef<HTMLDivElement>(null);\n  const isInView = useInView(containerRef, { once, margin: \"0px 0px -5% 0px\", amount: 0.05 });\n  const prefersReducedMotion = useReducedMotion();\n\n  const renderContentWithBoldArrow = (itemText: string) => {\n    if (itemText.includes(\"→\")) {\n      const parts = itemText.split(\"→\");\n      return (\n        <span className=\"inline-flex items-center justify-center gap-[0.18em] leading-none\">\n          {parts[0]}\n          <svg\n            className=\"inline-block w-[0.82em] h-[0.82em] text-white shrink-0 self-center\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeWidth=\"3.4\"\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n          >\n            <line x1=\"4\" y1=\"12\" x2=\"20\" y2=\"12\" />\n            <polyline points=\"13 5 20 12 13 19\" />\n          </svg>\n          {parts[1]}\n        </span>\n      );\n    }\n    return itemText;\n  };\n\n  if (prefersReducedMotion) {\n    return <Component className={className}>{renderContentWithBoldArrow(text)}</Component>;\n  }\n\n  const items = splitBy === \"lines\" ? text.split(\"\\n\") : text.split(\" \");\n\n  return (\n    // @ts-ignore\n    <Component ref={containerRef} className={cn(\"block\", className)}>\n      {items.map((item, idx) => (\n        <span\n          key={idx}\n          className={cn(\n            \"block overflow-hidden pb-1\",\n            splitBy === \"words\" && \"inline-block mr-[0.25em]\"\n          )}\n        >\n          <motion.span\n            initial={{ y: \"110%\", opacity: 0 }}\n            animate={isInView ? { y: \"0%\", opacity: 1 } : { y: \"110%\", opacity: 0 }}\n            transition={{\n              duration: 0.9,\n              delay: delay + idx * (splitBy === \"lines\" ? 0.12 : 0.04),\n              ease: LUXURY_EASE,\n            }}\n            className=\"block will-change-transform\"\n          >\n            {renderContentWithBoldArrow(item)}\n          </motion.span>\n        </span>\n      ))}\n    </Component>\n  );\n}\n"
+    }
+  ]
+}

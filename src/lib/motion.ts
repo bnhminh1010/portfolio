@@ -25,11 +25,23 @@ export function useReducedMotion(): boolean {
 }
 
 /**
- * Default transition for ThinkAI Studio animations
+ * Default transitions & springs for ThinkAI Studio
  */
+export const TAI_EASE = {
+  luxury: [0.16, 1, 0.3, 1] as const,
+  spring: [0.32, 0.72, 0, 1] as const,
+  snappy: [0.19, 1, 0.22, 1] as const,
+};
+
+export const TAI_SPRING = {
+  default: { type: "spring", damping: 32, stiffness: 280, mass: 1 },
+  stiff: { type: "spring", damping: 30, stiffness: 400, mass: 0.8 },
+  gentle: { type: "spring", damping: 38, stiffness: 200, mass: 1.2 },
+} as const;
+
 export const defaultTransition: Transition = {
   duration: 0.5,
-  ease: [0.16, 1, 0.3, 1], // ThinkAI luxury decelerate ease
+  ease: TAI_EASE.luxury,
 };
 
 /**

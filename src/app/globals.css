@@ -1,5 +1,25 @@
 @import "tailwindcss";
 
+@theme {
+  --color-tai-bg: #08080a;
+  --color-tai-sheet: #0d0d10;
+  --color-tai-card: #131316;
+  --color-tai-border: rgba(255, 255, 255, 0.07);
+  --color-tai-border-strong: rgba(255, 255, 255, 0.18);
+  --color-tai-green: #4ade80;
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --tai-bg: #08080a;
+  --tai-sheet: #0d0d10;
+  --tai-card: #131316;
+  --tai-border: rgba(255, 255, 255, 0.07);
+  --tai-border-strong: rgba(255, 255, 255, 0.18);
+  --tai-accent-green: #4ade80;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -9,7 +29,7 @@ body {
   margin: 0;
   min-width: 0;
   overflow-x: clip;
-  background-color: #121212;
+  background-color: var(--tai-bg);
   color: #fcfcfc;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -50,6 +70,19 @@ a,
 input,
 textarea {
   border-radius: 0px !important;
+}
+
+/* Impeccable Visual Signatures */
+.tai-inset-top {
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
+}
+
+.tai-led-glow {
+  filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.45));
+}
+
+.tai-border-hairline {
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 /* Authentic Tactile Studio Film Grain Overlay (Fine Micro-Grain) - ThinkAI Studio */

@@ -1,0 +1,233 @@
+{
+  "$schema": "https://ui.thinkai.studio/schema/registry.json",
+  "name": "thinkai-ui",
+  "homepage": "https://ui.thinkai.studio",
+  "items": [
+    {
+      "name": "tai-button",
+      "type": "registry:ui",
+      "title": "Tai Button",
+      "description": "0px sharp architectural button with top-inset light sweep, mechanical active compression, and polymorphic slot support.",
+      "dependencies": ["motion", "@radix-ui/react-slot", "class-variance-authority", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "ui/TaiButton.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/TaiButton.tsx"
+        }
+      ]
+    },
+    {
+      "name": "wipe-button",
+      "type": "registry:ui",
+      "title": "Wipe Button",
+      "description": "Signature Forward-Wipe interactive button with luxury easing and 0px border geometry.",
+      "dependencies": ["motion", "@radix-ui/react-slot", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "ui/WipeButton.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/WipeButton.tsx"
+        }
+      ]
+    },
+    {
+      "name": "arrow-roll",
+      "type": "registry:ui",
+      "title": "Arrow Roll",
+      "description": "Micro-interaction directional arrow roll on hover with spring physics.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "ui/ArrowRoll.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/ArrowRoll.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button-text-roll",
+      "type": "registry:ui",
+      "title": "Button Text Roll",
+      "description": "Dual-layer kinetic typography tumbler for buttons.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "ui/ButtonTextRoll.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/ButtonTextRoll.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-roll",
+      "type": "registry:ui",
+      "title": "Text Roll",
+      "description": "Slot-machine text tumbler roll for display headlines.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "ui/TextRoll.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/TextRoll.tsx"
+        }
+      ]
+    },
+    {
+      "name": "product-mockup",
+      "type": "registry:ui",
+      "title": "Product Mockup",
+      "description": "Architectural browser/laptop mockup frame with inset parallax and clip-path reveals.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "ui/ProductMockup.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/ProductMockup.tsx"
+        }
+      ]
+    },
+    {
+      "name": "masked-text-reveal",
+      "type": "registry:ui",
+      "title": "Masked Text Reveal",
+      "description": "Editorial text reveal using geometric clip-path masking.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "ui/MaskedTextReveal.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/MaskedTextReveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "halftone-banner",
+      "type": "registry:ui",
+      "title": "Halftone Banner",
+      "description": "WebGL ocean caustics banner integrated with ThinkAI Studio logomark.",
+      "dependencies": ["three", "motion"],
+      "registryDependencies": ["three-halftone-canvas"],
+      "files": [
+        {
+          "path": "ui/HalftoneBanner.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/HalftoneBanner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "three-halftone-canvas",
+      "type": "registry:ui",
+      "title": "Three Halftone Canvas",
+      "description": "Optimized Three.js WebGL procedural ocean halftone shader canvas with 60/120fps throttle.",
+      "dependencies": ["three"],
+      "files": [
+        {
+          "path": "ui/ThreeHalftoneCanvas.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/ThreeHalftoneCanvas.tsx"
+        }
+      ]
+    },
+    {
+      "name": "smooth-scroll",
+      "type": "registry:ui",
+      "title": "Smooth Scroll",
+      "description": "Lenis 120Hz smooth scroll provider with anchor interception and touch support.",
+      "dependencies": ["lenis"],
+      "files": [
+        {
+          "path": "ui/SmoothScroll.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/SmoothScroll.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tai-header",
+      "type": "registry:ui",
+      "title": "Tai Header",
+      "description": "Zero-border sticky architectural navigation header with mobile full-bleed drawer.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["tai-button", "wipe-button"],
+      "files": [
+        {
+          "path": "ui/TaiHeader.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/TaiHeader.tsx"
+        }
+      ]
+    },
+    {
+      "name": "about-drawer",
+      "type": "registry:ui",
+      "title": "About Drawer",
+      "description": "High-contrast spring drawer for biography, experience timelines, and philosophy.",
+      "dependencies": ["motion", "lucide-react"],
+      "files": [
+        {
+          "path": "ui/AboutDrawer.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/AboutDrawer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "architecture-modal",
+      "type": "registry:ui",
+      "title": "Architecture Modal",
+      "description": "Multi-tab deep-dive system architecture modal with backdrop blur and code previews.",
+      "dependencies": ["motion", "lucide-react"],
+      "files": [
+        {
+          "path": "ui/ArchitectureModal.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/ArchitectureModal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "contact-modal",
+      "type": "registry:ui",
+      "title": "Contact Modal",
+      "description": "Sharp geometric contact dialog with instant clipboard actions and toast feedback.",
+      "dependencies": ["motion", "lucide-react"],
+      "files": [
+        {
+          "path": "ui/ContactModal.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/ContactModal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-brand-icons",
+      "type": "registry:ui",
+      "title": "AI Brand Icons",
+      "description": "Vector brand marks for Claude, Gemini, OpenAI, Groq, Ollama, DeepSeek.",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "ui/AiBrandIcons.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/AiBrandIcons.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tech-logos",
+      "type": "registry:ui",
+      "title": "Tech Logos",
+      "description": "High-contrast inverted tech stack badges with snappy hover lift physics.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "ui/TechLogos.tsx",
+          "type": "registry:ui",
+          "target": "components/tai-ui/TechLogos.tsx"
+        }
+      ]
+    }
+  ]
+}

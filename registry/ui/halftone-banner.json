@@ -1,0 +1,19 @@
+{
+  "name": "halftone-banner",
+  "type": "registry:ui",
+  "title": "Halftone Banner",
+  "description": "WebGL ocean caustics banner integrated with ThinkAI Studio logomark.",
+  "dependencies": [
+    "three",
+    "motion"
+  ],
+  "registryDependencies": [
+    "three-halftone-canvas"
+  ],
+  "files": [
+    {
+      "name": "HalftoneBanner.tsx",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { ThreeHalftoneCanvas } from \"./ThreeHalftoneCanvas\";\n\ninterface HalftoneBannerProps {\n  children?: React.ReactNode;\n  className?: string;\n  height?: string;\n}\n\nexport function HalftoneBanner({\n  children,\n  className = \"\",\n  height = \"min-h-[480px]\",\n}: HalftoneBannerProps) {\n  return (\n    <div\n      className={`relative w-full overflow-hidden flex items-center justify-center ${height} ${className}`}\n    >\n      {/* Interactive GPU Three.js Halftone Canvas */}\n      <ThreeHalftoneCanvas />\n\n      {/* Content Container */}\n      <div className=\"relative z-20 w-full max-w-6xl mx-auto px-6 py-20 flex flex-col items-center justify-center text-center\">\n        {children}\n      </div>\n    </div>\n  );\n}\n\nexport function TaiLogoMark({ className = \"w-4 h-4\" }: { className?: string }) {\n  return (\n    <div className={`grid grid-cols-2 gap-[2px] ${className}`}>\n      <div className=\"w-full h-full bg-white rounded-none\" />\n      <div className=\"w-full h-full bg-white rounded-none\" />\n      <div className=\"w-full h-full bg-white rounded-none\" />\n      <div className=\"w-full h-full bg-white rounded-none\" />\n    </div>\n  );\n}\n"
+    }
+  ]
+}

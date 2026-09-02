@@ -1,0 +1,16 @@
+{
+  "name": "smooth-scroll",
+  "type": "registry:ui",
+  "title": "Smooth Scroll",
+  "description": "Lenis 120Hz smooth scroll provider with anchor interception and touch support.",
+  "dependencies": [
+    "lenis"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "SmoothScroll.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef } from \"react\";\nimport Lenis from \"lenis\";\n\ninterface SmoothScrollProps {\n  isLocked?: boolean;\n}\n\nexport function SmoothScroll({ isLocked = false }: SmoothScrollProps) {\n  const lenisRef = useRef<Lenis | null>(null);\n\n  useEffect(() => {\n    // Initialize Lenis 120Hz/ProMotion Smooth Momentum Scroll\n    const lenis = new Lenis({\n      duration: 1.15,\n      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential easeOut\n      orientation: \"vertical\",\n      gestureOrientation: \"vertical\",\n      smoothWheel: true,\n      wheelMultiplier: 0.95,\n      touchMultiplier: 1.8,\n      infinite: false,\n    });\n\n    lenisRef.current = lenis;\n    (window as unknown as { __lenis?: Lenis }).__lenis = lenis;\n\n    // High-performance RAF loop matching 120Hz / 144Hz / 240Hz display refresh rates\n    let rafId: number;\n    function raf(time: number) {\n      lenis.raf(time);\n      rafId = requestAnimationFrame(raf);\n    }\n    rafId = requestAnimationFrame(raf);\n\n    // Global anchor link smooth scroll listener\n    const handleAnchorClick = (e: MouseEvent) => {\n      const target = e.target as HTMLElement | null;\n      const anchor = target?.closest(\"a\");\n      if (!anchor) return;\n\n      const href = anchor.getAttribute(\"href\");\n      if (href && href.startsWith(\"#\")) {\n        if (href === \"#\" || href === \"#top\") {\n          e.preventDefault();\n          lenis.scrollTo(0, {\n            offset: 0,\n            duration: 1.2,\n            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),\n          });\n          return;\n        }\n        const targetElement = document.querySelector(href);\n        if (targetElement) {\n          e.preventDefault();\n          lenis.scrollTo(targetElement as HTMLElement, {\n            offset: 0,\n            duration: 1.2,\n            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),\n          });\n        }\n      }\n    };\n\n    document.addEventListener(\"click\", handleAnchorClick, { capture: true });\n\n    return () => {\n      document.removeEventListener(\"click\", handleAnchorClick, { capture: true });\n      cancelAnimationFrame(rafId);\n      lenis.destroy();\n      lenisRef.current = null;\n      (window as unknown as { __lenis?: Lenis | null }).__lenis = null;\n    };\n  }, []);\n\n  // Pause / Resume smooth scroll when Drawer or Modal is opened\n  useEffect(() => {\n    if (!lenisRef.current) return;\n    if (isLocked) {\n      lenisRef.current.stop();\n    } else {\n      lenisRef.current.start();\n    }\n  }, [isLocked]);\n\n  return null;\n}\n"
+    }
+  ]
+}

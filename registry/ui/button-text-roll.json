@@ -1,0 +1,16 @@
+{
+  "name": "button-text-roll",
+  "type": "registry:ui",
+  "title": "Button Text Roll",
+  "description": "Dual-layer kinetic typography tumbler for buttons.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "ButtonTextRoll.tsx",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\ninterface ButtonTextRollProps {\n  text: string;\n  className?: string;\n  stagger?: number;\n}\n\nexport function ButtonTextRoll({\n  text,\n  className = \"\",\n  stagger = 0,\n}: ButtonTextRollProps) {\n  // Synchronous unified text roll (All characters roll together at once)\n  if (stagger === 0) {\n    return (\n      <span\n        className={cn(\n          \"relative inline-flex items-center justify-center overflow-hidden h-[1.12em] leading-none select-none\",\n          className\n        )}\n      >\n        {/* Primary text */}\n        <span className=\"inline-flex items-center justify-center leading-none transform transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[135%]\">\n          {text}\n        </span>\n        {/* Duplicate text rolling in simultaneously from bottom */}\n        <span\n          aria-hidden=\"true\"\n          className=\"absolute inset-0 flex items-center justify-center leading-none translate-y-[135%] transform transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0\"\n        >\n          {text}\n        </span>\n      </span>\n    );\n  }\n\n  // Optional staggered letter-by-letter roll if explicitly requested with stagger > 0\n  const letters = Array.from(text);\n\n  return (\n    <span\n      className={cn(\n        \"relative inline-flex items-center overflow-hidden leading-none select-none h-[1.18em] self-center\",\n        className\n      )}\n    >\n      {letters.map((char, index) => {\n        if (char === \" \") {\n          return (\n            <span key={index} className=\"inline-block w-[0.3em]\">\n              &nbsp;\n            </span>\n          );\n        }\n\n        return (\n          <span\n            key={`${char}-${index}`}\n            className=\"relative inline-flex flex-col overflow-hidden h-[1.18em] leading-[1.18em]\"\n          >\n            {/* Primary letter */}\n            <span\n              style={{\n                transitionDelay: `${index * stagger}s`,\n              }}\n              className=\"inline-flex items-center justify-center transform transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full\"\n            >\n              {char}\n            </span>\n            {/* Duplicate letter rolling in from bottom */}\n            <span\n              style={{\n                transitionDelay: `${index * stagger}s`,\n              }}\n              className=\"absolute top-full left-0 inline-flex items-center justify-center transform transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full\"\n            >\n              {char}\n            </span>\n          </span>\n        );\n      })}\n    </span>\n  );\n}\n\nexport default ButtonTextRoll;\n"
+    }
+  ]
+}

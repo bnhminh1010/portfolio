@@ -1,36 +1,40 @@
 # ThinkAI Studio — Design Language & Engineering Specification (`DESIGN.md`)
 
-> **Version:** 1.0 (Official Specification)  
+> **Version:** 1.1 (Impeccable & Registry-First Specification)  
 > **Author & Maintainer:** ThinkAI Studio / Nguyen Huu Binh Minh  
 > **Repository:** `bnhminh1010/portfolio`  
 > **Component Namespace:** `tai-ui` (`@/components/tai-ui/`)  
-> **Style Scope:** `tai-*` (`src/app/studio.css`, `src/app/globals.css`)  
+> **CLI Distribution:** `thinkai-ui` (`registry/registry.json`)  
+> **Style Scope:** `tai-*` (`src/app/globals.css`)  
 
 ---
 
 ## 1. Triết Lý Thiết Kế & Bản Sắc Thương Hiệu (Brand Philosophy)
 
-ThinkAI Studio được xây dựng dựa trên nguyên lý **"Infrastructure-Grade Craft"** — Mọi pixel và tương tác trên giao diện phải có độ chính xác, tin cậy và bền bỉ tương đương một hệ thống hạ tầng phân tán cao cấp.
+ThinkAI Studio được xây dựng dựa trên nguyên lý **"Infrastructure-Grade Craft & Technical Luxury"** — Mọi pixel và tương tác trên giao diện phải có độ chính xác, tin cậy và bền bỉ tương đương một hệ thống hạ tầng phân tán cao cấp.
 
-### 4 Trụ Cột Cốt Lõi (The 4 Anti-AI-Slop Pillars):
+### 4 Trụ Cột Cốt Lõi (The 4 Impeccable Pillars):
 
-1. **Obsidian Monochromatic Restraint (Kiềm Chế Đơn Sắc Hắc Thạch):**
-   - Không lạm phát màu sắc trang trí (zero decorative purple gradients / neon glow).
-   - Sử dụng các lớp đen hắc thạch phân tầng (`#05070a`, `#0c0c0e`, `#111113`, `#121215`, `#141417`, `#161619`, `#18181c`).
-   - Màu sắc duy nhất được dùng là `#4ade80` (Emerald) cho trạng thái hệ thống hoạt động chuẩn mực (All Systems Nominal / Live Status).
+1. **Obsidian Monochromatic Depth (Chiều Sâu Đơn Sắc Hắc Thạch):**
+   - Không dùng đen thuần `#000000` (tránh làm bẹp UI). Sử dụng nền xám hắc thạch sâu thẳm (`#08080a`, `#0d0d10`, `#131316`).
+   - **Linear-Grade Top-Inset Highlights:** Mọi bề mặt nâng nổi (Card, Button, Dialog) đều có viền sáng mỏng 1px mép trên (`shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]`).
+   - **Dynamic Alpha Hairlines:** Dùng viền trong suốt `border-white/[0.07]` và `border-white/[0.18]` để thích ứng hoàn hảo trên mọi lớp nền.
+   - **LED Status Glow:** Màu xanh danh nghĩa `#4ade80` đi kèm hiệu ứng quang học vi mô `drop-shadow-[0_0_6px_rgba(74,222,128,0.45)]`.
 
-2. **Sharp Architectural Geometry (Hình Học Góc Cạnh Kiến Trúc):**
+2. **Sharp Architectural Geometry (Hình Học Góc Cạnh Kiến Trúc 4px Grid):**
    - **100% Zero Border-Radius**: Toàn bộ buttons, cards, dialogs, drawers, inputs và pills đều giữ góc vuông 90° sắc nét (`border-radius: 0px !important`).
-   - Thể hiện sự chuẩn xác của kiến trúc bare-metal và máy chủ Unix.
+   - **Mathematical 4px Grid**: Mọi padding, margin đều là bội số nghiêm ngặt của 4 (không có số ngẫu nhiên).
+   - **Crisp Focus Rings**: Khung focus bàn phím vuông vức, độ tương phản sắc nét (`outline: 2px solid rgba(255,255,255,0.85)`).
 
 3. **Analog Micro-Grain Tactility (Chất Cảm Vật Lý Tương Tự):**
    - Phủ một lớp film micro-grain (`SVG feTurbulence baseFrequency 1.4, opacity 0.135, background-size: 80px`) lên toàn bộ màn hình.
-   - Loại bỏ hoàn toàn cảm giác "phẳng và vô hồn" của giao diện số mặc định.
+   - Hiệu ứng kính mờ `backdrop-blur-xl bg-black/40` trên thanh điều hướng để tương phản với hình khối 0px phía dưới.
 
-4. **Communicative Motion Physics (Vật Lý Chuyển Động Có Mục Đích):**
-   - Mọi animation đều phải truyền tải trạng thái hoặc quan hệ không gian.
-   - Tuyệt đối không dùng chuyển động lắc lư vô nghĩa.
-   - Áp dụng đường cong Luxury Decelerate `cubic-bezier(0.16, 1, 0.3, 1)` và Spring Physics (`damping: 32, stiffness: 280`).
+4. **Tectonic Motion Mechanics (Vật Lý Chuyển Động Kiến Trúc):**
+   - Chuyển động không bồng bềnh mà mang trọng lượng cơ học (Heavy Frictionless Mechanics).
+   - **Spring Physics**: `{ damping: 32, stiffness: 280, mass: 1 }` và Easing Luxury `cubic-bezier(0.16, 1, 0.3, 1)`.
+   - **Mechanical Click Feedback**: Nén cơ học `active:scale-[0.98]` trên mọi phần tử tương tác.
+   - **Tectonic Spatial Shift**: Các panel và drawer trượt đa tầng tuyến tính (Z/X Parallax) thay vì co giãn scale mềm.
 
 ---
 
@@ -39,26 +43,15 @@ ThinkAI Studio được xây dựng dựa trên nguyên lý **"Infrastructure-Gr
 ### 2.1. Bảng Màu (Color Tokens)
 
 ```css
-:root {
-  /* Canvas & Sheet Surfaces */
-  --tai-bg: #121212;             /* Nền canvas gốc */
-  --tai-sheet: #141417;          /* Tầng nội dung chính (Projects, Products) */
-  --tai-sheet-alt: #111113;      /* Tầng nội dung phụ (Tech Stack, Footer) */
-  --tai-card-surface: #18181c;   /* Bề mặt card, Bezel mockup */
-  --tai-code-block: #161619;     /* Khối lệnh CLI reproduction */
-  --tai-drawer-bg: #f4f4f5;      /* Nền About Drawer tương phản sáng */
-
-  /* Hairline Borders */
-  --tai-border: rgba(255, 255, 255, 0.08);        /* Viền hairline ngăn cách */
-  --tai-border-strong: rgba(255, 255, 255, 0.22); /* Viền hover / active */
-
-  /* Typography Colors */
-  --tai-fg: #fcfcfc;             /* Chữ chính, display headlines */
-  --tai-fg-muted: #8a8a93;       /* Chữ phụ, body descriptions */
-  --tai-fg-subtle: #5a5a63;      /* Metadata, số thứ tự phân cách */
-
-  /* Functional Status Accent */
-  --tai-accent-green: #4ade80;   /* Trạng thái danh nghĩa / verified */
+@theme {
+  --color-tai-bg: #08080a;             /* Nền canvas hắc thạch sâu */
+  --color-tai-sheet: #0d0d10;          /* Tầng nội dung chính */
+  --color-tai-card: #131316;           /* Bề mặt card, Bezel mockup */
+  --color-tai-border: rgba(255, 255, 255, 0.07);        /* Viền hairline alpha */
+  --color-tai-border-strong: rgba(255, 255, 255, 0.18); /* Viền hover / active */
+  --color-tai-green: #4ade80;          /* Trạng thái danh nghĩa LED */
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
 }
 ```
 
@@ -174,7 +167,20 @@ src/components/tai-ui/
 
 ---
 
-## 6. Ghi Nhận Bản Quyền & Giấy Phép (Design Acknowledgment)
+## 6. Kiến Trúc Phân Phối CLI Registry (`thinkai-ui`)
+
+`thinkai-ui` hoạt động theo mô hình Registry-First (tương tự `shadcn/ui`):
+- `registry/registry.json`: Mục lục toàn cục chứa danh sách dependencies và files.
+- `registry/ui/*.json`: Manifest độc lập cho từng component chứa mã nguồn và metadata.
+- **Tiêu chuẩn lập trình component:**
+  1. `asChild` Polymorphism thông qua `@radix-ui/react-slot`.
+  2. Variant Typed Control với `cva` (Class Variance Authority).
+  3. Safe Tailwind merging với `cn()` (`clsx` + `tailwind-merge`).
+  4. 0px Architectural Focus State & Tactility (`active:scale-[0.98]`).
+
+---
+
+## 7. Ghi Nhận Bản Quyền & Giấy Phép (Design Acknowledgment)
 
 > **Design Acknowledgment & Attribution:**  
 > Hệ thống thiết kế của ThinkAI Studio kế thừa và phát triển từ phong cách Dark-Mode Editorial đương đại được khởi xướng bởi các studio công nghệ hàng đầu (như SoraLabs, Linear, và Vercel).  

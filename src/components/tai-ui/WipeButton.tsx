@@ -1,16 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
+import { Slot } from "@radix-ui/react-slot";
+import { cn } from "@/lib/utils";
+import { TAI_EASE } from "@/lib/motion";
 
-interface WipeButtonProps {
+export interface WipeButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   className?: string;
-  onClick?: (e: React.MouseEvent) => void;
+  asChild?: boolean;
+  as?: "button" | "a" | "div";
   href?: string;
   target?: string;
   rel?: string;
-  as?: "button" | "a" | "div";
   wipeColor?: string;
   textColor?: string;
   hoverTextColor?: string;
@@ -19,123 +23,151 @@ interface WipeButtonProps {
   ariaLabel?: string;
 }
 
-const LUXURY_EASE = [0.16, 1, 0.3, 1] as const;
+export const WipeButton = React.forwardRef<HTMLButtonElement, WipeButtonProps>(
+  (
+    {
+      children,
+      className,
+      asChild = false,
+      onClick,
+      href,
+      target,
+      rel,
+      wipeColor = "#ffffff",
+      textColor = "#ffffff",
+      hoverTextColor = "#05070a",
+      borderColor = "rgba(255, 255, 255, 0.12)",
+      hoverBorderColor = "#ffffff",
+      ariaLabel,
+      ...props
+    },
+    ref
+  ) => {
+    const [wipeState, setWipeState] = useState<"idle" | "in" | "out">("idle");
+    const prefersReduced = useReducedMotion();
 
-export function WipeButton({
-  children,
-  className = "",
-  onClick,
-  href,
-  target,
-  rel,
-  as = "button",
-  wipeColor = "#ffffff",
-  textColor = "#ffffff",
-  hoverTextColor = "#05070a",
-  borderColor = "rgba(255, 255, 255, 0.12)",
-  hoverBorderColor = "#ffffff",
-  ariaLabel,
-}: WipeButtonProps) {
-  const [wipeState, setWipeState] = useState<"idle" | "in" | "out">("idle");
+    const handleMouseEnter = () => {
+      setWipeState("in");
+    };
 
-  const handleMouseEnter = () => {
-    setWipeState("in");
-  };
+    const handleMouseLeave = () => {
+      setWipeState("out");
+    };
 
-  const handleMouseLeave = () => {
-    setWipeState("out");
-  };
+    if (asChild) {
+      return (
+        <Slot
+          className={cn(
+            "relative inline-flex items-center justify-center overflow-hidden rounded-none cursor-pointer select-none transition-all active:scale-[0.98]",
+            className
+          )}
+          ref={ref as any}
+          {...props}
+        >
+          {children}
+        </Slot>
+      );
+    }
 
-  const isLink = as === "a" || Boolean(href);
+    const innerContent = (
+      <>
+        {/* Sliding Through Forward Wipe Layer */}
+        {!prefersReduced && (
+          <motion.div
+            initial={{ x: "-102%" }}
+            animate={
+              wipeState === "in"
+                ? { x: "0%" }
+                : wipeState === "out"
+                ? { x: "102%" }
+                : { x: "-102%" }
+            }
+            transition={
+              wipeState === "idle"
+                ? { duration: 0 }
+                : { duration: 0.4, ease: TAI_EASE.luxury }
+            }
+            onAnimationComplete={() => {
+              if (wipeState === "out") {
+                setWipeState("idle");
+              }
+            }}
+            className="absolute inset-0 pointer-events-none rounded-none"
+            style={{ backgroundColor: wipeColor, zIndex: 0 }}
+          />
+        )}
+        {/* Foreground Content */}
+        <span
+          className="relative z-10 inline-flex items-center justify-center gap-2.5 sm:gap-3.5 w-full h-full transition-colors duration-250 leading-none"
+          style={{
+            color: wipeState === "in" && !prefersReduced ? hoverTextColor : textColor,
+          }}
+        >
+          {children}
+        </span>
+      </>
+    );
 
-  const innerContent = (
-    <>
-      {/* Sliding Through Wipe Layer (Enters left, Exits right) */}
-      <motion.div
-        initial={{ x: "-102%" }}
-        animate={
-          wipeState === "in"
-            ? { x: "0%" }
-            : wipeState === "out"
-            ? { x: "102%" }
-            : { x: "-102%" }
-        }
-        transition={
-          wipeState === "idle"
-            ? { duration: 0 }
-            : { duration: 0.42, ease: LUXURY_EASE }
-        }
-        onAnimationComplete={() => {
-          if (wipeState === "out") {
-            setWipeState("idle");
-          }
-        }}
-        className="absolute inset-0 pointer-events-none rounded-[inherit]"
-        style={{ backgroundColor: wipeColor, zIndex: 0 }}
-      />
-      {/* Foreground Content */}
-      <span
-        className="relative z-10 inline-flex items-center justify-center gap-2.5 sm:gap-3.5 w-full h-full transition-colors duration-300 leading-none"
-        style={{
-          color: wipeState === "in" ? hoverTextColor : textColor,
-        }}
-      >
-        {children}
-      </span>
-    </>
-  );
+    const baseClasses = cn(
+      "relative inline-flex items-center justify-center overflow-hidden rounded-none font-mono text-xs tracking-wider uppercase transition-all duration-300 cursor-pointer select-none outline-none focus-visible:ring-1 focus-visible:ring-white/50 active:scale-[0.98] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]",
+      className
+    );
 
-  const sharedStyles: React.CSSProperties = {
-    position: "relative",
-    overflow: "hidden",
-    borderColor: wipeState === "in" ? hoverBorderColor : borderColor,
-    transition: "border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
-  };
+    const sharedStyles: React.CSSProperties = {
+      borderColor: wipeState === "in" ? hoverBorderColor : borderColor,
+    };
 
-  if (isLink && href) {
+    if (props.as === "div") {
+      return (
+        <div
+          onClick={onClick as any}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className={baseClasses}
+          style={sharedStyles}
+          aria-label={ariaLabel}
+          ref={ref as any}
+        >
+          {innerContent}
+        </div>
+      );
+    }
+
+    if (href) {
+      return (
+        <a
+          href={href}
+          target={target}
+          rel={rel}
+          onClick={onClick as any}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className={baseClasses}
+          style={sharedStyles}
+          aria-label={ariaLabel}
+          ref={ref as any}
+        >
+          {innerContent}
+        </a>
+      );
+    }
+
     return (
-      <a
-        href={href}
-        target={target}
-        rel={rel}
+      <button
+        type="button"
         onClick={onClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className={className}
+        className={baseClasses}
         style={sharedStyles}
         aria-label={ariaLabel}
+        ref={ref}
+        {...props}
       >
         {innerContent}
-      </a>
+      </button>
     );
   }
+);
 
-  if (as === "div") {
-    return (
-      <div
-        onClick={onClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        className={className}
-        style={sharedStyles}
-        aria-label={ariaLabel}
-      >
-        {innerContent}
-      </div>
-    );
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className={className}
-      style={sharedStyles}
-      aria-label={ariaLabel}
-    >
-      {innerContent}
-    </button>
-  );
-}
+WipeButton.displayName = "WipeButton";

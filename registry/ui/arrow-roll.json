@@ -1,0 +1,16 @@
+{
+  "name": "arrow-roll",
+  "type": "registry:ui",
+  "title": "Arrow Roll",
+  "description": "Micro-interaction directional arrow roll on hover with spring physics.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "ArrowRoll.tsx",
+      "content": "\"use client\";\n\nimport React from \"react\";\n\ninterface ArrowRollProps {\n  className?: string;\n  size?: \"sm\" | \"md\" | \"lg\";\n}\n\nexport function ArrowRoll({ className = \"\", size = \"md\" }: ArrowRollProps) {\n  const sizeClasses = {\n    sm: \"w-4.5 h-4.5 text-[11px]\",\n    md: \"w-6 h-6 text-xs\",\n    lg: \"w-8 h-8 sm:w-9 sm:h-9 text-sm sm:text-base\",\n  }[size];\n\n  return (\n    <span\n      className={`relative overflow-hidden rounded-none bg-black text-white group-hover:bg-white group-hover:text-black inline-flex items-center justify-center font-extrabold shrink-0 transition-colors duration-300 select-none leading-none ${sizeClasses} ${className}`}\n    >\n      {/* Primary Arrow: Translates diagonally up-right (↗) */}\n      <span className=\"inline-flex items-center justify-center leading-none transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[160%] group-hover:-translate-y-[160%]\">\n        ↗\n      </span>\n\n      {/* Incoming Arrow: Enters diagonally from bottom-left (↙) into center */}\n      <span\n        aria-hidden=\"true\"\n        className=\"absolute inset-0 flex items-center justify-center leading-none -translate-x-[160%] translate-y-[160%] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0\"\n      >\n        ↗\n      </span>\n    </span>\n  );\n}\n"
+    }
+  ]
+}
