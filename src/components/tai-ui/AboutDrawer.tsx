@@ -6,14 +6,13 @@ import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { ButtonTextRoll } from "./ButtonTextRoll";
 import { WipeButton } from "./WipeButton";
+import { TAI_SPRING, TAI_EASE } from "@/lib/motion";
 
 interface AboutDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   lang: "vi" | "en";
 }
-
-const LUXURY_EASE = [0.16, 1, 0.3, 1] as const;
 
 export function AboutDrawer({ isOpen, onClose, lang }: AboutDrawerProps) {
   const prefersReduced = useReducedMotion();
@@ -45,9 +44,9 @@ export function AboutDrawer({ isOpen, onClose, lang }: AboutDrawerProps) {
           opacity: 1,
           y: 0,
           transition: {
-            duration: 0.8,
+            duration: 0.7,
             delay: delaySec,
-            ease: LUXURY_EASE,
+            ease: TAI_EASE.luxury,
           },
         },
   });
@@ -61,7 +60,7 @@ export function AboutDrawer({ isOpen, onClose, lang }: AboutDrawerProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: LUXURY_EASE }}
+            transition={{ duration: 0.35, ease: TAI_EASE.luxury }}
             onClick={onClose}
             className="fixed inset-0 bg-black/60 backdrop-blur-md cursor-pointer"
           />
@@ -71,12 +70,7 @@ export function AboutDrawer({ isOpen, onClose, lang }: AboutDrawerProps) {
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{
-              type: "spring",
-              damping: 32,
-              stiffness: 280,
-              mass: 0.85,
-            }}
+            transition={TAI_SPRING.default}
             data-lenis-prevent="true"
             data-lenis-prevent-wheel="true"
             data-lenis-prevent-touch="true"

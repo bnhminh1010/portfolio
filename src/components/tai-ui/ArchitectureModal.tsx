@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { projects } from "@/data/portfolio";
 import { TaiLogoMark } from "./HalftoneBanner";
+import { TAI_EASE } from "@/lib/motion";
 
 interface ArchitectureModalProps {
   projectId: "homelab" | "thinkai" | null;
@@ -56,11 +57,11 @@ export function ArchitectureModal({ projectId, onClose, lang }: ArchitectureModa
         >
           <motion.div
             onClick={(e) => e.stopPropagation()}
-            initial={{ opacity: 0, scale: 0.97, y: 12 }}
+            initial={{ opacity: 0, scale: 0.98, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.97, y: 12 }}
-            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-5xl bg-[#0c0c0e] border border-white/[0.1] rounded-none shadow-2xl overflow-hidden flex flex-col max-h-[90vh] cursor-default"
+            exit={{ opacity: 0, scale: 0.98, y: 16 }}
+            transition={{ duration: 0.25, ease: TAI_EASE.luxury }}
+            className="w-full max-w-5xl bg-[#0a0a0c] border border-white/[0.08] rounded-none shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_24px_60px_-15px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col max-h-[90vh] cursor-default"
           >
             {/* Header */}
             <div className="px-6 py-4 bg-[#141417] border-b border-white/[0.08] flex items-center justify-between">
