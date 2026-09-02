@@ -1,24 +1,24 @@
-/* Authentic SoraLabs Studio Aesthetic (soralabs.studio) */
+/* ThinkAI Studio Design Language System (thinkai.studio) */
 @import "tailwindcss";
 
 :root {
-  --sora-bg: #121212;
-  --sora-sheet: #141417;
-  --sora-sheet-alt: #111113;
-  --sora-card-surface: #18181c;
-  --sora-code-block: #161619;
-  --sora-drawer-bg: #f4f4f5;
-  --sora-border: rgba(255, 255, 255, 0.08);
-  --sora-border-strong: rgba(255, 255, 255, 0.22);
-  --sora-fg: #fcfcfc;
-  --sora-fg-muted: #8a8a93;
-  --sora-fg-subtle: #5a5a63;
-  --sora-accent-green: #4ade80;
+  --tai-bg: #121212;
+  --tai-sheet: #141417;
+  --tai-sheet-alt: #111113;
+  --tai-card-surface: #18181c;
+  --tai-code-block: #161619;
+  --tai-drawer-bg: #f4f4f5;
+  --tai-border: rgba(255, 255, 255, 0.08);
+  --tai-border-strong: rgba(255, 255, 255, 0.22);
+  --tai-fg: #fcfcfc;
+  --tai-fg-muted: #8a8a93;
+  --tai-fg-subtle: #5a5a63;
+  --tai-accent-green: #4ade80;
 }
 
-.sora-studio-root {
-  background-color: var(--sora-bg);
-  color: var(--sora-fg);
+.tai-studio-root {
+  background-color: var(--tai-bg);
+  color: var(--tai-fg);
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   letter-spacing: -0.015em;
@@ -26,8 +26,8 @@
   position: relative;
 }
 
-/* Authentic Grotesque Headings matching Sora Studio */
-.sora-heading-xl {
+/* Grotesque Headings - ThinkAI Studio */
+.tai-heading-xl {
   font-size: clamp(2.4rem, 7.5vw, 7rem);
   font-weight: 700;
   line-height: 0.94;
@@ -35,7 +35,7 @@
   text-transform: uppercase;
 }
 
-.sora-heading-hero {
+.tai-heading-hero {
   font-size: clamp(2.6rem, 7.8vw, 7.2rem);
   font-weight: 700;
   line-height: 0.94;
@@ -43,7 +43,7 @@
   text-transform: uppercase;
 }
 
-.sora-heading-lg {
+.tai-heading-lg {
   font-size: clamp(2rem, 5vw, 4.8rem);
   font-weight: 700;
   line-height: 0.94;
@@ -51,7 +51,7 @@
   text-transform: uppercase;
 }
 
-.sora-heading-statement {
+.tai-heading-statement {
   font-size: clamp(1.5rem, 3.2vw, 2.6rem);
   font-weight: 600;
   line-height: 1.20;
@@ -59,63 +59,63 @@
 }
 
 /* Minimalist label */
-.sora-label {
+.tai-label {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 11.5px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--sora-fg-muted);
+  color: var(--tai-fg-muted);
 }
 
 /* Layered Content Sheet */
-.sora-content-sheet {
+.tai-content-sheet {
   position: relative;
   z-index: 10;
-  background-color: var(--sora-sheet);
-  border-top: 1px solid var(--sora-border);
-  border-bottom: 1px solid var(--sora-border);
+  background-color: var(--tai-sheet);
+  border-top: 1px solid var(--tai-border);
+  border-bottom: 1px solid var(--tai-border);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
 }
 
-.sora-content-sheet-alt {
+.tai-content-sheet-alt {
   position: relative;
   z-index: 10;
-  background-color: var(--sora-sheet-alt);
-  border-top: 1px solid var(--sora-border);
-  border-bottom: 1px solid var(--sora-border);
+  background-color: var(--tai-sheet-alt);
+  border-top: 1px solid var(--tai-border);
+  border-bottom: 1px solid var(--tai-border);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
 }
 
 /* Tech Stack Tiles */
-.sora-tech-grid-top {
+.tai-tech-grid-top {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-top: 1px solid var(--sora-border);
-  border-left: 1px solid var(--sora-border);
-  border-right: 1px solid var(--sora-border);
-  border-bottom: 1px solid var(--sora-border);
+  border-top: 1px solid var(--tai-border);
+  border-left: 1px solid var(--tai-border);
+  border-right: 1px solid var(--tai-border);
+  border-bottom: 1px solid var(--tai-border);
 }
 
-.sora-tech-grid-bottom {
+.tai-tech-grid-bottom {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-left: 1px solid var(--sora-border);
-  border-right: 1px solid var(--sora-border);
-  border-bottom: 1px solid var(--sora-border);
+  border-left: 1px solid var(--tai-border);
+  border-right: 1px solid var(--tai-border);
+  border-bottom: 1px solid var(--tai-border);
 }
 
 @media (min-width: 1024px) {
-  .sora-tech-grid-bottom {
+  .tai-tech-grid-bottom {
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
 }
 
-.sora-stack-tile-lg {
+.tai-stack-tile-lg {
   height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid var(--sora-border);
+  border-right: 1px solid var(--tai-border);
   background-color: rgba(18, 18, 20, 0.85);
   color: #ffffff;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -125,22 +125,22 @@
 }
 
 @media (min-width: 640px) {
-  .sora-stack-tile-lg {
+  .tai-stack-tile-lg {
     height: 190px;
   }
 }
 
 @media (min-width: 1024px) {
-  .sora-stack-tile-lg {
+  .tai-stack-tile-lg {
     height: 250px;
   }
 }
 
-.sora-stack-tile-lg:last-child {
+.tai-stack-tile-lg:last-child {
   border-right: none;
 }
 
-.sora-stack-tile-lg:hover {
+.tai-stack-tile-lg:hover {
   background-color: #ffffff;
   color: #121212;
   transform: translateY(-2px);
@@ -148,13 +148,13 @@
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
 }
 
-.sora-stack-tile-sm {
+.tai-stack-tile-sm {
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid var(--sora-border);
-  border-bottom: 1px solid var(--sora-border);
+  border-right: 1px solid var(--tai-border);
+  border-bottom: 1px solid var(--tai-border);
   background-color: rgba(18, 18, 20, 0.85);
   color: #ffffff;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -164,13 +164,13 @@
 }
 
 @media (min-width: 640px) {
-  .sora-stack-tile-sm {
+  .tai-stack-tile-sm {
     height: 120px;
   }
 }
 
 @media (min-width: 1024px) {
-  .sora-stack-tile-sm {
+  .tai-stack-tile-sm {
     height: 155px;
     border-bottom: none;
   }
@@ -178,21 +178,21 @@
 
 /* Remove right border for 4th and 8th items on < 1024px */
 @media (max-width: 1023px) {
-  .sora-stack-tile-sm:nth-child(4n) {
+  .tai-stack-tile-sm:nth-child(4n) {
     border-right: none;
   }
-  .sora-stack-tile-sm:nth-child(n+5) {
+  .tai-stack-tile-sm:nth-child(n+5) {
     border-bottom: none;
   }
 }
 
 @media (min-width: 1024px) {
-  .sora-stack-tile-sm:last-child {
+  .tai-stack-tile-sm:last-child {
     border-right: none;
   }
 }
 
-.sora-stack-tile-sm:hover {
+.tai-stack-tile-sm:hover {
   background-color: #ffffff;
   color: #121212;
   transform: translateY(-2px);
@@ -201,7 +201,7 @@
 }
 
 /* Tag & Action Pills */
-.sora-tag-pill {
+.tai-tag-pill {
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -211,7 +211,7 @@
   transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-.sora-tag-pill:hover {
+.tai-tag-pill:hover {
   color: #05070a !important;
   background-color: #ffffff !important;
   border-color: #ffffff !important;
@@ -219,20 +219,20 @@
 
 /* ─────────────────────────────────────────────────────────────
    BOTTOM OCEAN INTERACTIVE "HOLD TO STIR CURRENTS" EXPERIENCE
-   (SoraLabs Minimalist Monochromatic Aesthetic)
+   (ThinkAI Monochromatic Editorial Aesthetic)
    ───────────────────────────────────────────────────────────── */
-.sora-ocean-interactive-zone {
+.tai-ocean-interactive-zone {
   position: relative;
   cursor: grab;
   user-select: none;
   touch-action: none;
 }
 
-.sora-ocean-interactive-zone:active {
+.tai-ocean-interactive-zone:active {
   cursor: grabbing;
 }
 
-.sora-hold-pill {
+.tai-hold-pill {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -253,19 +253,19 @@
   transition: transform 0.15s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.sora-hold-pill.is-holding {
+.tai-hold-pill.is-holding {
   border-color: rgba(255, 255, 255, 0.85);
   box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 255, 255, 0.25);
   transform: scale(0.97);
 }
 
-.sora-hold-ring {
+.tai-hold-ring {
   width: 18px;
   height: 18px;
   transform: rotate(-90deg);
 }
 
-.sora-hold-ring-circle {
+.tai-hold-ring-circle {
   transition: stroke-dashoffset 0.05s linear;
   stroke: #ffffff;
 }

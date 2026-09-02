@@ -11,26 +11,26 @@ import {
   Sparkles,
 } from "lucide-react";
 import { projects, profile } from "@/data/portfolio";
-import { ThreeHalftoneCanvas } from "@/components/sora/ThreeHalftoneCanvas";
-import { SoraHeader } from "@/components/sora/SoraHeader";
-import { MaskedTextReveal } from "@/components/sora/MaskedTextReveal";
-import { TextRoll } from "@/components/sora/TextRoll";
-import { ButtonTextRoll } from "@/components/sora/ButtonTextRoll";
-import { ProductMockup } from "@/components/sora/ProductMockup";
-import { AboutDrawer } from "@/components/sora/AboutDrawer";
-import { ContactModal } from "@/components/sora/ContactModal";
-import { ArrowRoll } from "@/components/sora/ArrowRoll";
-import { TechLogo } from "@/components/sora/TechLogos";
-import { SmoothScroll } from "@/components/sora/SmoothScroll";
-import { WipeButton } from "@/components/sora/WipeButton";
+import { ThreeHalftoneCanvas } from "@/components/tai-ui/ThreeHalftoneCanvas";
+import { TaiHeader } from "@/components/tai-ui/TaiHeader";
+import { MaskedTextReveal } from "@/components/tai-ui/MaskedTextReveal";
+import { TextRoll } from "@/components/tai-ui/TextRoll";
+import { ButtonTextRoll } from "@/components/tai-ui/ButtonTextRoll";
+import { ProductMockup } from "@/components/tai-ui/ProductMockup";
+import { AboutDrawer } from "@/components/tai-ui/AboutDrawer";
+import { ContactModal } from "@/components/tai-ui/ContactModal";
+import { ArrowRoll } from "@/components/tai-ui/ArrowRoll";
+import { TechLogo } from "@/components/tai-ui/TechLogos";
+import { SmoothScroll } from "@/components/tai-ui/SmoothScroll";
+import { WipeButton } from "@/components/tai-ui/WipeButton";
 import {
   OpenAiIcon,
   GeminiIcon,
   ClaudeIcon,
   PerplexityIcon,
   ManusIcon,
-} from "@/components/sora/AiBrandIcons";
-import "./sora.css";
+} from "@/components/tai-ui/AiBrandIcons";
+import "./studio.css";
 
 const CHAPTER_SLIDES = [
   {
@@ -92,7 +92,7 @@ const AI_PLATFORMS = [
   },
 ];
 
-export default function SoraPreviewPage() {
+export default function PortfolioPage() {
   const [lang, setLang] = useState<"vi" | "en">("en");
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -156,7 +156,7 @@ export default function SoraPreviewPage() {
     setProgress(0);
   };
 
-  // Update Vietnam Live Time & Date matching Soralabs Footer
+  // Update Vietnam Live Time & Date (Asia/Ho_Chi_Minh)
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
@@ -241,7 +241,7 @@ export default function SoraPreviewPage() {
   };
 
   return (
-    <div className="sora-studio-root selection:bg-white selection:text-black relative min-h-screen">
+    <div className="tai-studio-root selection:bg-white selection:text-black relative min-h-screen">
       {/* ─── 120HZ ULTRA-SMOOTH MOMENTUM SCROLLING ENGINE (LENIS) ─── */}
       <SmoothScroll isLocked={isAboutOpen || isContactOpen} />
 
@@ -249,7 +249,7 @@ export default function SoraPreviewPage() {
       <ThreeHalftoneCanvas />
 
       {/* ─── 01. AUTHENTIC TRANSPARENT HEADER ─── */}
-      <SoraHeader
+      <TaiHeader
         onOpenAbout={() => setIsAboutOpen(true)}
         onOpenContact={() => setIsContactOpen(true)}
       />
@@ -263,21 +263,21 @@ export default function SoraPreviewPage() {
         <div className="absolute inset-0 max-w-5xl mx-auto -z-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(4,6,10,0.68)_0%,rgba(4,6,10,0.32)_50%,transparent_78%)] blur-2xl" />
 
         <div className="max-w-6xl mx-auto space-y-6 sm:space-y-7 pointer-events-auto relative z-10">
-          {/* SoraLabs Authentic Floating Eyebrow */}
+          {/* ThinkAI Authentic Floating Eyebrow */}
           <div className="text-xs sm:text-[13.5px] font-mono font-bold tracking-[0.24em] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] uppercase select-none">
             A SYSTEMS STUDIO
           </div>
 
-          {/* SoraLabs Authentic Grotesque Masked Headline with High-Contrast Optical Shadow */}
+          {/* ThinkAI Grotesque Masked Headline with High-Contrast Optical Shadow */}
           <div className="py-1 sm:py-2">
             <MaskedTextReveal
               as="h1"
               text={"RELIABLE\nDELIVERY"}
-              className="sora-heading-hero text-white tracking-[-0.026em] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_12px_36px_rgba(0,0,0,0.90)] drop-shadow-[0_24px_64px_rgba(0,0,0,0.80)]"
+              className="tai-heading-hero text-white tracking-[-0.026em] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_12px_36px_rgba(0,0,0,0.90)] drop-shadow-[0_24px_64px_rgba(0,0,0,0.80)]"
             />
           </div>
 
-          {/* SoraLabs Authentic Floating Subline */}
+          {/* ThinkAI Floating Subline */}
           <div className="text-xs sm:text-[13.5px] font-mono font-medium tracking-[0.20em] text-neutral-100 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)] uppercase max-w-2xl mx-auto leading-relaxed select-none px-4">
             INFRASTRUCTURE AS CODE · GITOPS PLATFORMS · CRAFT WEB SYSTEMS
           </div>
@@ -393,7 +393,7 @@ export default function SoraPreviewPage() {
 
             {/* Right 4 Cols: Editorial Narrative & Scaled Typography */}
             <div className="lg:col-span-4 space-y-6">
-              <div className="sora-label text-neutral-400 font-mono font-bold text-xs tracking-widest">
+              <div className="tai-label text-neutral-400 font-mono font-bold text-xs tracking-widest">
                 HOMELAB PLATFORM
               </div>
 
@@ -462,7 +462,7 @@ export default function SoraPreviewPage() {
                 {projects[0].stack.map((item) => (
                   <span
                     key={item}
-                    className="sora-tag-pill px-3 py-1 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
+                    className="tai-tag-pill px-3 py-1 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
                   >
                     {item}
                   </span>
@@ -549,7 +549,7 @@ export default function SoraPreviewPage() {
 
             {/* Right 4 Cols: Editorial Narrative & Scaled Typography */}
             <div className="lg:col-span-4 space-y-6">
-              <div className="sora-label text-neutral-400 font-mono font-bold text-xs tracking-widest">
+              <div className="tai-label text-neutral-400 font-mono font-bold text-xs tracking-widest">
                 DELIVERY PIPELINES
               </div>
 
@@ -618,7 +618,7 @@ export default function SoraPreviewPage() {
                 {projects[1].stack.map((item) => (
                   <span
                     key={item}
-                    className="sora-tag-pill px-3 py-1 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
+                    className="tai-tag-pill px-3 py-1 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
                   >
                     {item}
                   </span>
@@ -699,7 +699,7 @@ export default function SoraPreviewPage() {
               <div className="border-t border-white/[0.08] pt-8 space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
                   <div>
-                    <span className="sora-label text-neutral-400 font-mono font-bold text-xs">
+                    <span className="tai-label text-neutral-400 font-mono font-bold text-xs">
                       HOSPITAL SAST SECURITY GATES
                     </span>
                     <h3 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight mt-2">
@@ -744,7 +744,7 @@ export default function SoraPreviewPage() {
                   {[".NET 8", "CodeQL SAST", "SonarQube Gates", "CSRF Remediation", "Package Fixes", "FTP Secure Baseline"].map((tag) => (
                     <span
                       key={tag}
-                      className="sora-tag-pill px-3 py-1.5 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
+                      className="tai-tag-pill px-3 py-1.5 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
                     >
                       {tag}
                     </span>
@@ -766,7 +766,7 @@ export default function SoraPreviewPage() {
             <div className="lg:col-span-10 grid grid-cols-1 md:grid-cols-2 gap-12">
               {/* Education Block */}
               <div className="border-t border-white/[0.08] pt-8 space-y-5">
-                <span className="sora-label text-neutral-400 font-mono font-bold text-xs flex items-center gap-2 tracking-widest">
+                <span className="tai-label text-neutral-400 font-mono font-bold text-xs flex items-center gap-2 tracking-widest">
                   <GraduationCap className="w-4 h-4 text-neutral-400" /> EDUCATION
                 </span>
                 <div>
@@ -787,7 +787,7 @@ export default function SoraPreviewPage() {
                   {["GPA 3.24", "Software Engineering", "HUTECH 2022-2026", "English B1"].map((tag) => (
                     <span
                       key={tag}
-                      className="sora-tag-pill px-3 py-1 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
+                      className="tai-tag-pill px-3 py-1 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
                     >
                       {tag}
                     </span>
@@ -797,7 +797,7 @@ export default function SoraPreviewPage() {
 
               {/* Awards & Recognition Block */}
               <div className="border-t border-white/[0.08] pt-8 space-y-5">
-                <span className="sora-label text-neutral-400 font-mono font-bold text-xs flex items-center gap-2 tracking-widest">
+                <span className="tai-label text-neutral-400 font-mono font-bold text-xs flex items-center gap-2 tracking-widest">
                   <Award className="w-4 h-4 text-neutral-400" /> RECOGNITION
                 </span>
                 <div className="space-y-6">
@@ -824,7 +824,7 @@ export default function SoraPreviewPage() {
                   {["IT Got Talent 2025", "Semifinalist", "Academic Scholarship", "DevOps Focus"].map((tag) => (
                     <span
                       key={tag}
-                      className="sora-tag-pill px-3 py-1 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
+                      className="tai-tag-pill px-3 py-1 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
                     >
                       {tag}
                     </span>
@@ -861,7 +861,7 @@ export default function SoraPreviewPage() {
 
           {/* Clean Masked Rolling Headline - Rolls 2 times on hover */}
           <div className="text-center py-6">
-            <div className="sora-heading-xl text-white tracking-tighter block leading-[0.88]">
+            <div className="tai-heading-xl text-white tracking-tighter block leading-[0.88]">
               <div className="overflow-hidden">
                 <TextRoll text="MODERN" rolls={2} />
               </div>
@@ -878,20 +878,20 @@ export default function SoraPreviewPage() {
             </div>
 
             {/* Top 3 Core Foundation Cards */}
-            <div className="sora-tech-grid-top">
-              <div className="sora-stack-tile-lg group">
+            <div className="tai-tech-grid-top">
+              <div className="tai-stack-tile-lg group">
                 <TechLogo name="Go" className="w-10 h-10 sm:w-16 sm:h-16 lg:w-20 lg:h-20 transition-colors duration-300" />
               </div>
-              <div className="sora-stack-tile-lg group">
+              <div className="tai-stack-tile-lg group">
                 <TechLogo name="Kubernetes" className="w-10 h-10 sm:w-16 sm:h-16 lg:w-20 lg:h-20 transition-colors duration-300" />
               </div>
-              <div className="sora-stack-tile-lg group">
+              <div className="tai-stack-tile-lg group">
                 <TechLogo name="Linux" className="w-10 h-10 sm:w-16 sm:h-16 lg:w-20 lg:h-20 transition-colors duration-300" />
               </div>
             </div>
 
             {/* Bottom 8 Tooling Cards (4x2 on Mobile/Tablet, 8x1 on Desktop) */}
-            <div className="sora-tech-grid-bottom">
+            <div className="tai-tech-grid-bottom">
               {[
                 { name: "Docker" },
                 { name: "Podman" },
@@ -902,7 +902,7 @@ export default function SoraPreviewPage() {
                 { name: "PostgreSQL" },
                 { name: "SonarQube" },
               ].map((item) => (
-                <div key={item.name} className="sora-stack-tile-sm group">
+                <div key={item.name} className="tai-stack-tile-sm group">
                   <TechLogo name={item.name} className="w-6 h-6 sm:w-8 sm:h-8 lg:w-11 lg:h-11 transition-colors duration-300" />
                 </div>
               ))}
@@ -918,7 +918,7 @@ export default function SoraPreviewPage() {
           <MaskedTextReveal
             as="h2"
             text={"RELIABLE\nSYSTEMS\nYOU OWN\n→ SHIP"}
-            className="sora-heading-xl text-white tracking-tighter drop-shadow-[0_12px_40px_rgba(0,0,0,0.85)]"
+            className="tai-heading-xl text-white tracking-tighter drop-shadow-[0_12px_40px_rgba(0,0,0,0.85)]"
           />
 
           {/* Start a project Button with Forward Directional Wipe, Arrow Roll & Bounce */}
@@ -1150,7 +1150,7 @@ export default function SoraPreviewPage() {
             if (e.touches[0]) startHolding(e.touches[0].clientX, e.touches[0].clientY);
           }}
           onTouchEnd={stopHolding}
-          className="sora-ocean-interactive-zone relative w-full min-h-[13rem] sm:h-72 lg:h-80 bg-transparent border-t border-b border-white/[0.08] flex flex-col sm:flex-row items-center justify-center sm:justify-between px-4 sm:px-12 lg:px-20 xl:px-24 gap-4 py-8 sm:py-0 overflow-hidden"
+          className="tai-ocean-interactive-zone relative w-full min-h-[13rem] sm:h-72 lg:h-80 bg-transparent border-t border-b border-white/[0.08] flex flex-col sm:flex-row items-center justify-center sm:justify-between px-4 sm:px-12 lg:px-20 xl:px-24 gap-4 py-8 sm:py-0 overflow-hidden"
         >
           {/* Studio Brand Mark & Glyph with Glassmorphic Badge (Click to Reload to Top) */}
           <button
@@ -1190,7 +1190,7 @@ export default function SoraPreviewPage() {
             <span className="leading-none">『Reliable Infrastructure for Production.』</span>
           </div>
 
-          {/* Polished Floating Interactive Hold Pill (SoraLabs Aesthetic) */}
+          {/* Polished Floating Interactive Hold Pill (ThinkAI Studio) */}
           <AnimatePresence>
             {isOceanHovered && (
               <motion.div
@@ -1205,10 +1205,10 @@ export default function SoraPreviewPage() {
                   zIndex: 9999,
                   pointerEvents: "none",
                 }}
-                className={`sora-hold-pill ${isOceanHolding ? "is-holding" : ""}`}
+                className={`tai-hold-pill ${isOceanHolding ? "is-holding" : ""}`}
               >
                 {/* SVG Circular Progress Ring */}
-                <svg className="sora-hold-ring" viewBox="0 0 24 24">
+                <svg className="tai-hold-ring" viewBox="0 0 24 24">
                   <circle
                     cx="12"
                     cy="12"
@@ -1226,7 +1226,7 @@ export default function SoraPreviewPage() {
                     strokeDasharray={56.54}
                     strokeDashoffset={56.54 - (56.54 * holdProgress) / 100}
                     strokeLinecap="round"
-                    className="sora-hold-ring-circle"
+                    className="tai-hold-ring-circle"
                   />
                 </svg>
 

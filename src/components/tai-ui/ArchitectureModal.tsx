@@ -17,7 +17,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { projects } from "@/data/portfolio";
-import { SoraLogoMark } from "./HalftoneBanner";
+import { TaiLogoMark } from "./HalftoneBanner";
 
 interface ArchitectureModalProps {
   projectId: "homelab" | "thinkai" | null;
@@ -65,7 +65,7 @@ export function ArchitectureModal({ projectId, onClose, lang }: ArchitectureModa
             {/* Header */}
             <div className="px-6 py-4 bg-[#141417] border-b border-white/[0.08] flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <SoraLogoMark className="w-4 h-4" />
+                <TaiLogoMark className="w-4 h-4" />
                 <div>
                   <div className="flex items-center gap-2">
                     <h3 className="text-base sm:text-lg font-bold text-white uppercase tracking-tight">

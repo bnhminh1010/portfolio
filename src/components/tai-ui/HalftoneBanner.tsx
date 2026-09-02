@@ -29,7 +29,7 @@ export function HalftoneBanner({
   );
 }
 
-export function SoraLogoMark({ className = "w-4 h-4" }: { className?: string }) {
+export function TaiLogoMark({ className = "w-4 h-4" }: { className?: string }) {
   return (
     <div className={`grid grid-cols-2 gap-[2px] ${className}`}>
       <div className="w-full h-full bg-white rounded-none" />

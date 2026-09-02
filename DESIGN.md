@@ -1,110 +1,92 @@
-# Soralabs Studio — Design System & Motion Specification (`DESIGN.md`)
+# ThinkAI Studio — Design Language & Engineering Specification (`DESIGN.md`)
 
-> **Phiên bản:** 2.0 (High-Fidelity Specification)  
-> **Áp dụng cho:** `/preview-sora` (DevOps & Systems Engineering Portfolio)  
-> **Tiêu chuẩn tham chiếu:** `soralabs.studio`, `SoraLabsOSS/skills` (`motion-meaning`, `animating-icons`), `SoraLabsOSS/ui`.
+> **Version:** 1.0 (Official Specification)  
+> **Author & Maintainer:** ThinkAI Studio / Nguyen Huu Binh Minh  
+> **Repository:** `bnhminh1010/portfolio`  
+> **Component Namespace:** `tai-ui` (`@/components/tai-ui/`)  
+> **Style Scope:** `tai-*` (`src/app/studio.css`, `src/app/globals.css`)  
 
 ---
 
-## 1. Triết Lý Thiết Kế & Hệ Thống Thị Giác (Visual Philosophy)
+## 1. Triết Lý Thiết Kế & Bản Sắc Thương Hiệu (Brand Philosophy)
 
-Giao diện Soralabs không phải là một landing page thông thường; nó là một **Layered Editorial Experience (Trải nghiệm Tạp chí Điện tử Phân Tầng)**. Sự kết hợp giữa phong cách **Dark-Tech Minimalist** và kỹ thuật **Motion-First** tạo nên cảm giác cao cấp qua 4 trụ cột:
+ThinkAI Studio được xây dựng dựa trên nguyên lý **"Infrastructure-Grade Craft"** — Mọi pixel và tương tác trên giao diện phải có độ chính xác, tin cậy và bền bỉ tương đương một hệ thống hạ tầng phân tán cao cấp.
 
-1. **High-Contrast Density (Tương phản Mật độ):** Đan xen giữa các section tối đậm (`#121212`, `#141417`) và các khoang tương phản mạnh (Drawer About màu sáng `#f4f4f5`, ô Stack hover màu trắng rực `#ffffff`).
-2. **Typography as Structure (Chữ là Kiến trúc):** Sử dụng các tiêu đề Grotesque siêu lớn (Display XL) kéo dài toàn bộ chiều ngang để định hình cấu trúc trang, kết hợp nhãn Monospace siêu nhỏ (`11px`) để tạo chất kỹ thuật (Engineering Credibility).
-3. **12-Column Asymmetric Grid (Lưới 12 Cột Bất Đối Xứng):** Cột định danh (`● Section Label`) luôn nằm riêng biệt ở biên trái, tạo nhịp quét mắt nhất quán khi người dùng cuộn từ trên xuống dưới.
-4. **Communicative Motion (Chuyển Động Có Chủ Đích):** Mọi chuyển động phải trả lời được câu hỏi: *"Chuyển động này đóng vai trò gì trong việc đọc và tương tác?"*. Tuyệt đối không dùng chuyển động lắc lư (wiggle) vô nghĩa.
+### 4 Trụ Cột Cốt Lõi (The 4 Anti-AI-Slop Pillars):
+
+1. **Obsidian Monochromatic Restraint (Kiềm Chế Đơn Sắc Hắc Thạch):**
+   - Không lạm phát màu sắc trang trí (zero decorative purple gradients / neon glow).
+   - Sử dụng các lớp đen hắc thạch phân tầng (`#05070a`, `#0c0c0e`, `#111113`, `#121215`, `#141417`, `#161619`, `#18181c`).
+   - Màu sắc duy nhất được dùng là `#4ade80` (Emerald) cho trạng thái hệ thống hoạt động chuẩn mực (All Systems Nominal / Live Status).
+
+2. **Sharp Architectural Geometry (Hình Học Góc Cạnh Kiến Trúc):**
+   - **100% Zero Border-Radius**: Toàn bộ buttons, cards, dialogs, drawers, inputs và pills đều giữ góc vuông 90° sắc nét (`border-radius: 0px !important`).
+   - Thể hiện sự chuẩn xác của kiến trúc bare-metal và máy chủ Unix.
+
+3. **Analog Micro-Grain Tactility (Chất Cảm Vật Lý Tương Tự):**
+   - Phủ một lớp film micro-grain (`SVG feTurbulence baseFrequency 1.4, opacity 0.135, background-size: 80px`) lên toàn bộ màn hình.
+   - Loại bỏ hoàn toàn cảm giác "phẳng và vô hồn" của giao diện số mặc định.
+
+4. **Communicative Motion Physics (Vật Lý Chuyển Động Có Mục Đích):**
+   - Mọi animation đều phải truyền tải trạng thái hoặc quan hệ không gian.
+   - Tuyệt đối không dùng chuyển động lắc lư vô nghĩa.
+   - Áp dụng đường cong Luxury Decelerate `cubic-bezier(0.16, 1, 0.3, 1)` và Spring Physics (`damping: 32, stiffness: 280`).
 
 ---
 
 ## 2. Bảng Token Thiết Kế (Design Tokens)
 
-### 2.1. Bảng Màu (Color Palette)
+### 2.1. Bảng Màu (Color Tokens)
 
-| Token Name | Hex / CSS Value | Ứng Dụng |
-| :--- | :--- | :--- |
-| `--sora-bg` | `#121212` | Nền canvas gốc, nền Hero, Footer |
-| `--sora-sheet` | `#141417` | Nền các tầng nội dung (Work, Products) |
-| `--sora-sheet-alt` | `#111113` | Nền khoang phụ, Tech Stack, Footer Alt |
-| `--sora-card-surface` | `#18181c` | Bề mặt card, Bezel laptop mockup |
-| `--sora-code-block` | `#161619` | Khối dòng lệnh CLI, terminal snippet |
-| `--sora-drawer-bg` | `#f4f4f5` | Nền Modal/Drawer About (Tương phản sáng) |
-| `--sora-border` | `rgba(255, 255, 255, 0.08)` | Viền chia section, grid lines |
-| `--sora-border-strong`| `rgba(255, 255, 255, 0.22)` | Viền hover, viền trạng thái active |
-| `--sora-fg` | `#fcfcfc` | Chữ chính, display headings, logo |
-| `--sora-fg-muted` | `#8a8a93` | Chữ diễn giải, monospace labels |
-| `--sora-fg-subtle` | `#5a5a63` | Metadata phụ, số thứ tự phân cách |
-| `--sora-accent-green` | `#4ade80` | Status dot, verification indicator |
+```css
+:root {
+  /* Canvas & Sheet Surfaces */
+  --tai-bg: #121212;             /* Nền canvas gốc */
+  --tai-sheet: #141417;          /* Tầng nội dung chính (Projects, Products) */
+  --tai-sheet-alt: #111113;      /* Tầng nội dung phụ (Tech Stack, Footer) */
+  --tai-card-surface: #18181c;   /* Bề mặt card, Bezel mockup */
+  --tai-code-block: #161619;     /* Khối lệnh CLI reproduction */
+  --tai-drawer-bg: #f4f4f5;      /* Nền About Drawer tương phản sáng */
+
+  /* Hairline Borders */
+  --tai-border: rgba(255, 255, 255, 0.08);        /* Viền hairline ngăn cách */
+  --tai-border-strong: rgba(255, 255, 255, 0.22); /* Viền hover / active */
+
+  /* Typography Colors */
+  --tai-fg: #fcfcfc;             /* Chữ chính, display headlines */
+  --tai-fg-muted: #8a8a93;       /* Chữ phụ, body descriptions */
+  --tai-fg-subtle: #5a5a63;      /* Metadata, số thứ tự phân cách */
+
+  /* Functional Status Accent */
+  --tai-accent-green: #4ade80;   /* Trạng thái danh nghĩa / verified */
+}
+```
 
 ### 2.2. Thang Typography (Typography Scale)
 
-| Level | Size (Clamp / Rem) | Weight | Tracking | Line-Height | Transform | Ứng Dụng |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Display XL** | `clamp(3.4rem, 10.5vw, 9.2rem)` | 800 | `-0.045em` | `0.88` | UPPERCASE | Hero Headline, Slogan CTA, Modern Tech Stack |
-| **Display LG** | `clamp(2.4rem, 6vw, 5.5rem)` | 800 | `-0.040em` | `0.92` | UPPERCASE | Section Titles, Footer Navigation Links |
-| **Statement** | `clamp(1.5rem, 3.2vw, 2.6rem)` | 600 | `-0.025em` | `1.22` | Normal | Core Statement (Highlight on Scroll) |
-| **H3 / Card** | `1.875rem (30px)` – `2.25rem` | 700 | `-0.020em` | `1.15` | Normal | Project Titles, Work Experience Roles |
-| **Body LG** | `1.0625rem (17px)` | 300 | `-0.010em` | `1.65` | Normal | Project Summaries, Drawer Bio |
-| **Body SM** | `0.875rem (14px)` | 400 | `0` | `1.55` | Normal | 3-Pillar Story details (Problem/Approach/Outcome) |
-| **Mono Label**| `0.6875rem (11px)` | 500 | `+0.160em` | `1.00` | UPPERCASE | Metadata tags, `● Products`, `01/02`, CLI headers |
+| Token / Class | Font Family | Size (Fluid Clamp) | Weight | Tracking | Line-Height | Transform | Ứng Dụng |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `.tai-heading-hero` | Barlow Condensed | `clamp(2.6rem, 7.8vw, 7.2rem)` | 700 / 800 | `-0.026em` | `0.94` | UPPERCASE | Hero Headline ("RELIABLE DELIVERY") |
+| `.tai-heading-xl` | Barlow Condensed | `clamp(2.4rem, 7.5vw, 7.0rem)` | 700 / 800 | `-0.028em` | `0.94` | UPPERCASE | Section Titles, Modern Tech Stack, CTA |
+| `.tai-heading-lg` | Barlow Condensed | `clamp(2.0rem, 5.0vw, 4.8rem)` | 700 | `-0.024em` | `0.94` | UPPERCASE | Drawer Headlines, Sub-section Headers |
+| `.tai-heading-statement` | Barlow Condensed | `clamp(1.5rem, 3.2vw, 2.6rem)` | 600 | `-0.020em` | `1.20` | Normal | Core Studio Statements |
+| `.tai-label` | System Monospace | `11.5px` | 500 / 700 | `+0.160em` | `1.00` | UPPERCASE | HUD Labels, `● Products`, `01/03`, CLI tags |
+| Body Regular | System Sans Stack | `14px - 16px` | 300 / 400 | `-0.010em` | `1.65` | Normal | Project summaries, Drawer bios |
 
 ---
 
-## 3. Hệ Thống Lưới & Khoảng Cách (12-Column Grid & Spacing)
+## 3. Hệ Thống Chuyển Động & Tương Tác Đặc Trưng (Interactive Signatures)
 
-### 3.1. Cấu Trúc Lưới 12 Cột (Desktop >= 1024px)
-Toàn bộ nội dung nằm trong container `max-w-[1400px] px-6 mx-auto`.
-
-```
-[ Col 1-2 ]           [ Col 3-8 ]                      [ Col 9-12 ]
-┌──────────────┐   ┌──────────────────────────────┐   ┌──────────────────────┐
-│ ● Products   │   │                              │   │ UI ← 01/02           │
-│              │   │   Large Mockup / Media       │   │ Project Title        │
-│ 01/02        │   │   with Inset Parallax        │   │ 3-Pillar Story       │
-│              │   │                              │   │ CLI Box & Buttons    │
-└──────────────┘   └──────────────────────────────┘   └──────────────────────┘
-(2 Cols - 16.6%)          (6 Cols - 50.0%)               (4 Cols - 33.3%)
-```
-
-### 3.2. Nhịp Khoảng Cách (Vertical Rhythm)
-- **Section Spacing:** `py-28` (112px) đến `py-36` (144px) đối với các sheet lớn.
-- **Section Gap:** `space-y-16` (64px) giữa các khối nội dung lớn.
-- **Card Padding:** `p-8` (32px) cho Work cards; `p-5` cho Laptop Mockup bezel.
-
----
-
-## 4. Đặc Tả Hệ Thống Chuyển Động (Layered Motion Specification)
-
-### 4.1. Bảng Easing & Timing Curve Chuẩn
+### 3.1. Easing Curves Chuẩn của ThinkAI Studio
 
 ```ts
-export const SORA_EASE = {
-  luxury: [0.16, 1, 0.3, 1] as const,     // Easing mượt mà cho reveal, trượt mở, transition chính
-  snappy: [0.19, 1, 0.22, 1] as const,    // Easing nhanh dứt khoát cho button hover, pill sweep
-  entrance: [0.25, 1, 0.5, 1] as const,   // Easing tự nhiên cho element trượt vào tầm nhìn
+export const THINKAI_EASE = {
+  luxury: [0.16, 1, 0.3, 1] as const,     // Easing trượt mượt mà cho reveal, dialog, sheet
+  snappy: [0.19, 1, 0.22, 1] as const,    // Easing tức thì cho button hover, pill sweep
+  entrance: [0.25, 1, 0.5, 1] as const,   // Easing tự nhiên cho element trượt vào viewport
 };
 ```
-
----
-
-### 4.2. Chi Tiết Từng Lớp Chuyển Động (Motion Layers)
-
-#### Lớp 1: Ambient Visual Motion (Canvas Nền)
-- **Component:** `WaveHalftoneCanvas` / `HalftoneBanner`
-- **Vị trí:** Hero section và CTA kết màn.
-- **Cơ chế:** Render bằng Canvas 2D/WebGL trực tiếp trên GPU. Các hạt halftone biến đổi vị trí theo hàm sóng Sin kết hợp độ lệch con trỏ chuột (`mouse position lerp factor: 0.05`).
-- **FPS Target:** 120 FPS / không gây jank luồng DOM chính.
-- **Reduced Motion:** Ngừng vòng lặp requestAnimationFrame, vẽ 1 frame tĩnh với độ mờ dịu.
-
-#### Lớp 2: Typography Mask Reveal (Tiêu đề & Nhãn)
-- **Component:** `MaskedTextReveal`
-- **Vị trí:** Eyebrow, H1, H2, Tiêu đề section.
-- **Cơ chế:** Wrap từng dòng/từ trong `span` có `overflow: hidden; display: block;`. 
-- **Animation:** `initial: { y: "100%", opacity: 0 } -> whileInView: { y: "0%", opacity: 1 }`.
-- **Timing:** Duration `0.9s`, Ease `[0.16, 1, 0.3, 1]`, Stagger dòng `0.12s`.
-- **Reduced Motion:** Hiển thị tức thì (`y: "0%", opacity: 1, duration: 0`).
-
-#### Lớp 3: Scroll-Driven 3D Perspective Roll (Chữ Khổng Lồ Cuộn Xoay)
+#### Lớp 3: Scroll-Driven 3D Perspective Roll
 - **Component:** `ScrollRollText`
 - **Vị trí:** `RELIABLE / DELIVERY`, `MODERN / TECH STACK`, `RELIABLE SYSTEMS YOU OWN → SHIP`.
 - **Cơ chế:** Tách mỗi dòng thành 2 nửa bằng `clipPath: inset(0 0 50% 0)` (nửa trên) và `clipPath: inset(50% 0 0 0)` (nửa dưới).
@@ -138,39 +120,63 @@ export const SORA_EASE = {
 - **Reduced Motion:** Bỏ parallax, container hiển thị ở `clipPath: inset(0)`.
 
 #### Lớp 7: Interactive Micro-Gestures & Buttons
-- **Component:** `SoraButton`, `TechLogos`
-- **Nguyên tắc Soralabs OSS:** "Chuyển động là ý nghĩa của chính đối tượng tác động lên nó".
-  - **Button:** Lớp phủ ánh sáng `mix-blend-overlay` quét từ dưới lên `y: 100% -> 0%`. Text nhấc nhẹ `y: -1px`.
+- **Component:** `WipeButton`, `TaiButton`, `TechLogos`
+- **Nguyên tắc:** "Chuyển động là ý nghĩa của chính đối tượng tác động lên nó".
+  - **WipeButton:** Lớp phủ nền quét từ trái sang phải (`-102% → 0% → 102%`).
+  - **TaiButton:** Lớp phủ ánh sáng `mix-blend-overlay` quét từ dưới lên `y: 100% -> 0%`. Text nhấc nhẹ `y: -0.5px`.
   - **Directional Arrow:** Mũi tên tiến về trước `x: +4px` (Không rung lắc, không xoay góc giả tạo).
   - **Tech Stack Tiles:** Khi hover, màu nền đảo nghịch từ đen sang trắng rực (`bg-white text-black`), nâng nổi `y: -2px`, đổ bóng `shadow-xl`.
 
-#### Lớp 8: Overlay / Modal State Transition (About Drawer)
-- **Component:** `AboutDrawer`
-- **Vị trí:** Global overlay kích hoạt từ Nav hoặc Footer.
+#### Lớp 8: Overlay / Modal State Transition (About Drawer & Architecture Modal)
+- **Component:** `AboutDrawer`, `ArchitectureModal`, `ContactModal`
 - **Cơ chế:**
-  - Backdrop: Fade `opacity: 0 -> 0.6`.
+  - Backdrop: Fade `opacity: 0 -> 0.85` kết hợp `backdrop-blur-md`.
   - Drawer Panel: Spring sliding `x: 100% -> 0%` (`damping: 28, stiffness: 260`).
-  - Internal Stagger: Các mục Bio, Principles, Tech Matrix xuất hiện so le.
-  - Phím bấm `ESC` và Click Outside tự động đóng; khoá cuộn màn hình nền (`overflow: hidden`).
+  - Modal Window: Scale `0.97 -> 1.0` kết hợp `y: 12px -> 0px` (`duration: 0.22s`).
+  - Phím bấm `ESC` và Click Outside tự động đóng; khoá cuộn màn hình nền.
 
 ---
 
-## 5. Quy Chuẩn Tuân Thủ Reduced Motion (WCAG & SoraLabs OSS)
+## 4. Quy Chuẩn Tuân Thủ Reduced Motion (WCAG AAA)
 
-Toàn bộ component phải triển khai đúng 4 chiến lược theo tài liệu `motion-meaning`:
+Toàn bộ component phải triển khai đúng 4 chiến lược chuyển động tiếp cận:
 
 | Chiến Lược | Áp Dụng Cho | Biểu Hiện Dưới Reduced Motion |
 | :--- | :--- | :--- |
 | **1. Bail** | Ambient Canvas, Parallax Layers, Glow Blurs | Hiệu ứng biến mất hoặc đứng yên, giải phóng tài nguyên GPU |
 | **2. Snap to end state** | `ScrollRollText`, `HighlightOnScroll`, Typography Reveal | Văn bản hiển thị đầy đủ ở trạng thái cuối cùng, không lửng lơ |
-| **3. Collapse transition** | `SoraButton` sweep, Tab switches, `ProjectSequence` | Chuyển đổi trạng thái ngay lập tức (`duration: 0.01ms`) |
-| **4. Reduce complexity** | `WaveHalftoneCanvas` | Giảm mật độ particle, tắt auto-drift |
+| **3. Collapse transition** | `WipeButton`, `TaiButton`, Tab switches, `ProjectSequence` | Chuyển đổi trạng thái ngay lập tức (`duration: 0.01ms`) |
+| **4. Reduce complexity** | `ThreeHalftoneCanvas`, `WaveHalftoneCanvas` | Giảm mật độ particle, tắt auto-drift |
 
 ---
 
-## 6. Tiêu Chí Nghiệm Thu Điểm 10/10
+## 5. Cấu Trúc Thành Phần `src/components/tai-ui/` (16 Active Production Components)
 
-1. **Về Layout:** Tỉ lệ lưới 12 cột chuẩn xác trên màn hình `>= 1024px`, responsive hoàn hảo trên Mobile (`< 768px`) và Tablet (`768px - 1023px`).
-2. **Về Typography:** Chữ tiêu đề lớn có độ nén kerning chuẩn grotesque, không có lỗi rớt từ cụt ngủn.
-3. **Về Motion:** Chuyển động mượt mà 60–120 FPS, không gây Layout Shifts (CLS = 0), không gây lag CPU.
-4. **Về UX:** Khả năng truy cập bàn phím đầy đủ, mở đóng Drawer About mượt mà, copy dòng lệnh CLI trơn tru.
+```
+src/components/tai-ui/
+├── AboutDrawer.tsx              # Drawer giới thiệu tiểu sử & kinh nghiệm
+├── AiBrandIcons.tsx             # Bộ SVG icons cho các mô hình AI (Claude, Gemini, OpenAI, etc.)
+├── ArchitectureModal.tsx        # Modal xem sơ đồ kiến trúc hệ thống đa tab
+├── ArrowRoll.tsx                # Icon mũi tên lật mượt mà khi hover
+├── ButtonTextRoll.tsx           # Hiệu ứng chữ cuộn 2 tầng trên nút bấm
+├── ContactModal.tsx             # Modal liên hệ & sao chép thông tin
+├── HalftoneBanner.tsx           # Banner WebGL halftone tích hợp LogoMark
+├── MaskedTextReveal.tsx         # Reveal chữ mượt mà qua mặt nạ cắt (Clip-Path)
+├── ProductMockup.tsx            # Khung laptop browser mockup chuẩn studio
+├── SmoothScroll.tsx             # Bộ điều phối cuộn mượt mà Lenis 120Hz
+├── TaiButton.tsx                # Nút bấm cơ bản ThinkAI Studio với sweep hover
+├── TaiHeader.tsx                # Header điều hướng trong suốt & mobile drawer
+├── TechLogos.tsx                # Bộ nhận diện công nghệ (Go, K8s, Linux, Podman...)
+├── TextRoll.tsx                 # Slot-machine text tumbler roll cho headlines
+├── ThreeHalftoneCanvas.tsx      # WebGL Ocean Shader Engine chính
+└── WipeButton.tsx               # Nút bấm signature với hiệu ứng Forward Wipe
+```
+
+---
+
+## 6. Ghi Nhận Bản Quyền & Giấy Phép (Design Acknowledgment)
+
+> **Design Acknowledgment & Attribution:**  
+> Hệ thống thiết kế của ThinkAI Studio kế thừa và phát triển từ phong cách Dark-Mode Editorial đương đại được khởi xướng bởi các studio công nghệ hàng đầu (như SoraLabs, Linear, và Vercel).  
+> Mọi thành phần UI trong `src/components/tai-ui/` được cài đặt độc lập bằng React, TypeScript, Tailwind CSS, Three.js và Motion (`motion/react`).  
+> Bản quyền thuộc về **ThinkAI Studio / Nguyen Huu Binh Minh** (c) 2026.

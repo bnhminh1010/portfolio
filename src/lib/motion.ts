@@ -25,11 +25,11 @@ export function useReducedMotion(): boolean {
 }
 
 /**
- * Default transition for Sora-style animations
+ * Default transition for ThinkAI Studio animations
  */
 export const defaultTransition: Transition = {
   duration: 0.5,
-  ease: [0.16, 1, 0.3, 1], // Sora-style ease
+  ease: [0.16, 1, 0.3, 1], // ThinkAI luxury decelerate ease
 };
 
 /**

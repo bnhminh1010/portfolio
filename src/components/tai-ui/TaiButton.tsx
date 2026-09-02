@@ -4,7 +4,7 @@ import React from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
-interface SoraButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface TaiButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   href?: string;
   variant?: "primary" | "secondary" | "outline" | "ghost";
@@ -12,14 +12,14 @@ interface SoraButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
   className?: string;
 }
 
-export function SoraButton({
+export function TaiButton({
   children,
   href,
   variant = "primary",
   icon,
   className,
   ...props
-}: SoraButtonProps) {
+}: TaiButtonProps) {
   const prefersReduced = useReducedMotion();
 
   const baseClasses =

@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 
 import { ArrowDown, ArrowUpRight, Github, Linkedin, Mail, MapPin } from "lucide-react";

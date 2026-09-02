@@ -8,14 +8,14 @@ import { WipeButton } from "./WipeButton";
 import { ButtonTextRoll } from "./ButtonTextRoll";
 import { ArrowRoll } from "./ArrowRoll";
 
-interface SoraHeaderProps {
+interface TaiHeaderProps {
   onOpenAbout: () => void;
   onOpenContact?: () => void;
 }
 
 const LUXURY_EASE = [0.16, 1, 0.3, 1] as const;
 
-export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
+export function TaiHeader({ onOpenAbout, onOpenContact }: TaiHeaderProps) {
   const [isHeaderHidden, setIsHeaderHidden] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -219,7 +219,7 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
         </div>
       </motion.header>
 
-      {/* ─── AUTHENTIC SORALABS MOBILE NAVIGATION DRAWER (Upper Curtain with Grab Handle) ─── */}
+      {/* ─── AUTHENTIC THINKAI MOBILE NAVIGATION DRAWER (Upper Curtain with Grab Handle) ─── */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -321,7 +321,7 @@ export function SoraHeader({ onOpenAbout, onOpenContact }: SoraHeaderProps) {
               </a>
             </motion.div>
 
-            {/* Bottom Grab Bar Handle Icon matching Sora */}
+            {/* Bottom Grab Bar Handle */}
             <div className="flex justify-center items-center py-2">
               <div className="flex flex-col gap-1 items-center">
                 <div className="w-8 h-[2px] rounded-none bg-neutral-600/80" />
