@@ -9,6 +9,8 @@ import {
   GraduationCap,
   Award,
   Sparkles,
+  Lock,
+  ArrowUpRight,
 } from "lucide-react";
 import { projects, profile } from "@/data/portfolio";
 import { ThreeHalftoneCanvas } from "@/components/tai-ui/ThreeHalftoneCanvas";
@@ -17,6 +19,8 @@ import { MaskedTextReveal } from "@/components/tai-ui/MaskedTextReveal";
 import { TextRoll } from "@/components/tai-ui/TextRoll";
 import { ButtonTextRoll } from "@/components/tai-ui/ButtonTextRoll";
 import { ProductMockup } from "@/components/tai-ui/ProductMockup";
+import { ParallaxProductCover } from "@/components/tai-ui/ParallaxProductCover";
+import { ArchitectureModal } from "@/components/tai-ui/ArchitectureModal";
 import { AboutDrawer } from "@/components/tai-ui/AboutDrawer";
 import { ContactModal } from "@/components/tai-ui/ContactModal";
 import { ArrowRoll } from "@/components/tai-ui/ArrowRoll";
@@ -105,8 +109,7 @@ export default function PortfolioPage() {
     document.title = "ThinkAI Studio";
   }, []);
 
-  const [storyTab0, setStoryTab0] = useState<"problem" | "approach" | "outcome">("problem");
-  const [storyTab1, setStoryTab1] = useState<"problem" | "approach" | "outcome">("problem");
+  const [selectedArchProject, setSelectedArchProject] = useState<"thinkai-ui" | "homelab" | "thinkai" | null>(null);
 
   // Chapter 01 Carousel State & Progress Bar
   const [activeSlide, setActiveSlide] = useState(0);
@@ -367,317 +370,151 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ─── 04. PRODUCT SHOWCASE CONTINUOUS STACK (Edge-to-Edge Wide) ─── */}
-      <section id="products" className="relative z-20 bg-[#141417] py-28 sm:py-36 border-t border-white/[0.08] shadow-2xl">
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 lg:px-16 space-y-32 sm:space-y-44">
-          {/* Product 01: HomeLab Dashboard */}
+      {/* ─── 04. PRODUCT SHOWCASE (Progressive Disclosure Split Grid) ─── */}
+      <section id="products" className="relative z-20 bg-[#08080a] py-24 sm:py-32 border-t border-white/[0.08] shadow-2xl">
+        <div className="max-w-[1600px] mx-auto px-6 sm:px-12 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
-            {/* Left 2 Cols: Section Label */}
-            <div className="lg:col-span-2">
+            {/* Left 2 Cols: Sticky Section Label */}
+            <div className="lg:col-span-2 lg:sticky lg:top-24">
               <div className="flex items-center gap-2 text-sm sm:text-base font-bold text-neutral-200">
-                <span className="w-2.5 h-2.5 rounded-none bg-neutral-300" />
-                <span>Products</span>
+                <span className="w-2.5 h-2.5 rounded-none bg-emerald-400" />
+                <span className="uppercase tracking-wider">Products</span>
               </div>
+              <span className="block text-xs font-mono text-neutral-500 mt-1">
+                03 Systems Live
+              </span>
             </div>
 
-            {/* Center 6 Cols: Clean Browser Frame Mockup */}
-            <div className="lg:col-span-6">
-              <ProductMockup
-                title={projects[0].content[lang].title}
-                headline={projects[0].content[lang].category}
-                description={projects[0].content[lang].summary}
-                domain="hostdeck.thinkai.id.vn"
-                type="homelab"
-              />
-            </div>
+            {/* Right 10 Cols: Asymmetric Split Grid Collection */}
+            <div className="lg:col-span-10 divide-y divide-dotted divide-white/20">
+              {projects.map((project, index) => {
+                const indexStr = String(index + 1).padStart(2, "0");
+                const totalStr = String(projects.length).padStart(2, "0");
+                return (
+                  <div key={project.id} className="py-14 sm:py-16 first:pt-0 last:pb-0">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                      
+                      {/* Left: 16:10 Monolithic Media Cover with Scroll Parallax Scrub (Span 7) */}
+                      <div className="lg:col-span-7">
+                        <ParallaxProductCover
+                          image={project.preview.image}
+                          title={project.content[lang].title}
+                          liveUrl={project.liveUrl}
+                          mark={project.mark}
+                          status="LIVE"
+                          priority={index === 0}
+                        />
+                      </div>
 
-            {/* Right 4 Cols: Editorial Narrative & Scaled Typography */}
-            <div className="lg:col-span-4 space-y-6">
-              <div className="tai-label text-neutral-400 font-mono font-bold text-xs tracking-widest">
-                HOMELAB PLATFORM
-              </div>
+                      {/* Right: Editorial & Telemetry Column (Span 5) */}
+                      <div className="lg:col-span-5 space-y-6">
+                        {/* Micrographic Header: [MARK] ─── ● ─── 01/03 */}
+                        <div className="flex items-center gap-3 font-mono text-xs">
+                          <span className="px-2.5 py-1 rounded-none bg-white/10 text-white border border-white/20 font-bold tracking-wider">
+                            {project.mark}
+                          </span>
+                          <div className="flex-1 flex items-center gap-2">
+                            <div className="h-[1px] flex-1 bg-white/25" />
+                            <div className="w-1.5 h-1.5 rounded-none bg-emerald-400" />
+                            <div className="h-[1px] flex-1 bg-white/25" />
+                          </div>
+                          <span className="px-2.5 py-1 rounded-none border border-white/20 text-neutral-300 font-mono font-semibold bg-white/[0.04]">
+                            {indexStr} / {totalStr}
+                          </span>
+                        </div>
 
-              <h3 className="text-3xl sm:text-5xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
-                {projects[0].content[lang].title}
-              </h3>
+                        {/* Title & Category Eyebrow */}
+                        <div className="space-y-2">
+                          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white uppercase">
+                            {project.content[lang].title}
+                          </h3>
+                          <p className="text-xs sm:text-sm font-mono text-neutral-300 uppercase tracking-wider font-semibold">
+                            {project.content[lang].category}
+                          </p>
+                        </div>
 
-              <p className="text-base sm:text-lg text-neutral-200 leading-relaxed font-light">
-                {projects[0].content[lang].summary}
-              </p>
+                        {/* Punchy 2-line Value Proposition Summary */}
+                        <p className="text-neutral-200 text-sm sm:text-base leading-relaxed">
+                          {project.content[lang].summary}
+                        </p>
 
-              {/* 3-Pillar Interactive Segmented Story Switcher */}
-              <div className="space-y-4 border-y border-white/[0.08] py-5">
-                {/* Segmented Pill Switcher */}
-                <div className="flex items-center gap-1.5 p-1 rounded-none bg-white/[0.04] border border-white/[0.08] w-fit">
-                  {[
-                    { id: "problem", label: "Problem" },
-                    { id: "approach", label: "Approach" },
-                    { id: "outcome", label: "Outcome" },
-                  ].map((tab) => {
-                    const isActive = storyTab0 === tab.id;
-                    return (
-                      <button
-                        key={tab.id}
-                        type="button"
-                        onClick={() => setStoryTab0(tab.id as "problem" | "approach" | "outcome")}
-                        className={`relative px-3.5 py-1.5 rounded-none text-xs font-mono font-bold tracking-wide transition-colors cursor-pointer select-none ${
-                          isActive ? "text-[#0a0a0c]" : "text-neutral-400 hover:text-white"
-                        }`}
-                      >
-                        {isActive && (
-                          <motion.div
-                            layoutId="storyTabIndicator0"
-                            className="absolute inset-0 rounded-none bg-white shadow-md"
-                            transition={{ type: "spring", bounce: 0.15, duration: 0.4 }}
-                          />
-                        )}
-                        <span className="relative z-10">{tab.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
+                        {/* Tech Stack Chips */}
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                          {project.stack.map((item) => (
+                            <span
+                              key={item}
+                              className="px-2.5 py-1 rounded-none font-mono text-xs bg-[#141418] text-neutral-200 border border-white/15 hover:border-white/30 transition-colors"
+                            >
+                              {item}
+                            </span>
+                          ))}
+                        </div>
 
-                {/* Active Narrative Card with Large Typography */}
-                <div className="min-h-[85px] sm:min-h-[95px] flex flex-col justify-center">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={storyTab0}
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                      <p className="text-base sm:text-[17.5px] lg:text-[18px] text-neutral-100 leading-[1.65] font-light">
-                        {storyTab0 === "problem" && projects[0].content[lang].story.problem}
-                        {storyTab0 === "approach" && projects[0].content[lang].story.approach}
-                        {storyTab0 === "outcome" && projects[0].content[lang].story.outcome}
-                      </p>
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-              </div>
+                        {/* Telemetry Result Block */}
+                        <div className="p-4 rounded-none bg-[#0f0f13] border border-white/15 space-y-3 shadow-inner">
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-2">
+                              <span className="px-2 py-0.5 rounded-none bg-white text-black font-mono text-xs font-bold">
+                                {project.metric.value}
+                              </span>
+                              <span className="font-mono text-xs sm:text-sm font-bold text-emerald-400">
+                                {project.metric.label[lang].split("•")[0]?.trim()}
+                              </span>
+                            </div>
+                            {project.cliCommand && (
+                              <button
+                                type="button"
+                                onClick={() => handleCopy(project.cliCommand!)}
+                                className="flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-white/10 hover:bg-white/20 text-neutral-100 hover:text-white border border-white/20 hover:border-white/40 font-mono text-xs font-semibold transition-colors cursor-pointer shrink-0"
+                              >
+                                {copiedCli === project.cliCommand ? (
+                                  <>
+                                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                                    <span className="text-emerald-400 font-bold">COPIED</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Copy className="w-3.5 h-3.5 text-neutral-300" />
+                                    <span>COPY CLI</span>
+                                  </>
+                                )}
+                              </button>
+                            )}
+                          </div>
+                          <p className="font-mono text-xs text-neutral-300 truncate">
+                            {project.metric.label[lang]}
+                          </p>
+                        </div>
 
-              {/* Stack Tags */}
-              <div className="flex flex-wrap gap-2 pt-1">
-                {projects[0].stack.map((item) => (
-                  <span
-                    key={item}
-                    className="tai-tag-pill px-3 py-1 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
+                        {/* Dual Action CTAs: Open System + Architecture Deep Dive */}
+                        <div className="flex flex-wrap items-center gap-3 pt-2">
+                          {project.liveUrl && (
+                            <a
+                              href={project.liveUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-2 px-5 py-3 rounded-none bg-white text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-neutral-200 transition-colors shadow-lg"
+                            >
+                              <span>{lang === "vi" ? "Mở Hệ Thống" : "Open System"}</span>
+                              <ArrowUpRight className="w-3.5 h-3.5 text-black" />
+                            </a>
+                          )}
 
-              {/* Accurate CLI Command Block with Wipe Interaction */}
-              <div className="space-y-2 pt-1">
-                <div className="text-xs font-mono text-neutral-400 uppercase tracking-wider font-bold">
-                  CLI INSTALLATION
-                </div>
-                <WipeButton
-                  as="div"
-                  onClick={() =>
-                    handleCopy(
-                      "curl -fsSL https://github.com/bnhminh1010/hostdeck/releases/latest/download/install.sh | bash"
-                    )
-                  }
-                  wipeColor="#ffffff"
-                  textColor="#d4d4d8"
-                  hoverTextColor="#05070a"
-                  className="p-3.5 rounded-none flex items-center justify-between cursor-pointer font-mono text-xs sm:text-[13px] shadow-sm bg-[#161619] border border-white/[0.08]"
-                >
-                  <span className="truncate">
-                    curl -fsSL https://github.com/bnhminh1010/hostdeck/releases/latest/download/install.sh | bash
-                  </span>
-                  {copiedCli ===
-                  "curl -fsSL https://github.com/bnhminh1010/hostdeck/releases/latest/download/install.sh | bash" ? (
-                    <Check className="w-4 h-4 text-emerald-400 shrink-0 ml-2" />
-                  ) : (
-                    <Copy className="w-4 h-4 opacity-60 shrink-0 ml-2" />
-                  )}
-                </WipeButton>
-              </div>
+                          <button
+                            type="button"
+                            onClick={() => setSelectedArchProject(project.id)}
+                            className="inline-flex items-center gap-2 px-5 py-3 rounded-none bg-[#16161b] hover:bg-[#222228] border border-white/25 hover:border-white/50 text-white font-mono text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                          >
+                            <span>{lang === "vi" ? "Kiến trúc & Báo cáo" : "Architecture & Case Study"}</span>
+                            <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400" />
+                          </button>
+                        </div>
 
-              {/* Action Buttons with Directional Forward Wipe & Arrow Roll */}
-              <div className="flex items-center gap-3 pt-2 text-xs sm:text-sm font-mono font-bold">
-                {projects[0].liveUrl && (
-                  <WipeButton
-                    as="a"
-                    href={projects[0].liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    wipeColor="#ffffff"
-                    textColor="#ffffff"
-                    hoverTextColor="#05070a"
-                    className="group px-4 py-2 rounded-none flex items-center gap-2 bg-white/[0.06] border border-white/15 cursor-pointer active:scale-[0.95] transition-transform duration-150"
-                  >
-                    <span>Live Console</span>
-                    <ArrowRoll size="sm" />
-                  </WipeButton>
-                )}
-                <WipeButton
-                  as="a"
-                  href={projects[0].repo}
-                  target="_blank"
-                  rel="noreferrer"
-                  wipeColor="#ffffff"
-                  textColor="#ffffff"
-                  hoverTextColor="#05070a"
-                  className="group px-4 py-2 rounded-none flex items-center gap-2 bg-white/[0.06] border border-white/15 cursor-pointer active:scale-[0.95] transition-transform duration-150"
-                >
-                  <span>Source Code</span>
-                  <ArrowRoll size="sm" />
-                </WipeButton>
-              </div>
-            </div>
-          </div>
-
-          {/* Product 02: ThinkAI Delivery Pipeline */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-20 border-t border-white/[0.08]">
-            <div className="lg:col-span-2" />
-
-            {/* Center 6 Cols: Clean Browser Frame Mockup */}
-            <div className="lg:col-span-6">
-              <ProductMockup
-                title={projects[1].content[lang].title}
-                headline={projects[1].content[lang].category}
-                description={projects[1].content[lang].summary}
-                domain="learning.thinkai.id.vn"
-                type="thinkai"
-              />
-            </div>
-
-            {/* Right 4 Cols: Editorial Narrative & Scaled Typography */}
-            <div className="lg:col-span-4 space-y-6">
-              <div className="tai-label text-neutral-400 font-mono font-bold text-xs tracking-widest">
-                DELIVERY PIPELINES
-              </div>
-
-              <h3 className="text-3xl sm:text-5xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
-                {projects[1].content[lang].title}
-              </h3>
-
-              <p className="text-base sm:text-lg text-neutral-200 leading-relaxed font-light">
-                {projects[1].content[lang].summary}
-              </p>
-
-              {/* 3-Pillar Interactive Segmented Story Switcher */}
-              <div className="space-y-4 border-y border-white/[0.08] py-5">
-                {/* Segmented Pill Switcher */}
-                <div className="flex items-center gap-1.5 p-1 rounded-none bg-white/[0.04] border border-white/[0.08] w-fit">
-                  {[
-                    { id: "problem", label: "Problem" },
-                    { id: "approach", label: "Approach" },
-                    { id: "outcome", label: "Outcome" },
-                  ].map((tab) => {
-                    const isActive = storyTab1 === tab.id;
-                    return (
-                      <button
-                        key={tab.id}
-                        type="button"
-                        onClick={() => setStoryTab1(tab.id as "problem" | "approach" | "outcome")}
-                        className={`relative px-3.5 py-1.5 rounded-none text-xs font-mono font-bold tracking-wide transition-colors cursor-pointer select-none ${
-                          isActive ? "text-[#0a0a0c]" : "text-neutral-400 hover:text-white"
-                        }`}
-                      >
-                        {isActive && (
-                          <motion.div
-                            layoutId="storyTabIndicator1"
-                            className="absolute inset-0 rounded-none bg-white shadow-md"
-                            transition={{ type: "spring", bounce: 0.15, duration: 0.4 }}
-                          />
-                        )}
-                        <span className="relative z-10">{tab.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {/* Active Narrative Card with Large Typography */}
-                <div className="min-h-[85px] sm:min-h-[95px] flex flex-col justify-center">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={storyTab1}
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                      <p className="text-base sm:text-[17.5px] lg:text-[18px] text-neutral-100 leading-[1.65] font-light">
-                        {storyTab1 === "problem" && projects[1].content[lang].story.problem}
-                        {storyTab1 === "approach" && projects[1].content[lang].story.approach}
-                        {storyTab1 === "outcome" && projects[1].content[lang].story.outcome}
-                      </p>
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-              </div>
-
-              {/* Stack Tags */}
-              <div className="flex flex-wrap gap-2 pt-1">
-                {projects[1].stack.map((item) => (
-                  <span
-                    key={item}
-                    className="tai-tag-pill px-3 py-1 rounded-none text-xs sm:text-[13px] font-mono cursor-default"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-
-              {/* Accurate CLI Command Block with Wipe Interaction */}
-              <div className="space-y-2 pt-1">
-                <div className="text-xs font-mono text-neutral-400 uppercase tracking-wider font-bold">
-                  CLI REPRODUCTION
-                </div>
-                <WipeButton
-                  as="div"
-                  onClick={() => handleCopy("docker compose up -d mysql backend")}
-                  wipeColor="#ffffff"
-                  textColor="#d4d4d8"
-                  hoverTextColor="#05070a"
-                  className="p-3.5 rounded-none flex items-center justify-between cursor-pointer font-mono text-xs sm:text-[13px] shadow-sm bg-[#161619] border border-white/[0.08]"
-                >
-                  <span className="truncate">docker compose up -d mysql backend</span>
-                  {copiedCli === "docker compose up -d mysql backend" ? (
-                    <Check className="w-4 h-4 text-emerald-400 shrink-0 ml-2" />
-                  ) : (
-                    <Copy className="w-4 h-4 opacity-60 shrink-0 ml-2" />
-                  )}
-                </WipeButton>
-              </div>
-
-              {/* Action Buttons with Directional Forward Wipe & Arrow Roll */}
-              <div className="flex items-center gap-3 pt-2 text-xs sm:text-sm font-mono font-bold">
-                {projects[1].liveUrl && (
-                  <WipeButton
-                    as="a"
-                    href={projects[1].liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    wipeColor="#ffffff"
-                    textColor="#ffffff"
-                    hoverTextColor="#05070a"
-                    className="group px-4 py-2 rounded-none flex items-center gap-2 bg-white/[0.06] border border-white/15 cursor-pointer active:scale-[0.95] transition-transform duration-150"
-                  >
-                    <span>Live Platform</span>
-                    <ArrowRoll size="sm" />
-                  </WipeButton>
-                )}
-                <WipeButton
-                  as="a"
-                  href={projects[1].repo}
-                  target="_blank"
-                  rel="noreferrer"
-                  wipeColor="#ffffff"
-                  textColor="#ffffff"
-                  hoverTextColor="#05070a"
-                  className="group px-4 py-2 rounded-none flex items-center gap-2 bg-white/[0.06] border border-white/15 cursor-pointer active:scale-[0.95] transition-transform duration-150"
-                >
-                  <span>Source Code</span>
-                  <ArrowRoll size="sm" />
-                </WipeButton>
-              </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -707,7 +544,7 @@ export default function PortfolioPage() {
                     </h3>
                   </div>
                   <div className="text-xs sm:text-sm font-mono text-neutral-400 shrink-0">
-                    Ho Chi Minh City Oncology Hospital · 10/2024 - 01/2025
+                    Ho Chi Minh City Oncology Hospital · 05/2026 – 07/2026
                   </div>
                 </div>
 
@@ -1264,6 +1101,13 @@ export default function PortfolioPage() {
       <ContactModal
         isOpen={isContactOpen}
         onClose={() => setIsContactOpen(false)}
+      />
+
+      {/* ─── 12. ARCHITECTURE & DEEP DIVE MODAL ─── */}
+      <ArchitectureModal
+        projectId={selectedArchProject}
+        onClose={() => setSelectedArchProject(null)}
+        lang={lang}
       />
     </div>
   );

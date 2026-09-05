@@ -60,7 +60,7 @@ export function ProductMockup({
           </div>
           <div className="hidden sm:flex items-center gap-1.5 pl-2 text-[11px] font-mono font-bold text-white/50 uppercase tracking-wider">
             <Terminal className="w-3 h-3 text-white/40" />
-            <span>{type === "homelab" ? "HOSTDECK // OPS" : "THINKAI // PIPELINE"}</span>
+            <span>{type === "homelab" ? "HOSTDECK · OPERATIONS CONSOLE" : "THINKAI · DELIVERY PIPELINE"}</span>
           </div>
         </div>
 

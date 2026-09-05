@@ -40,18 +40,20 @@ html {
   scroll-behavior: smooth;
 }
 
-button,
-a {
-  font: inherit;
-}
+@layer base {
+  button,
+  a {
+    font: inherit;
+  }
 
-button {
-  cursor: pointer;
-}
+  button {
+    cursor: pointer;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 ::selection {

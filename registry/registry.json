@@ -1,7 +1,7 @@
 {
-  "$schema": "https://ui.thinkai.studio/schema/registry.json",
+  "$schema": "https://ui.thinkai.id.vn/schema/registry.json",
   "name": "thinkai-ui",
-  "homepage": "https://ui.thinkai.studio",
+  "homepage": "https://ui.thinkai.id.vn",
   "items": [
     {
       "name": "tai-button",
